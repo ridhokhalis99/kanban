@@ -100,7 +100,9 @@ const Sidebar = ({ boards }: SidebarProps) => {
           style={{
             margin: "0 24px",
             display: "flex",
+            alignItems: "center",
             gap: 16,
+            cursor: "pointer",
           }}
         >
           <Image

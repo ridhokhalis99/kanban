@@ -33,6 +33,7 @@ const BoardList = ({ boards }: BoardListProps) => {
           padding: "15px 0px 15px 32px",
           gap: "16px",
           alignItems: "center",
+          cursor: "pointer",
         }}
       >
         <BoardIcon fill="#635fc7" />
