@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.heading-xl {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.heading-l {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.heading-m {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.heading-s {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 2.4px;
+}
+
+.body-l {
+  font-size: 500;
+  font-size: 13px;
+  line-height: 23px;
+}
+
+.body-m {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.heading-xl {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.heading-l {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.heading-m {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.heading-s {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 2.4px;
+}
+
+.body-l {
+  font-size: 500;
+  font-size: 13px;
+  line-height: 23px;
+}
+
+.body-m {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.light .heading-xl .heading-l .heading-m .body-l .body-m {
+  color: #000112;
+}
+.light .heading-s {
+  color: #828fa3;
+}
+
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 23px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  top: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #635fc7;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #635fc7;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(23px);
+  -ms-transform: translateX(23px);
+  transform: translateX(23px);
+}
+
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.sidebar {
+  color: #828fa3;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Plus Jakarta Sans, ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+/*# sourceMappingURL=globals.css.map */

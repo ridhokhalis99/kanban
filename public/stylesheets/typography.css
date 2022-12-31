@@ -1,0 +1,42 @@
+.heading-xl {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.heading-l {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.heading-m {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.heading-s {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 2.4px;
+}
+
+.body-l {
+  font-size: 500;
+  font-size: 13px;
+  line-height: 23px;
+}
+
+.body-m {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=typography.css.map */
