@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logoDark from "../../assets/logo-dark.svg";
 import BoardList from "./components/BoardList";
@@ -9,51 +10,67 @@ interface SidebarProps {
   boards: [Board];
   currentBoard: Board;
   setCurrentBoard: React.Dispatch<Board>;
+  isSidebarHidden: boolean;
+  setIsSidebarHidden: React.Dispatch<boolean>;
 }
 
-const Sidebar = ({ boards, ...props }: SidebarProps) => {
+const Sidebar = ({
+  boards,
+  isSidebarHidden,
+  setIsSidebarHidden,
+  ...props
+}: SidebarProps) => {
   const numberOfBoards = boards.length;
   return (
-    <div className="sidebar container">
-      <Image
-        src={logoDark}
-        alt="kanban logo"
-        width={logoDark.width}
-        height={logoDark.height}
-        style={{ marginLeft: 34, marginBottom: 54 }}
-      />
-
-      <div
-        style={{
-          width: 276,
-        }}
-      >
-        <h2
-          className="heading-s uppercase"
-          style={{
-            paddingLeft: 32,
-            marginBottom: 18,
-          }}
+    <AnimatePresence>
+      {!isSidebarHidden && (
+        <motion.div
+          initial={{ x: 0 }}
+          exit={{ x: -300 }}
+          transition={{ duration: 0.3 }}
+          className="sidebar container"
         >
-          All Boards ({numberOfBoards})
-        </h2>
+          <Image
+            src={logoDark}
+            alt="kanban logo"
+            width={logoDark.width}
+            height={logoDark.height}
+            style={{ marginLeft: 34, marginBottom: 54 }}
+          />
 
-        <BoardList boards={boards} {...props} />
-      </div>
+          <div
+            style={{
+              width: 276,
+            }}
+          >
+            <h2
+              className="heading-s uppercase"
+              style={{
+                paddingLeft: 32,
+                marginBottom: 18,
+              }}
+            >
+              All Boards ({numberOfBoards})
+            </h2>
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: 40,
-          display: "flex",
-          flexDirection: "column",
-          gap: 24,
-        }}
-      >
-        <ThemeSlider />
-        <HideSidebar />
-      </div>
-    </div>
+            <BoardList boards={boards} {...props} />
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              bottom: 40,
+              display: "flex",
+              flexDirection: "column",
+              gap: 24,
+            }}
+          >
+            <ThemeSlider />
+            <HideSidebar setIsSidebarHidden={setIsSidebarHidden} />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

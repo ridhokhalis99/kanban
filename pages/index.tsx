@@ -5,6 +5,7 @@ import prisma from "../lib/prisma";
 import { Board } from "../interfaces/Board";
 import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
+import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
 
 interface HomeProps {
   boards: [Board];
@@ -19,6 +20,7 @@ export const getStaticProps = async () => {
 
 const Home = ({ boards }: HomeProps) => {
   const [currentBoard, setCurrentBoard] = useState<Board>({} as Board);
+  const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
 
   useEffect(() => {
     if (boards.length > 0) {
@@ -32,15 +34,21 @@ const Home = ({ boards }: HomeProps) => {
         boards={boards}
         currentBoard={currentBoard}
         setCurrentBoard={setCurrentBoard}
+        isSidebarHidden={isSidebarHidden}
+        setIsSidebarHidden={setIsSidebarHidden}
       />
 
       <div
         style={{
-          width: "calc(100% - 300px)",
+          width: isSidebarHidden ? "100%" : "calc(100% - 300px)",
           position: "relative",
-          left: 300,
+          left: isSidebarHidden ? 0 : 300,
+          transition: "all 0.3s ease-out",
         }}
       >
+        {isSidebarHidden && (
+          <ShowSidebar setIsSidebarHidden={setIsSidebarHidden} />
+        )}
         {!isEmpty(currentBoard) && <Controlbar currentBoard={currentBoard} />}
         <Taskboard />
       </div>

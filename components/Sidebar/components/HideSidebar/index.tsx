@@ -1,8 +1,12 @@
 import HideIcon from "./HideIcon";
 
-const HideSidebar = () => {
+interface HideSidebarProps {
+  setIsSidebarHidden: React.Dispatch<boolean>;
+}
+
+const HideSidebar = ({ setIsSidebarHidden }: HideSidebarProps) => {
   return (
-    <div className="hide-sidebar">
+    <div className="hide-sidebar" onClick={() => setIsSidebarHidden(true)}>
       <HideIcon />
       <h3 className="heading-m">Hide Sidebar</h3>
     </div>
