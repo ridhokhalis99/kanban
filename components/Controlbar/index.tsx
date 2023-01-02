@@ -18,7 +18,7 @@ const Controlbar = ({ currentBoard, isSidebarHidden }: ControlbarProps) => {
   return (
     <div className="controlbar container">
       <div className="left-container">
-        {isSidebarHidden && (
+        {true && (
           <>
             <Image
               src={logoDark}
@@ -48,6 +48,7 @@ const Controlbar = ({ currentBoard, isSidebarHidden }: ControlbarProps) => {
           onClick={() => setIsComponentVisible((prev) => !prev)}
           style={{
             cursor: "pointer",
+            marginRight: 32,
           }}
         />
         <BoardDropdown

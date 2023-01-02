@@ -1,6 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import logoDark from "../../assets/logo-dark.svg";
 import BoardList from "./components/BoardList";
 import { Board } from "../../interfaces/Board";
 import ThemeSlider from "./components/ThemeSlider";
@@ -30,14 +28,6 @@ const Sidebar = ({
           transition={{ duration: 0.3 }}
           className="sidebar container"
         >
-          <Image
-            src={logoDark}
-            alt="kanban logo"
-            width={logoDark.width}
-            height={logoDark.height}
-            style={{ marginLeft: 34, marginBottom: 54 }}
-          />
-
           <div
             style={{
               width: 276,
