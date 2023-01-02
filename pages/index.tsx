@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import prisma from "../lib/prisma";
 import { Board } from "../interfaces/Board";
 import { isEmpty } from "lodash";
+import Taskboard from "../components/Taskboard";
 
 interface HomeProps {
   boards: [Board];
@@ -41,6 +42,7 @@ const Home = ({ boards }: HomeProps) => {
         }}
       >
         {!isEmpty(currentBoard) && <Controlbar currentBoard={currentBoard} />}
+        <Taskboard />
       </div>
     </div>
   );

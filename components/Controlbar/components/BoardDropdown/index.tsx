@@ -1,6 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-const BoardDropdown = ({ isShow }) => {
+interface BoardDropdownProps {
+  isShow: boolean;
+}
+
+const BoardDropdown = ({ isShow }: BoardDropdownProps) => {
   return (
     <AnimatePresence>
       {isShow && (
