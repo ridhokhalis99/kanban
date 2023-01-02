@@ -4,29 +4,27 @@ import BoardList from "./components/BoardList";
 import lightThemeIcon from "../../assets/icon-light-theme.svg";
 import darkThemeIcon from "../../assets/icon-dark-theme.svg";
 import hideSidebarIcon from "../../assets/icon-hide-sidebar.svg";
+import { Board } from "../../interfaces/Board";
 
 interface SidebarProps {
-  boards: [
-    {
-      id: number;
-      name: string;
-      created_at: Date;
-    }
-  ];
+  boards: [Board];
+  currentBoard: Board;
+  setCurrentBoard: React.Dispatch<Board>;
 }
 
-const Sidebar = ({ boards }: SidebarProps) => {
+const Sidebar = ({ boards, ...props }: SidebarProps) => {
   const numberOfBoards = boards.length;
   return (
     <div
       className="sidebar"
       style={{
-        border: "2px solid #E4EBFA",
+        borderRight: "2px solid #E4EBFA",
         width: 300,
         height: "100vh",
-        position: "relative",
+        position: "absolute",
         left: 0,
         padding: "32px 24px 32px 0",
+        backgroundColor: "#ffffff",
       }}
     >
       <Image
@@ -52,7 +50,7 @@ const Sidebar = ({ boards }: SidebarProps) => {
           All Boards ({numberOfBoards})
         </h2>
 
-        <BoardList boards={boards} />
+        <BoardList boards={boards} {...props} />
       </div>
 
       <div

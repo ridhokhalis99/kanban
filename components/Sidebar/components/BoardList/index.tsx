@@ -1,32 +1,49 @@
 import BoardIcon from "./BoardIcon";
-
-interface board {
-  id: number;
-  name: string;
-  created_at: Date;
-}
+import { Board } from "../../../../interfaces/Board";
 
 interface BoardListProps {
-  boards: [board];
+  boards: [Board];
+  currentBoard: Board;
+  setCurrentBoard: React.Dispatch<Board>;
 }
 
-const BoardList = ({ boards }: BoardListProps) => {
+const BoardList = ({
+  boards,
+  currentBoard,
+  setCurrentBoard,
+}: BoardListProps) => {
   return (
     <div>
-      {boards.map(({ name }: board, index: number) => (
-        <div
-          key={index}
-          style={{
-            display: "flex",
-            padding: "15px 92px 15px 32px",
-            gap: "16px",
-            alignItems: "center",
-          }}
-        >
-          <BoardIcon />
-          <h3 className="heading-m">{name}</h3>
-        </div>
-      ))}
+      {boards.map((board: Board, index: number) => {
+        const { name } = board;
+        const isCurrentBoard = board === currentBoard;
+
+        const currentBoardStyle = {
+          backgroundColor: "#635fc7",
+          color: "#ffffff",
+          borderTopRightRadius: 100,
+          borderBottomRightRadius: 100,
+        };
+
+        return (
+          <div
+            key={index}
+            onClick={() => setCurrentBoard(board)}
+            style={{
+              display: "flex",
+              padding: "15px 92px 15px 32px",
+              gap: "16px",
+              alignItems: "center",
+              cursor: "pointer",
+              transition: "all .25s ease-in",
+              ...(isCurrentBoard ? currentBoardStyle : {}),
+            }}
+          >
+            <BoardIcon fill={isCurrentBoard ? "#ffffff" : "#828FA3"} />
+            <h3 className="heading-m">{name}</h3>
+          </div>
+        );
+      })}
       <div
         style={{
           display: "flex",
