@@ -16,7 +16,7 @@ const Taskboard = () => {
         }}
       >
         <h2
-          className="heading-l"
+          className="heading-l text-grey-82"
           style={{
             marginBottom: 32,
           }}

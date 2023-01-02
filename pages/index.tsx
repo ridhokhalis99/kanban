@@ -40,16 +40,21 @@ const Home = ({ boards }: HomeProps) => {
 
       <div
         style={{
-          width: isSidebarHidden ? "100%" : "calc(100% - 300px)",
+          width: isSidebarHidden ? "100%" : "calc(100% - 302px)",
           position: "relative",
-          left: isSidebarHidden ? 0 : 300,
+          left: isSidebarHidden ? 0 : 302,
           transition: "all 0.3s ease-out",
         }}
       >
         {isSidebarHidden && (
           <ShowSidebar setIsSidebarHidden={setIsSidebarHidden} />
         )}
-        {!isEmpty(currentBoard) && <Controlbar currentBoard={currentBoard} />}
+        {!isEmpty(currentBoard) && (
+          <Controlbar
+            currentBoard={currentBoard}
+            isSidebarHidden={isSidebarHidden}
+          />
+        )}
         <Taskboard />
       </div>
     </div>

@@ -3,6 +3,10 @@
   color: #635fc7;
 }
 
+.text-grey-82 {
+  color: #828fa3;
+}
+
 .heading-xl {
   font-weight: 700;
   font-size: 24px;
@@ -87,6 +91,10 @@
 
 .text-purple-63 {
   color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
 }
 
 .light .heading-xl .heading-l .heading-m .body-l .body-m {
@@ -100,8 +108,16 @@
   color: #635fc7;
 }
 
+.text-grey-82 {
+  color: #828fa3;
+}
+
 .text-purple-63 {
   color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
 }
 
 .sidebar {
@@ -201,6 +217,56 @@
   left: 0;
   padding: 32px 24px 32px 0;
   background-color: #ffffff;
+}
+
+.controlbar .left-container {
+  display: flex;
+  padding: 0px 32px 0px 28px;
+}
+.controlbar .left-container-divider {
+  border-right: #e4ebfa 2px solid;
+  margin: 0 32px;
+  position: relative;
+  height: 100%;
+}
+.controlbar .board-title {
+  margin: auto;
+  padding: 20px 0 28px 0;
+}
+.controlbar .button-new-task {
+  background-color: #635fc7;
+  border-radius: 24px;
+  padding: 14px 24px;
+  color: white;
+}
+.controlbar .dropdown-container {
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  right: 24px;
+  top: 82px;
+  box-shadow: #e4ebfa 0px 1px 4px;
+}
+.controlbar .dropdown-container .dropdown-item {
+  width: 160px;
+  cursor: pointer;
+}
+.controlbar .dropdown-container .edit {
+  color: #828fa3;
+}
+.controlbar .dropdown-container .delete {
+  color: #ea5555;
+}
+
+.controlbar.container {
+  border-bottom: 2px solid #e4ebfa;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
 * {

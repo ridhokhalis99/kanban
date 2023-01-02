@@ -1,34 +1,37 @@
-import { useState } from "react";
 import Image from "next/image";
 import { Board } from "../../interfaces/Board";
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 import BoardDropdown from "./components/BoardDropdown";
+import useComponentVisible from "./hooks/useComponentVisible";
+import logoDark from "../../assets/logo-dark.svg";
 
 interface ControlbarProps {
   currentBoard: Board;
+  isSidebarHidden: boolean;
 }
 
-const Controlbar = ({ currentBoard }: ControlbarProps) => {
-  const [isShowDropdown, setIsShowDropdown] = useState(false);
+const Controlbar = ({ currentBoard, isSidebarHidden }: ControlbarProps) => {
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
   const { name } = currentBoard || {};
+
   return (
-    <div
-      style={{
-        padding: "20px 32px 28px 24px",
-        borderBottom: "2px solid #E4EBFA",
-        display: "flex",
-        justifyContent: "space-between",
-        alignContent: "center",
-      }}
-    >
-      <h1
-        className="heading-xl"
-        style={{
-          padding: "4px 0",
-        }}
-      >
-        {name}
-      </h1>
+    <div className="controlbar container">
+      <div className="left-container">
+        {isSidebarHidden && (
+          <>
+            <Image
+              src={logoDark}
+              alt="kanban logo"
+              width={logoDark.width}
+              height={logoDark.height}
+              style={{ margin: "auto" }}
+            />
+            <div className="left-container-divider" />
+          </>
+        )}
+        <h1 className="heading-xl board-title">{name}</h1>
+      </div>
       <div
         style={{
           display: "flex",
@@ -36,27 +39,21 @@ const Controlbar = ({ currentBoard }: ControlbarProps) => {
           alignItems: "center",
         }}
       >
-        <button
-          style={{
-            backgroundColor: "#635FC7",
-            borderRadius: 24,
-            padding: "14px 24px",
-            color: "white",
-          }}
-        >
-          + Add New Task
-        </button>
+        <button className="button-new-task">+ Add New Task</button>
         <Image
           src={iconEllipsis.src}
           alt="ellipsis"
           width={iconEllipsis.width}
           height={iconEllipsis.height}
-          onClick={() => setIsShowDropdown((prev) => !prev)}
+          onClick={() => setIsComponentVisible((prev) => !prev)}
           style={{
             cursor: "pointer",
           }}
         />
-        <BoardDropdown isShow={isShowDropdown} />
+        <BoardDropdown
+          refDropdown={ref}
+          isComponentVisible={isComponentVisible}
+        />
       </div>
     </div>
   );
