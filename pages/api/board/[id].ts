@@ -26,11 +26,11 @@ const readBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   switch (method) {
     case "GET":
-      readBoardById(req, res);
+      await readBoardById(req, res);
       break;
   }
 };

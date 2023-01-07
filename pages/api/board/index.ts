@@ -34,14 +34,14 @@ const readBoards = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(boards);
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   switch (method) {
     case "GET":
-      readBoards(req, res);
+      await readBoards(req, res);
       break;
     case "POST":
-      createBoard(req, res);
+      await createBoard(req, res);
       break;
   }
 };

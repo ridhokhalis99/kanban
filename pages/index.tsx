@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Controlbar from "../components/Controlbar";
 import Sidebar from "../components/Sidebar";
-import { Board } from "../interfaces/Board";
 import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
 import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
