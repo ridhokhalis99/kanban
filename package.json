@@ -10,6 +10,7 @@
     "sass": "sass --watch styles:public/stylesheets"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@next/font": "13.1.1",
     "@prisma/client": "^4.8.0",
     "@supabase/supabase-js": "^2.2.3",
