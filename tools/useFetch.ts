@@ -5,12 +5,14 @@ interface useFetchProps {
   url: string;
   formatter?: Function;
   defaultValue?: any;
+  afterSuccess?: Function;
 }
 
 const useFetch = ({
   url,
   formatter = (val: any) => val,
   defaultValue = [],
+  afterSuccess,
 }: useFetchProps) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(defaultValue);
@@ -20,6 +22,7 @@ const useFetch = ({
       setLoading(true);
       const { data } = await axios.get(url);
       setData((prev: any) => formatter(data, prev));
+      afterSuccess && afterSuccess(data);
     } catch (err) {
       console.log(err);
     } finally {

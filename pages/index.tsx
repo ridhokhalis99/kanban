@@ -9,13 +9,20 @@ import BoardModal from "../components/Modals/BoardModal";
 import useModal from "../components/Modals/hooks/useModal";
 import TaskModal from "../components/Modals/TaskModal";
 import useFetch from "../tools/useFetch";
+import { board } from "@prisma/client";
 
 const Home = () => {
-  const [currentBoard, setCurrentBoard] = useState<Board>({} as Board);
+  const [currentBoard, setCurrentBoard] = useState<board>({} as board);
+  const [boardDetail, setBoardDetail] = useState<board>({} as board);
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
 
-  const { data: boards, refetch: refethBoards } = useFetch({
+  const { data: boards, refetch: refetchBoards } = useFetch({
     url: "/api/board",
+  });
+
+  const { refetch: refetchBoardDetail } = useFetch({
+    url: `/api/board/${currentBoard.id}`,
+    afterSuccess: (res: board) => setBoardDetail(res),
   });
 
   useEffect(() => {
@@ -23,6 +30,10 @@ const Home = () => {
       return setCurrentBoard(boards[0]);
     }
   }, [boards]);
+
+  useEffect(() => {
+    refetchBoardDetail();
+  }, [currentBoard]);
 
   const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
   const { isOpen: isOpenTaskModal, toggle: toggleTaskModal } = useModal();
@@ -62,7 +73,7 @@ const Home = () => {
       <BoardModal
         isOpen={isOpenBoardModal}
         toggle={toggleBoardModal}
-        refetchBoards={refethBoards}
+        refetchBoards={refetchBoards}
       />
       <TaskModal isOpen={isOpenTaskModal} toggle={toggleTaskModal} />
     </div>

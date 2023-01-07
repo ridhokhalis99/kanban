@@ -1,13 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import BoardList from "./components/BoardList";
-import { Board } from "../../interfaces/Board";
 import ThemeSlider from "./components/ThemeSlider";
 import HideSidebar from "./components/HideSidebar";
+import { board } from "@prisma/client";
 
 interface SidebarProps {
-  boards: [Board];
-  currentBoard: Board;
-  setCurrentBoard: React.Dispatch<Board>;
+  boards: [board];
+  currentBoard: board;
+  setCurrentBoard: React.Dispatch<board>;
   isSidebarHidden: boolean;
   setIsSidebarHidden: React.Dispatch<boolean>;
   toggleBoardModal: Function;

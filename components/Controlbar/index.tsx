@@ -4,9 +4,10 @@ import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 import BoardDropdown from "./components/BoardDropdown";
 import useComponentVisible from "./hooks/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
+import { board } from "@prisma/client";
 
 interface ControlbarProps {
-  currentBoard: Board;
+  currentBoard: board;
   isSidebarHidden: boolean;
   toggleTaskModal: Function;
 }

@@ -1,0 +1,38 @@
+import { PrismaClient, Prisma } from "@prisma/client";
+import { NextApiRequest, NextApiResponse } from "next";
+
+const prisma = new PrismaClient();
+
+const readBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
+  const boardId = req.query.id;
+  if (boardId) {
+    const board = await prisma.board.findUnique({
+      where: {
+        id: +boardId,
+      },
+      include: {
+        columns: {
+          include: {
+            tasks: {
+              include: {
+                sub_tasks: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    res.status(200).json(board);
+  }
+};
+
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  const { method } = req;
+  switch (method) {
+    case "GET":
+      readBoardById(req, res);
+      break;
+  }
+};
+
+export default handler;

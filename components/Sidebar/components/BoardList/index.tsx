@@ -1,11 +1,11 @@
 import { useState } from "react";
 import BoardIcon from "./BoardIcon";
-import { Board } from "../../../../interfaces/Board";
+import { board } from "@prisma/client";
 
 interface BoardListProps {
-  boards: [Board];
-  currentBoard: Board;
-  setCurrentBoard: React.Dispatch<Board>;
+  boards: [board];
+  currentBoard: board;
+  setCurrentBoard: React.Dispatch<board>;
   toggleBoardModal: Function;
 }
 
@@ -18,7 +18,7 @@ const BoardList = ({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <div>
-      {boards.map((board: Board, index: number) => {
+      {boards.map((board: board, index: number) => {
         const { name } = board;
         const isCurrentBoard = board === currentBoard;
         const isHovered = hoveredIndex === index;
