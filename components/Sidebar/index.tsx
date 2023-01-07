@@ -10,6 +10,7 @@ interface SidebarProps {
   setCurrentBoard: React.Dispatch<Board>;
   isSidebarHidden: boolean;
   setIsSidebarHidden: React.Dispatch<boolean>;
+  toggleAddBoard: Function;
 }
 
 const Sidebar = ({

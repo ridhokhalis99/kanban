@@ -7,6 +7,7 @@ import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
 import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
 import AddBoard from "../components/Modals/AddBoard";
+import useModal from "../components/Modals/hooks/useModal";
 
 interface HomeProps {
   boards: [Board];
@@ -29,6 +30,8 @@ const Home = ({ boards }: HomeProps) => {
     }
   }, []);
 
+  const { isOpen: isOpenAddBoard, toggle: toggleAddBoard } = useModal();
+
   return (
     <div className="light">
       <Sidebar
@@ -37,6 +40,7 @@ const Home = ({ boards }: HomeProps) => {
         setCurrentBoard={setCurrentBoard}
         isSidebarHidden={isSidebarHidden}
         setIsSidebarHidden={setIsSidebarHidden}
+        toggleAddBoard={toggleAddBoard}
       />
 
       {!isEmpty(currentBoard) && (
@@ -59,7 +63,7 @@ const Home = ({ boards }: HomeProps) => {
         <Taskboard />
       </div>
 
-      <AddBoard />
+      <AddBoard isOpen={isOpenAddBoard} toggle={toggleAddBoard} />
     </div>
   );
 };

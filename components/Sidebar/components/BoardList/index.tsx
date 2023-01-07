@@ -6,12 +6,14 @@ interface BoardListProps {
   boards: [Board];
   currentBoard: Board;
   setCurrentBoard: React.Dispatch<Board>;
+  toggleAddBoard: Function;
 }
 
 const BoardList = ({
   boards,
   currentBoard,
   setCurrentBoard,
+  toggleAddBoard,
 }: BoardListProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
@@ -70,7 +72,12 @@ const BoardList = ({
         }}
       >
         <BoardIcon fill="#635fc7" />
-        <h3 className="heading-m text-purple-63">+ Create New Board</h3>
+        <h3
+          className="heading-m text-purple-63"
+          onClick={() => toggleAddBoard()}
+        >
+          + Create New Board
+        </h3>
       </div>
     </div>
   );

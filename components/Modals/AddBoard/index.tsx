@@ -5,6 +5,11 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import ColumnInput from "./components/ColumnInput";
 import { isEmpty } from "lodash";
 
+interface AddBoardProps {
+  isOpen: boolean;
+  toggle: Function;
+}
+
 interface FormValues {
   board: string;
   column: {
@@ -12,7 +17,7 @@ interface FormValues {
   }[];
 }
 
-const AddBoard = () => {
+const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
   const defaultValues = {
     board: "",
     column: [{ columnName: "To do" }, { columnName: "Doing" }],
@@ -41,6 +46,8 @@ const AddBoard = () => {
   return (
     <CenteredModal
       title="Add New Board"
+      isOpen={isOpen}
+      toggle={toggle}
       children={
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div>
