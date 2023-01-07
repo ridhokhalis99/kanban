@@ -3,9 +3,10 @@ import crossIcon from "../../../../../assets/icon-cross.svg";
 
 interface ColumnInputProps {
   onRemove: Function;
+  forwardRef: any;
 }
 
-const ColumnInput = ({ onRemove, ...props }: ColumnInputProps) => {
+const ColumnInput = ({ onRemove, forwardRef, ...props }: ColumnInputProps) => {
   return (
     <div
       style={{
@@ -14,7 +15,7 @@ const ColumnInput = ({ onRemove, ...props }: ColumnInputProps) => {
         gap: 16,
       }}
     >
-      <input {...props} />
+      <input ref={forwardRef} {...props} />
       <Image
         src={crossIcon.src}
         alt="close modal"

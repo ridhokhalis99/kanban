@@ -3,38 +3,40 @@ import { useForm, useFieldArray } from "react-hook-form";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import ColumnInput from "./components/ColumnInput";
+import { isEmpty } from "lodash";
 
-interface columnForm {
+interface FormValues {
+  board: string;
   column: {
-    name: string;
-    value: string;
+    columnName: string;
   }[];
 }
 
 const AddBoard = () => {
   const defaultValues = {
-    column: [
-      { name: "column", value: "To do" },
-      { name: "column", value: "Doing" },
-    ],
+    board: "",
+    column: [{ columnName: "To do" }, { columnName: "Doing" }],
   };
-  const { control, register } = useForm({ defaultValues });
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control,
-      name: "column",
-    }
-  );
+  const { control, register, handleSubmit } = useForm<FormValues>({
+    defaultValues,
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "column",
+  });
 
   const addColumn = () => {
-    append({ name: "column", value: "test" });
+    append({ columnName: "" });
   };
 
   const removeColumn = (index: number) => {
     remove(index);
   };
 
-  const createBoard = () => {};
+  const createBoard = (formValues: FormValues) => {
+    const { column } = formValues;
+    console.log(formValues);
+  };
 
   return (
     <CenteredModal
@@ -43,29 +45,35 @@ const AddBoard = () => {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div>
             <h3 className="body-m input-label">Name</h3>
-            <input placeholder="e.g. Web Design" />
+            <input placeholder="e.g. Web Design" {...register("board")} />
           </div>
 
-          <div>
-            <h3 className="body-m input-label">Columns</h3>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 12,
-              }}
-            >
-              {fields.map((field, index) => {
-                return (
-                  <ColumnInput
-                    key={field.id}
-                    onRemove={() => removeColumn(index)}
-                    {...register(`column.${index}.value`)}
-                  />
-                );
-              })}
+          {!isEmpty(fields) && (
+            <div>
+              <h3 className="body-m input-label">Columns</h3>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                }}
+              >
+                {fields.map((field, index) => {
+                  const { ref, ...props } = register(
+                    `column.${index}.columnName`
+                  );
+                  return (
+                    <ColumnInput
+                      key={field.id}
+                      onRemove={() => removeColumn(index)}
+                      forwardRef={ref}
+                      {...props}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
 
           <div
             style={{
@@ -75,7 +83,10 @@ const AddBoard = () => {
             }}
           >
             <SecondaryButton text="+ Add New Column" onClick={addColumn} />
-            <PrimaryButton text="Create New Board" onClick={createBoard} />
+            <PrimaryButton
+              text="Create New Board"
+              onClick={handleSubmit(createBoard)}
+            />
           </div>
         </div>
       }
