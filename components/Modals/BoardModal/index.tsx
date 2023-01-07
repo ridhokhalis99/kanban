@@ -5,10 +5,12 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import ArrayListInput from "./components/ArrayListInput";
 import { isEmpty } from "lodash";
 import { ErrorMessage } from "@hookform/error-message";
+import useMutation from "../../../tools/useMutation";
 
 interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
+  refetchBoards: Function;
 }
 
 interface FormValues {
@@ -18,7 +20,7 @@ interface FormValues {
   }[];
 }
 
-const BoardModal = ({ isOpen, toggle }: BoardModalProps) => {
+const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
   const defaultValues = {
     board: "",
     columns: [{ name: "To do" }, { name: "Doing" }],
@@ -36,6 +38,15 @@ const BoardModal = ({ isOpen, toggle }: BoardModalProps) => {
     name: "columns",
   });
 
+  const { mutation: mutationCreate, loading } = useMutation({
+    url: "/api/board",
+    method: "post",
+    afterSuccess: () => {
+      refetchBoards();
+      toggle();
+    },
+  });
+
   const addColumn = () => {
     append({ name: "" });
   };
@@ -44,9 +55,8 @@ const BoardModal = ({ isOpen, toggle }: BoardModalProps) => {
     remove(index);
   };
 
-  const createBoard = (formValues: FormValues) => {
-    const { columns } = formValues;
-    console.log(formValues);
+  const createBoard = async (formValues: FormValues) => {
+    mutationCreate(formValues);
   };
 
   return (

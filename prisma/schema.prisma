@@ -8,37 +8,36 @@ datasource db {
 }
 
 model board {
-  id         BigInt    @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String?   @default("") @db.VarChar
   created_at DateTime? @default(now()) @db.Timestamptz(6)
-  column     column[]
+  columns     column[]
 }
 
 model sub_task {
-  id          BigInt    @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String?   @default("") @db.VarChar
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  task_id     BigInt?
+  task_id     Int?
   is_finished Boolean   @default(false)
   task        task?     @relation(fields: [task_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model task {
-  id          BigInt     @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String?    @default("") @db.VarChar
   description String?    @default("")
   created_at  DateTime?  @default(now()) @db.Timestamptz(6)
-  column_id   BigInt?
-  sub_task    sub_task[]
+  column_id   Int?
+  sub_tasks    sub_task[]
   column      column?    @relation(fields: [column_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model column {
-  id         BigInt    @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String?   @default("") @db.VarChar
   created_at DateTime? @default(now()) @db.Timestamptz(6)
-  board_id   BigInt?
-  order      Decimal   @db.Decimal
+  board_id   Int?
   board      board?    @relation(fields: [board_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  task       task[]
+  tasks       task[]
 }
