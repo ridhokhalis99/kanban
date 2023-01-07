@@ -6,6 +6,7 @@ import { Board } from "../interfaces/Board";
 import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
 import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
+import AddBoard from "../components/Modals/AddBoard";
 
 interface HomeProps {
   boards: [Board];
@@ -57,6 +58,8 @@ const Home = ({ boards }: HomeProps) => {
         )}
         <Taskboard />
       </div>
+
+      <AddBoard />
     </div>
   );
 };

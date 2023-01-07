@@ -291,4 +291,23 @@ input[type=reset] {
   line-height: 1;
 }
 
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+input {
+  background: #ffffff;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  padding: 10px 16px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.input-label {
+  margin-bottom: 8px;
+  color: #828fa3;
+}
+
 /*# sourceMappingURL=globals.css.map */
