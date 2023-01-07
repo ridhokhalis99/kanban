@@ -2,22 +2,22 @@ import CenteredModal from "../CenteredModal";
 import { useForm, useFieldArray } from "react-hook-form";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import ColumnInput from "./components/ColumnInput";
+import ArrayListInput from "./components/ArrayListInput";
 import { isEmpty } from "lodash";
 
-interface AddBoardProps {
+interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
 }
 
 interface FormValues {
   board: string;
-  column: {
+  columns: {
     columnName: string;
   }[];
 }
 
-const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
+const BoardModal = ({ isOpen, toggle }: BoardModalProps) => {
   const defaultValues = {
     board: "",
     column: [{ columnName: "To do" }, { columnName: "Doing" }],
@@ -27,7 +27,7 @@ const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
   });
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "column",
+    name: "columns",
   });
 
   const addColumn = () => {
@@ -39,7 +39,7 @@ const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
   };
 
   const createBoard = (formValues: FormValues) => {
-    const { column } = formValues;
+    const { columns } = formValues;
     console.log(formValues);
   };
 
@@ -67,10 +67,10 @@ const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
               >
                 {fields.map((field, index) => {
                   const { ref, ...props } = register(
-                    `column.${index}.columnName`
+                    `columns.${index}.columnName`
                   );
                   return (
-                    <ColumnInput
+                    <ArrayListInput
                       key={field.id}
                       onRemove={() => removeColumn(index)}
                       forwardRef={ref}
@@ -101,4 +101,4 @@ const AddBoard = ({ isOpen, toggle }: AddBoardProps) => {
   );
 };
 
-export default AddBoard;
+export default BoardModal;

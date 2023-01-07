@@ -6,8 +6,9 @@ import { Board } from "../interfaces/Board";
 import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
 import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
-import AddBoard from "../components/Modals/AddBoard";
+import BoardModal from "../components/Modals/BoardModal";
 import useModal from "../components/Modals/hooks/useModal";
+import TaskModal from "../components/Modals/TaskModal";
 
 interface HomeProps {
   boards: [Board];
@@ -30,7 +31,8 @@ const Home = ({ boards }: HomeProps) => {
     }
   }, []);
 
-  const { isOpen: isOpenAddBoard, toggle: toggleAddBoard } = useModal();
+  const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
+  const { isOpen: isOpenTaskModal, toggle: toggleTaskModal } = useModal();
 
   return (
     <div className="light">
@@ -40,13 +42,14 @@ const Home = ({ boards }: HomeProps) => {
         setCurrentBoard={setCurrentBoard}
         isSidebarHidden={isSidebarHidden}
         setIsSidebarHidden={setIsSidebarHidden}
-        toggleAddBoard={toggleAddBoard}
+        toggleBoardModal={toggleBoardModal}
       />
 
       {!isEmpty(currentBoard) && (
         <Controlbar
           currentBoard={currentBoard}
           isSidebarHidden={isSidebarHidden}
+          toggleTaskModal={toggleTaskModal}
         />
       )}
       <div
@@ -63,7 +66,8 @@ const Home = ({ boards }: HomeProps) => {
         <Taskboard />
       </div>
 
-      <AddBoard isOpen={isOpenAddBoard} toggle={toggleAddBoard} />
+      <BoardModal isOpen={isOpenBoardModal} toggle={toggleBoardModal} />
+      <TaskModal isOpen={isOpenTaskModal} toggle={toggleTaskModal} />
     </div>
   );
 };

@@ -1,12 +1,16 @@
 import Image from "next/image";
 import crossIcon from "../../../../../assets/icon-cross.svg";
 
-interface ColumnInputProps {
+interface ArrayListInputProps {
   onRemove: Function;
   forwardRef: any;
 }
 
-const ColumnInput = ({ onRemove, forwardRef, ...props }: ColumnInputProps) => {
+const ArrayListInput = ({
+  onRemove,
+  forwardRef,
+  ...props
+}: ArrayListInputProps) => {
   return (
     <div
       style={{
@@ -28,4 +32,4 @@ const ColumnInput = ({ onRemove, forwardRef, ...props }: ColumnInputProps) => {
   );
 };
 
-export default ColumnInput;
+export default ArrayListInput;

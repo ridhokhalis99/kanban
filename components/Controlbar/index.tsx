@@ -8,9 +8,14 @@ import logoDark from "../../assets/logo-dark.svg";
 interface ControlbarProps {
   currentBoard: Board;
   isSidebarHidden: boolean;
+  toggleTaskModal: Function;
 }
 
-const Controlbar = ({ currentBoard, isSidebarHidden }: ControlbarProps) => {
+const Controlbar = ({
+  currentBoard,
+  isSidebarHidden,
+  toggleTaskModal,
+}: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const { name } = currentBoard || {};
@@ -39,7 +44,9 @@ const Controlbar = ({ currentBoard, isSidebarHidden }: ControlbarProps) => {
           alignItems: "center",
         }}
       >
-        <button className="button-new-task">+ Add New Task</button>
+        <button className="button-new-task" onClick={() => toggleTaskModal()}>
+          + Add New Task
+        </button>
         <Image
           src={iconEllipsis.src}
           alt="ellipsis"
