@@ -34,6 +34,7 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
   } = useForm<FormValues>({
     defaultValues,
   });
+  console.log("[] ~ file: index.tsx:34 ~ BoardModal ~ errors", errors);
   const { fields, append, remove } = useFieldArray({
     control,
     name: "columns",
@@ -106,12 +107,15 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
                 }}
               >
                 {fields.map((field, index) => {
-                  const { ref, ...props } = register(`columns.${index}.name`);
+                  const { ref, ...props } = register(`columns.${index}.name`, {
+                    required: "Please enter column name.",
+                  });
                   return (
                     <ArrayListInput
                       key={field.id}
                       onRemove={() => removeColumn(index)}
                       forwardRef={ref}
+                      errors={errors}
                       {...props}
                     />
                   );

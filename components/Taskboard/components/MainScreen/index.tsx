@@ -8,14 +8,15 @@ interface MainScreenProps {
 
 const MainScreen = ({ columns }: MainScreenProps) => {
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        gap: 24,
+      }}
+    >
       {columns.map(({ name, tasks }: ColumnDetail) => {
         return (
-          <div
-            style={{
-              width: "280px",
-            }}
-          >
+          <div style={{ width: "280px" }}>
             <p className="heading-s uppercase">
               {name} ({tasks?.length})
             </p>
@@ -35,6 +36,7 @@ const MainScreen = ({ columns }: MainScreenProps) => {
                   return (
                     <div
                       style={{
+                        width: "280px",
                         padding: "24px 16px",
                         backgroundColor: "white",
                         borderRadius: "8px",
@@ -46,7 +48,7 @@ const MainScreen = ({ columns }: MainScreenProps) => {
                       }}
                     >
                       <h2 className="heading-m">{name}</h2>
-                      <p className="body-m">
+                      <p className="body-m text-grey-82">
                         {finishedSubtasks} of {sub_tasks?.length} substasks
                       </p>
                     </div>
@@ -68,8 +70,7 @@ const MainScreen = ({ columns }: MainScreenProps) => {
       })}
       <div
         style={{
-          width: "280px",
-          height: "calc(100vh - 144px)",
+          width: "100%",
           borderRadius: "6px",
           marginTop: "40px",
           background:
@@ -80,9 +81,17 @@ const MainScreen = ({ columns }: MainScreenProps) => {
           justifyContent: "center",
         }}
       >
-        <h2 className="heading-xl text-grey-82 ">+ New Column</h2>
+        <h2
+          className="heading-xl text-grey-82"
+          style={{
+            width: "280px",
+            textAlign: "center",
+          }}
+        >
+          + New Column
+        </h2>
       </div>
-    </>
+    </div>
   );
 };
 
