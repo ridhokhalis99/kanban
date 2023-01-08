@@ -28,7 +28,7 @@ const Home = () => {
   });
 
   useEffect(() => {
-    if (boards.length > 0) {
+    if (!isEmpty(boards)) {
       return setCurrentBoard(boards[0]);
     }
   }, [boards]);
@@ -78,7 +78,12 @@ const Home = () => {
         toggle={toggleBoardModal}
         refetchBoards={refetchBoards}
       />
-      <TaskModal isOpen={isOpenTaskModal} toggle={toggleTaskModal} />
+      <TaskModal
+        isOpen={isOpenTaskModal}
+        toggle={toggleTaskModal}
+        boardDetail={boardDetail}
+        refetchBoardDetail={refetchBoardDetail}
+      />
     </div>
   );
 };

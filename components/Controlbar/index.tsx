@@ -4,6 +4,7 @@ import BoardDropdown from "./components/BoardDropdown";
 import useComponentVisible from "./hooks/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
+import { isEmpty } from "lodash";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
@@ -13,23 +14,21 @@ interface ControlbarProps {
 const Controlbar = ({ boardDetail, toggleTaskModal }: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
-  const { name } = boardDetail || {};
+  const { name, columns } = boardDetail || {};
 
   return (
     <div className="controlbar container">
       <div className="left-container">
-        {true && (
-          <>
-            <Image
-              src={logoDark}
-              alt="kanban logo"
-              width={logoDark.width}
-              height={logoDark.height}
-              style={{ margin: "auto" }}
-            />
-            <div className="left-container-divider" />
-          </>
-        )}
+        <>
+          <Image
+            src={logoDark}
+            alt="kanban logo"
+            width={logoDark.width}
+            height={logoDark.height}
+            style={{ margin: "auto" }}
+          />
+          <div className="left-container-divider" />
+        </>
         <h1 className="heading-xl board-title">{name}</h1>
       </div>
       <div
@@ -39,9 +38,11 @@ const Controlbar = ({ boardDetail, toggleTaskModal }: ControlbarProps) => {
           alignItems: "center",
         }}
       >
-        <button className="button-new-task" onClick={() => toggleTaskModal()}>
-          + Add New Task
-        </button>
+        {!isEmpty(columns) && (
+          <button className="button-new-task" onClick={() => toggleTaskModal()}>
+            + Add New Task
+          </button>
+        )}
         <Image
           src={iconEllipsis.src}
           alt="ellipsis"

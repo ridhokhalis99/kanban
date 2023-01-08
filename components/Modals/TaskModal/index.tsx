@@ -4,36 +4,66 @@ import CenteredModal from "../CenteredModal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import { isEmpty } from "lodash";
+import BoardDetail from "../../../interfaces/BoardDetail";
+import { ErrorMessage } from "@hookform/error-message";
+import useMutation from "../../../tools/useMutation";
 
 interface TaskModalProps {
   isOpen: boolean;
   toggle: Function;
+  boardDetail: BoardDetail;
+  refetchBoardDetail: Function;
 }
 
 interface FormValues {
   title: string;
   description: string;
   subtasks: {
-    subtaskName: string;
+    name: string;
   }[];
   columnId: number;
 }
 
-const TaskModal = ({ isOpen, toggle }: TaskModalProps) => {
-  const { control, register, handleSubmit } = useForm<FormValues>();
+const TaskModal = ({
+  isOpen,
+  toggle,
+  boardDetail,
+  refetchBoardDetail,
+}: TaskModalProps) => {
+  const { columns } = boardDetail;
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>();
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "subtasks",
   });
 
+  const closeModal = () => {
+    toggle();
+    reset();
+  };
+
+  const { mutation: mutationCreateTask, loading } = useMutation({
+    url: "/api/task",
+    method: "post",
+    afterSuccess: () => {
+      refetchBoardDetail();
+      closeModal();
+    },
+  });
+
   const createTask = (formValues: FormValues) => {
-    const { title, description, subtasks, columnId } = formValues;
-    console.log(formValues);
+    mutationCreateTask(formValues);
   };
 
   const addSubtask = () => {
-    append({ subtaskName: "" });
+    append({ name: "" });
   };
 
   const removeSubtask = (index: number) => {
@@ -44,14 +74,29 @@ const TaskModal = ({ isOpen, toggle }: TaskModalProps) => {
     <CenteredModal
       title="Add New Task"
       isOpen={isOpen}
-      toggle={toggle}
+      toggle={closeModal}
       children={
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div>
             <h3 className="body-m input-label">Title</h3>
             <input
               placeholder="e.g. Take coffee break"
-              {...register("title")}
+              {...register("title", { required: "Please enter task title." })}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="title"
+              render={({ message }) => (
+                <p
+                  style={{
+                    fontSize: 12,
+                    marginTop: 4,
+                    color: "#EA5555",
+                  }}
+                >
+                  {message}
+                </p>
+              )}
             />
           </div>
 
@@ -77,9 +122,7 @@ const TaskModal = ({ isOpen, toggle }: TaskModalProps) => {
                 }}
               >
                 {fields.map((field, index) => {
-                  const { ref, ...props } = register(
-                    `subtasks.${index}.subtaskName`
-                  );
+                  const { ref, ...props } = register(`subtasks.${index}.name`);
                   return (
                     <ArrayListInput
                       key={field.id}
@@ -92,6 +135,18 @@ const TaskModal = ({ isOpen, toggle }: TaskModalProps) => {
               </div>
             </div>
           )}
+
+          <div>
+            <select {...register(`columnId`)}>
+              {columns?.map(({ name, id }) => {
+                return (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
 
           <div
             style={{

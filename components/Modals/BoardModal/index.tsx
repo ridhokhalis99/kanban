@@ -29,6 +29,7 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues,
@@ -43,9 +44,14 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
     method: "post",
     afterSuccess: () => {
       refetchBoards();
-      toggle();
+      closeModal();
     },
   });
+
+  const closeModal = () => {
+    reset();
+    toggle();
+  };
 
   const addColumn = () => {
     append({ name: "" });
@@ -63,7 +69,7 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
     <CenteredModal
       title="Add New Board"
       isOpen={isOpen}
-      toggle={toggle}
+      toggle={closeModal}
       children={
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div>
