@@ -1,25 +1,19 @@
 import Image from "next/image";
-import { Board } from "../../interfaces/Board";
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 import BoardDropdown from "./components/BoardDropdown";
 import useComponentVisible from "./hooks/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
-import { board } from "@prisma/client";
+import BoardDetail from "../../interfaces/BoardDetail";
 
 interface ControlbarProps {
-  currentBoard: board;
-  isSidebarHidden: boolean;
+  boardDetail: BoardDetail;
   toggleTaskModal: Function;
 }
 
-const Controlbar = ({
-  currentBoard,
-  isSidebarHidden,
-  toggleTaskModal,
-}: ControlbarProps) => {
+const Controlbar = ({ boardDetail, toggleTaskModal }: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
-  const { name } = currentBoard || {};
+  const { name } = boardDetail || {};
 
   return (
     <div className="controlbar container">

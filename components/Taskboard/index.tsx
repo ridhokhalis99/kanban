@@ -1,4 +1,15 @@
-const Taskboard = () => {
+import { isEmpty } from "lodash";
+import BoardDetail from "../../interfaces/BoardDetail";
+import EmptyScreen from "./components/EmptyScreen";
+import MainScreen from "./components/MainScreen";
+
+interface TaskboardProps {
+  boardDetail: BoardDetail;
+}
+
+const Taskboard = ({ boardDetail }: TaskboardProps) => {
+  const { columns } = boardDetail;
+
   return (
     <div
       style={{
@@ -6,34 +17,12 @@ const Taskboard = () => {
         width: "100%",
         height: "calc(100vh - 96px)",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        ...(isEmpty(columns)
+          ? { alignItems: "center", justifyContent: "center" }
+          : { paddingTop: "24px", paddingLeft: "18px", gap: "24px" }),
       }}
     >
-      <div
-        style={{
-          textAlign: "center",
-        }}
-      >
-        <h2
-          className="heading-l text-grey-82"
-          style={{
-            marginBottom: 32,
-          }}
-        >
-          This board is empty. Create a new column to get started.
-        </h2>
-        <button
-          style={{
-            backgroundColor: "#635FC7",
-            borderRadius: 24,
-            padding: "18px 24px",
-            color: "white",
-          }}
-        >
-          + Add New Column
-        </button>
-      </div>
+      {isEmpty(columns) ? <EmptyScreen /> : <MainScreen columns={columns} />}
     </div>
   );
 };

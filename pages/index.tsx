@@ -9,10 +9,13 @@ import useModal from "../components/Modals/hooks/useModal";
 import TaskModal from "../components/Modals/TaskModal";
 import useFetch from "../tools/useFetch";
 import { board } from "@prisma/client";
+import BoardDetail from "../interfaces/BoardDetail";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
-  const [boardDetail, setBoardDetail] = useState<board>({} as board);
+  const [boardDetail, setBoardDetail] = useState<BoardDetail>(
+    {} as BoardDetail
+  );
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
 
   const { data: boards, refetch: refetchBoards } = useFetch({
@@ -21,7 +24,7 @@ const Home = () => {
 
   const { refetch: refetchBoardDetail } = useFetch({
     url: `/api/board/${currentBoard.id}`,
-    afterSuccess: (res: board) => setBoardDetail(res),
+    afterSuccess: (res: BoardDetail) => setBoardDetail(res),
   });
 
   useEffect(() => {
@@ -31,7 +34,9 @@ const Home = () => {
   }, [boards]);
 
   useEffect(() => {
-    refetchBoardDetail();
+    if (currentBoard?.id) {
+      refetchBoardDetail();
+    }
   }, [currentBoard]);
 
   const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
@@ -50,9 +55,8 @@ const Home = () => {
 
       {!isEmpty(currentBoard) && (
         <Controlbar
-          currentBoard={currentBoard}
-          isSidebarHidden={isSidebarHidden}
           toggleTaskModal={toggleTaskModal}
+          boardDetail={boardDetail}
         />
       )}
       <div
@@ -66,7 +70,7 @@ const Home = () => {
         {isSidebarHidden && (
           <ShowSidebar setIsSidebarHidden={setIsSidebarHidden} />
         )}
-        <Taskboard />
+        <Taskboard boardDetail={boardDetail} />
       </div>
 
       <BoardModal
