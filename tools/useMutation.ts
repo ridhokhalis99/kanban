@@ -21,7 +21,7 @@ const useMutation = ({
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(defaultValue);
 
-  const mutation = async (value: any) => {
+  const mutation = async (value?: any) => {
     try {
       setLoading(true);
       const response = await axios[method](url, value);

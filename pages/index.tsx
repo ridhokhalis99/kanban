@@ -10,6 +10,7 @@ import TaskModal from "../components/Modals/TaskModal";
 import useFetch from "../tools/useFetch";
 import { board } from "@prisma/client";
 import BoardDetail from "../interfaces/BoardDetail";
+import DeleteModal from "../components/Modals/DeleteModal";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
@@ -17,6 +18,7 @@ const Home = () => {
     {} as BoardDetail
   );
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
+  const [deleteType, setDeleteType] = useState<string>("");
 
   const { data: boards, refetch: refetchBoards } = useFetch({
     url: "/api/board",
@@ -39,8 +41,17 @@ const Home = () => {
     }
   }, [currentBoard]);
 
+  useEffect(() => {
+    if (deleteType) openDeletemodal();
+  }, [deleteType]);
+
   const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
   const { isOpen: isOpenTaskModal, toggle: toggleTaskModal } = useModal();
+  const {
+    isOpen: isOpenDeleteModal,
+    toggle: toggleDeleteModal,
+    open: openDeletemodal,
+  } = useModal();
 
   return (
     <div className="light">
@@ -57,6 +68,7 @@ const Home = () => {
         <Controlbar
           toggleTaskModal={toggleTaskModal}
           boardDetail={boardDetail}
+          setDeleteType={setDeleteType}
         />
       )}
       <div
@@ -83,6 +95,16 @@ const Home = () => {
         toggle={toggleTaskModal}
         boardDetail={boardDetail}
         refetchBoardDetail={refetchBoardDetail}
+      />
+      <DeleteModal
+        isOpen={isOpenDeleteModal}
+        toggle={() => {
+          toggleDeleteModal();
+          setDeleteType("");
+        }}
+        type={deleteType}
+        currentBoard={currentBoard}
+        refetchBoards={refetchBoards}
       />
     </div>
   );

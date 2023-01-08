@@ -5,13 +5,19 @@ import useComponentVisible from "./hooks/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";
+import { Dispatch } from "react";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
   toggleTaskModal: Function;
+  setDeleteType: Dispatch<string>;
 }
 
-const Controlbar = ({ boardDetail, toggleTaskModal }: ControlbarProps) => {
+const Controlbar = ({
+  boardDetail,
+  toggleTaskModal,
+  setDeleteType,
+}: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const { name, columns } = boardDetail || {};
@@ -57,6 +63,7 @@ const Controlbar = ({ boardDetail, toggleTaskModal }: ControlbarProps) => {
         <BoardDropdown
           refDropdown={ref}
           isComponentVisible={isComponentVisible}
+          setDeleteType={setDeleteType}
         />
       </div>
     </div>

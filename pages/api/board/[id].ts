@@ -26,11 +26,26 @@ const readBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const deleteBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
+  const boardId = req.query.id;
+  if (boardId) {
+    await prisma.board.delete({
+      where: {
+        id: +boardId,
+      },
+    });
+    res.status(200).json({ message: "board deleted successfully" });
+  }
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   switch (method) {
     case "GET":
       await readBoardById(req, res);
+      break;
+    case "DELETE":
+      await deleteBoardById(req, res);
       break;
   }
 };

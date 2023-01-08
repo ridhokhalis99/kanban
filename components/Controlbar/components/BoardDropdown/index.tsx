@@ -1,13 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Dispatch } from "react";
 
 interface BoardDropdownProps {
   isComponentVisible: boolean;
   refDropdown: any;
+  setDeleteType: Dispatch<string>;
 }
 
 const BoardDropdown = ({
   isComponentVisible,
   refDropdown,
+  setDeleteType,
 }: BoardDropdownProps) => {
   return (
     <AnimatePresence>
@@ -21,7 +24,12 @@ const BoardDropdown = ({
           className="dropdown-container"
         >
           <h3 className="body-l dropdown-item edit">Edit Board</h3>
-          <h3 className="body-l dropdown-item delete">Delete Board</h3>
+          <h3
+            onClick={() => setDeleteType("board")}
+            className="body-l dropdown-item delete"
+          >
+            Delete Board
+          </h3>
         </motion.div>
       )}
     </AnimatePresence>

@@ -5,9 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface CenteredModalProps {
   title: string;
+  isTitleRed?: boolean;
   isOpen: boolean;
   toggle: Function;
   children: ReactElement;
+  woClose?: boolean;
 }
 
 const CenteredModal = ({
@@ -15,6 +17,7 @@ const CenteredModal = ({
   isOpen,
   toggle,
   children,
+  woClose,
 }: CenteredModalProps) => {
   return (
     <>
@@ -47,7 +50,7 @@ const CenteredModal = ({
                 opacity: 0.5,
                 position: "absolute",
               }}
-            ></div>
+            />
             <div
               style={{
                 padding: 32,
@@ -63,17 +66,22 @@ const CenteredModal = ({
                   justifyContent: "space-between",
                 }}
               >
-                <h2 className="heading-l" style={{ marginBottom: 24 }}>
+                <h2
+                  className="heading-l"
+                  style={{ marginBottom: 24, color: "#EA5555" }}
+                >
                   {title}
                 </h2>
-                <Image
-                  src={crossIcon.src}
-                  alt="close modal"
-                  width={crossIcon.width}
-                  height={crossIcon.height}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => toggle()}
-                />
+                {!woClose && (
+                  <Image
+                    src={crossIcon.src}
+                    alt="close modal"
+                    width={crossIcon.width}
+                    height={crossIcon.height}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => toggle()}
+                  />
+                )}
               </div>
               {children}
             </div>
