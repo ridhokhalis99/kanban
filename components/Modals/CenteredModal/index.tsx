@@ -1,6 +1,4 @@
 import { ReactElement } from "react";
-import crossIcon from "../../../assets/icon-cross.svg";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface CenteredModalProps {
@@ -9,7 +7,6 @@ interface CenteredModalProps {
   isOpen: boolean;
   toggle: Function;
   children: ReactElement;
-  woClose?: boolean;
 }
 
 const CenteredModal = ({
@@ -17,7 +14,6 @@ const CenteredModal = ({
   isOpen,
   toggle,
   children,
-  woClose,
 }: CenteredModalProps) => {
   return (
     <>
@@ -72,16 +68,6 @@ const CenteredModal = ({
                 >
                   {title}
                 </h2>
-                {!woClose && (
-                  <Image
-                    src={crossIcon.src}
-                    alt="close modal"
-                    width={crossIcon.width}
-                    height={crossIcon.height}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => toggle()}
-                  />
-                )}
               </div>
               {children}
             </div>

@@ -36,7 +36,6 @@ const DeleteModal = ({
       toggle={toggle}
       title={`Delete this ${type}?`}
       isTitleRed
-      woClose
       children={
         <div>
           <p className="body-l text-grey-82">{description}</p>

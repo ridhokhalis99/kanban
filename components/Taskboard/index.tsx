@@ -14,9 +14,9 @@ const Taskboard = ({ boardDetail }: TaskboardProps) => {
     <div
       style={{
         backgroundColor: "#F4F7FD",
-        height: "calc(100vh - 96px)",
+        height: "calc(100vh - 80px)",
         display: "flex",
-        overflowX: "scroll",
+        overflowX: "auto",
         paddingRight: "40px",
         ...(isEmpty(columns)
           ? { alignItems: "center", justifyContent: "center" }
