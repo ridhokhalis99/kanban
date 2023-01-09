@@ -34,7 +34,6 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
   } = useForm<FormValues>({
     defaultValues,
   });
-  console.log("[] ~ file: index.tsx:34 ~ BoardModal ~ errors", errors);
   const { fields, append, remove } = useFieldArray({
     control,
     name: "columns",

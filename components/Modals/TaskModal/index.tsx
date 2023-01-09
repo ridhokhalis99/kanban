@@ -7,10 +7,9 @@ import { isEmpty } from "lodash";
 import BoardDetail from "../../../interfaces/BoardDetail";
 import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
+import ModalProps from "../../../interfaces/ModalProps";
 
-interface TaskModalProps {
-  isOpen: boolean;
-  toggle: Function;
+interface TaskModalProps extends ModalProps {
   boardDetail: BoardDetail;
   refetchBoardDetail: Function;
 }
@@ -128,6 +127,7 @@ const TaskModal = ({
                       key={field.id}
                       onRemove={() => removeSubtask(index)}
                       forwardRef={ref}
+                      errors={errors}
                       {...props}
                     />
                   );

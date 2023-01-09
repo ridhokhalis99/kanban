@@ -1,12 +1,14 @@
 import ColumnDetail from "../../../../interfaces/ColumnDetail";
 import TaskDetail from "../../../../interfaces/TaskDetail";
 import { countBy, isEmpty } from "lodash";
+import { Dispatch } from "react";
 
 interface MainScreenProps {
   columns: ColumnDetail[];
+  setTaskDetail: Dispatch<TaskDetail>;
 }
 
-const MainScreen = ({ columns }: MainScreenProps) => {
+const MainScreen = ({ columns, setTaskDetail }: MainScreenProps) => {
   return (
     <div
       style={{
@@ -29,12 +31,16 @@ const MainScreen = ({ columns }: MainScreenProps) => {
               }}
             >
               {!isEmpty(tasks) ? (
-                tasks?.map(({ name, sub_tasks }: TaskDetail) => {
+                tasks?.map((task: TaskDetail) => {
+                  const { name, sub_tasks } = task;
                   const finishedSubtasks =
                     countBy(sub_tasks, ({ is_finished }) => is_finished).true ||
                     0;
+                  const numberOfSubtasks = sub_tasks?.length;
+
                   return (
                     <div
+                      onClick={() => setTaskDetail(task)}
                       style={{
                         width: "280px",
                         padding: "24px 16px",
@@ -49,7 +55,7 @@ const MainScreen = ({ columns }: MainScreenProps) => {
                     >
                       <h2 className="heading-m">{name}</h2>
                       <p className="body-m text-grey-82">
-                        {finishedSubtasks} of {sub_tasks?.length} substasks
+                        {finishedSubtasks} of {numberOfSubtasks} substasks
                       </p>
                     </div>
                   );

@@ -1,19 +1,21 @@
 import { ReactElement } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ModalProps from "../../../interfaces/ModalProps";
 
-interface CenteredModalProps {
+interface CenteredModalProps extends ModalProps {
   title: string;
   isTitleRed?: boolean;
-  isOpen: boolean;
-  toggle: Function;
   children: ReactElement;
+  customComponent?: ReactElement;
 }
 
 const CenteredModal = ({
   title,
+  isTitleRed,
   isOpen,
   toggle,
   children,
+  customComponent,
 }: CenteredModalProps) => {
   return (
     <>
@@ -64,10 +66,14 @@ const CenteredModal = ({
               >
                 <h2
                   className="heading-l"
-                  style={{ marginBottom: 24, color: "#EA5555" }}
+                  style={{
+                    marginBottom: 24,
+                    color: isTitleRed ? "#EA5555" : "#000112",
+                  }}
                 >
                   {title}
                 </h2>
+                {customComponent}
               </div>
               {children}
             </div>

@@ -1,10 +1,9 @@
 import { board } from "@prisma/client";
+import ModalProps from "../../../interfaces/ModalProps";
 import useMutation from "../../../tools/useMutation";
 import CenteredModal from "../CenteredModal";
 
-interface DeleteModalProps {
-  isOpen: boolean;
-  toggle: Function;
+interface DeleteModalProps extends ModalProps {
   type: string;
   currentBoard: board;
   refetchBoards: Function;

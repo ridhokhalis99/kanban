@@ -11,6 +11,8 @@ import useFetch from "../tools/useFetch";
 import { board } from "@prisma/client";
 import BoardDetail from "../interfaces/BoardDetail";
 import DeleteModal from "../components/Modals/DeleteModal";
+import TaskDetailModal from "../components/Modals/TaskDetailModal";
+import TaskDetail from "../interfaces/TaskDetail";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
@@ -19,6 +21,7 @@ const Home = () => {
   );
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
   const [deleteType, setDeleteType] = useState<string>("");
+  const [taskDetail, setTaskDetail] = useState<TaskDetail>({} as TaskDetail);
 
   const { data: boards, refetch: refetchBoards } = useFetch({
     url: "/api/board",
@@ -42,15 +45,24 @@ const Home = () => {
   }, [currentBoard]);
 
   useEffect(() => {
-    if (deleteType) openDeletemodal();
+    if (deleteType) openDeleteModal();
   }, [deleteType]);
+
+  useEffect(() => {
+    if (!isEmpty(taskDetail)) openTaskDetailModal();
+  }, [taskDetail]);
 
   const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
   const { isOpen: isOpenTaskModal, toggle: toggleTaskModal } = useModal();
   const {
     isOpen: isOpenDeleteModal,
     toggle: toggleDeleteModal,
-    open: openDeletemodal,
+    open: openDeleteModal,
+  } = useModal();
+  const {
+    isOpen: isOpenTaskDetailModal,
+    toggle: toggleTaskDetailModal,
+    open: openTaskDetailModal,
   } = useModal();
 
   return (
@@ -82,7 +94,7 @@ const Home = () => {
         {isSidebarHidden && (
           <ShowSidebar setIsSidebarHidden={setIsSidebarHidden} />
         )}
-        <Taskboard boardDetail={boardDetail} />
+        <Taskboard boardDetail={boardDetail} setTaskDetail={setTaskDetail} />
       </div>
 
       <BoardModal
@@ -105,6 +117,16 @@ const Home = () => {
         type={deleteType}
         currentBoard={currentBoard}
         refetchBoards={refetchBoards}
+      />
+      <TaskDetailModal
+        isOpen={isOpenTaskDetailModal}
+        toggle={() => {
+          refetchBoardDetail();
+          toggleTaskDetailModal();
+          setTaskDetail({} as TaskDetail);
+        }}
+        taskDetail={taskDetail}
+        boardDetail={boardDetail}
       />
     </div>
   );
