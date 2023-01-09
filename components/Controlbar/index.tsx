@@ -1,7 +1,7 @@
 import Image from "next/image";
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
-import BoardDropdown from "./components/BoardDropdown";
-import useComponentVisible from "./hooks/useComponentVisible";
+import BoardDropdown from "./BoardDropdown";
+import useComponentVisible from "../../tools/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";

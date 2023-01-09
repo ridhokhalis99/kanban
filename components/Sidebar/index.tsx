@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import BoardList from "./components/BoardList";
-import ThemeSlider from "./components/ThemeSlider";
-import HideSidebar from "./components/HideSidebar";
+import BoardList from "./BoardList";
+import ThemeSlider from "./ThemeSlider";
+import HideSidebar from "./HideSidebar";
 import { board } from "@prisma/client";
 
 interface SidebarProps {

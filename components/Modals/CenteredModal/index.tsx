@@ -5,6 +5,7 @@ import ModalProps from "../../../interfaces/ModalProps";
 interface CenteredModalProps extends ModalProps {
   title: string;
   isTitleRed?: boolean;
+  className?: string;
   children: ReactElement;
   customComponent?: ReactElement;
 }
@@ -12,6 +13,7 @@ interface CenteredModalProps extends ModalProps {
 const CenteredModal = ({
   title,
   isTitleRed,
+  className,
   isOpen,
   toggle,
   children,
@@ -26,6 +28,7 @@ const CenteredModal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
+            className={className}
             style={{
               position: "absolute",
               top: 0,

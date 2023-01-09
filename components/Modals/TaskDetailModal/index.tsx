@@ -2,13 +2,19 @@ import BoardDetail from "../../../interfaces/BoardDetail";
 import ModalProps from "../../../interfaces/ModalProps";
 import TaskDetail from "../../../interfaces/TaskDetail";
 import CenteredModal from "../CenteredModal";
-import { countBy } from "lodash";
+import { countBy, isEmpty } from "lodash";
 import { useForm } from "react-hook-form";
 import useMutation from "../../../tools/useMutation";
+import Image from "next/image";
+import iconEllipsis from "../../../assets/icon-vertical-ellipsis.svg";
+import useComponentVisible from "../../../tools/useComponentVisible";
+import TaskDetailDropdown from "./TaskDetailDropdown";
+import { Dispatch } from "react";
 
 interface TaskDetailModalProps extends ModalProps {
   taskDetail: TaskDetail;
   boardDetail: BoardDetail;
+  setDeleteType: Dispatch<string>;
 }
 
 const TaskDetailModal = ({
@@ -16,6 +22,7 @@ const TaskDetailModal = ({
   toggle,
   taskDetail,
   boardDetail,
+  setDeleteType,
 }: TaskDetailModalProps) => {
   const {
     name: taskTitle,
@@ -26,10 +33,7 @@ const TaskDetailModal = ({
   } = taskDetail;
   const { columns } = boardDetail;
 
-  const {
-    register,
-    formState: { errors },
-  } = useForm({
+  const { register } = useForm({
     defaultValues: {
       columnId: defaultColumnId,
     },
@@ -60,11 +64,38 @@ const TaskDetailModal = ({
     mutationTask({ columnId, taskId });
   };
 
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
+
   return (
     <CenteredModal
       isOpen={isOpen}
       toggle={toggle}
       title={taskTitle}
+      className="task-detail-modal"
+      customComponent={
+        <div>
+          <Image
+            src={iconEllipsis.src}
+            alt="ellipsis"
+            width={iconEllipsis.width}
+            height={iconEllipsis.height}
+            onClick={() => setIsComponentVisible((prev) => !prev)}
+            style={{
+              cursor: "pointer",
+            }}
+          />
+          <TaskDetailDropdown
+            isComponentVisible={isComponentVisible}
+            forwardRef={ref}
+            setDeleteType={setDeleteType}
+            toggleParent={() => {
+              toggle();
+              setIsComponentVisible((prev) => !prev);
+            }}
+          />
+        </div>
+      }
       children={
         <div
           style={{
@@ -73,13 +104,12 @@ const TaskDetailModal = ({
             gap: "24px",
           }}
         >
-          <p className="body-l text-grey-82">{description}</p>
-
+          {description && <p className="body-l text-grey-82">{description}</p>}
           <div>
             <p
               className="body-m text-grey-82"
               style={{
-                marginBottom: "16px",
+                marginBottom: !isEmpty(sub_tasks) ? "16px" : 0,
               }}
             >
               Subtasks ({finishedSubtasks} of {numberOfSubtasks})

@@ -1,5 +1,5 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import ArrayListInput from "../BoardModal/components/ArrayListInput";
+import ArrayListInput from "../BoardModal/ArrayListInput";
 import CenteredModal from "../CenteredModal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";

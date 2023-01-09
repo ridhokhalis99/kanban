@@ -1,5 +1,5 @@
-import ColumnDetail from "../../../../interfaces/ColumnDetail";
-import TaskDetail from "../../../../interfaces/TaskDetail";
+import ColumnDetail from "../../../interfaces/ColumnDetail";
+import TaskDetail from "../../../interfaces/TaskDetail";
 import { countBy, isEmpty } from "lodash";
 import { Dispatch } from "react";
 

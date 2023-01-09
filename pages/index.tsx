@@ -3,7 +3,7 @@ import Controlbar from "../components/Controlbar";
 import Sidebar from "../components/Sidebar";
 import { isEmpty } from "lodash";
 import Taskboard from "../components/Taskboard";
-import ShowSidebar from "../components/Sidebar/components/ShowSidebar";
+import ShowSidebar from "../components/Sidebar/ShowSidebar";
 import BoardModal from "../components/Modals/BoardModal";
 import useModal from "../components/Modals/hooks/useModal";
 import TaskModal from "../components/Modals/TaskModal";
@@ -127,6 +127,7 @@ const Home = () => {
         }}
         taskDetail={taskDetail}
         boardDetail={boardDetail}
+        setDeleteType={setDeleteType}
       />
     </div>
   );

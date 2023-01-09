@@ -1,6 +1,6 @@
 import Image from "next/image";
-import lightThemeIcon from "../../../../assets/icon-light-theme.svg";
-import darkThemeIcon from "../../../../assets/icon-dark-theme.svg";
+import lightThemeIcon from "../../../assets/icon-light-theme.svg";
+import darkThemeIcon from "../../../assets/icon-dark-theme.svg";
 
 const ThemeSlider = () => {
   return (

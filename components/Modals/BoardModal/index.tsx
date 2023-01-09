@@ -2,7 +2,7 @@ import CenteredModal from "../CenteredModal";
 import { useForm, useFieldArray } from "react-hook-form";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import ArrayListInput from "./components/ArrayListInput";
+import ArrayListInput from "./ArrayListInput";
 import { isEmpty } from "lodash";
 import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
@@ -23,7 +23,7 @@ interface FormValues {
 const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
   const defaultValues = {
     board: "",
-    columns: [{ name: "To do" }, { name: "Doing" }],
+    columns: [{ name: "To do" }, { name: "Doing" }, { name: "Done" }],
   };
   const {
     control,

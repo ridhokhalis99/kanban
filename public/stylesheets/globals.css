@@ -271,6 +271,30 @@
   align-content: center;
 }
 
+.task-detail-modal .dropdown-container {
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  right: 26px;
+  top: 60px;
+  box-shadow: #e4ebfa 0px 1px 4px;
+  z-index: 1;
+}
+.task-detail-modal .dropdown-container .dropdown-item {
+  width: 160px;
+  cursor: pointer;
+}
+.task-detail-modal .dropdown-container .edit {
+  color: #828fa3;
+}
+.task-detail-modal .dropdown-container .delete {
+  color: #ea5555;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

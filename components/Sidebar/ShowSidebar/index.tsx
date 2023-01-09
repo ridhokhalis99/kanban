@@ -1,4 +1,4 @@
-import showSidebarIcon from "../../../../assets/icon-show-sidebar.svg";
+import showSidebarIcon from "../../../assets/icon-show-sidebar.svg";
 import Image from "next/image";
 
 interface ShowSidebarProps {

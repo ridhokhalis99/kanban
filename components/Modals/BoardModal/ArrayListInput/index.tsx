@@ -1,5 +1,5 @@
 import Image from "next/image";
-import crossIcon from "../../../../../assets/icon-cross.svg";
+import crossIcon from "../../../../assets/icon-cross.svg";
 import { ErrorMessage } from "@hookform/error-message";
 
 interface ArrayListInputProps {
