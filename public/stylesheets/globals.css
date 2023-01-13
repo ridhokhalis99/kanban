@@ -354,6 +354,33 @@
   color: #000112;
 }
 
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+.delete-modal .button-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.delete-modal .button-container .button {
+  width: 50%;
+  padding: 14px 0;
+  border-radius: 20px;
+}
+.delete-modal .button-container .button.delete {
+  background-color: #ea5555;
+  color: #ffffff;
+}
+.delete-modal .button-container .button.cancel {
+  background-color: rgba(96, 93, 199, 0.1019607843);
+  color: #635fc7;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

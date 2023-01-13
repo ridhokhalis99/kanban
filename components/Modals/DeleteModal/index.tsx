@@ -1,6 +1,5 @@
 import { board } from "@prisma/client";
 import ModalProps from "../../../interfaces/ModalProps";
-import TaskDetail from "../../../interfaces/TaskDetail";
 import useMutation from "../../../tools/useMutation";
 import CenteredModal from "../CenteredModal";
 
@@ -39,22 +38,13 @@ const DeleteModal = ({
       title={`Delete this ${type}?`}
       isTitleRed
       children={
-        <div>
+        <div className="delete-modal">
           <p className="body-l text-grey-82">{description}</p>
           <div className="button-container">
             <button className="button delete" onClick={() => mutationDelete()}>
               Delete
             </button>
-            <button
-              style={{
-                width: "50%",
-                padding: "14px 0",
-                backgroundColor: "#635FC71A",
-                color: "#635FC7",
-                borderRadius: "20px",
-              }}
-              onClick={() => toggle()}
-            >
+            <button className="button cancel" onClick={() => toggle()}>
               Cancel
             </button>
           </div>
