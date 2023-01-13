@@ -74,7 +74,14 @@
   bottom: 40;
   display: flex;
   flex-direction: column;
-  gap: 24;
+  gap: 24px;
+}
+.sidebar .bottom-sidebar {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .sidebar .hide-sidebar {
   display: flex;

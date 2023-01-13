@@ -4,17 +4,7 @@ import darkThemeIcon from "../../../assets/icon-dark-theme.svg";
 
 const ThemeSlider = () => {
   return (
-    <div
-      style={{
-        margin: "0 24px",
-        padding: "14px 54px",
-        backgroundColor: "#F4F7FD",
-        borderRadius: 6,
-        display: "flex",
-        gap: 24,
-        alignItems: "center",
-      }}
-    >
+    <div className="theme-slider">
       <Image
         src={lightThemeIcon.src}
         alt="light theme"

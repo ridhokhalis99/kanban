@@ -48,6 +48,10 @@
   text-transform: uppercase;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .heading-xl {
   font-weight: 700;
   font-size: 24px;
@@ -87,6 +91,10 @@
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .text-purple-63 {
@@ -208,7 +216,14 @@
   bottom: 40;
   display: flex;
   flex-direction: column;
-  gap: 24;
+  gap: 24px;
+}
+.sidebar .bottom-sidebar {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .sidebar .hide-sidebar {
   display: flex;
@@ -381,6 +396,85 @@
   color: #635fc7;
 }
 
+.taskboard {
+  background-color: #f4f7fd;
+  height: calc(100vh - 80px);
+  display: flex;
+  overflow-x: auto;
+  padding-right: 40px;
+}
+
+.taskboard.empty {
+  align-items: center;
+  justify-content: center;
+}
+.taskboard.empty .add-column-button {
+  background-color: #635fc7;
+  border-radius: 24px;
+  padding: 18px 24px;
+  color: white;
+}
+
+.taskboard.main {
+  padding-top: 24px;
+  padding-left: 18px;
+  gap: 24px;
+}
+.taskboard.main .main-container {
+  display: flex;
+  gap: 24px;
+}
+.taskboard.main .main-container .column-parent {
+  width: 280px;
+}
+.taskboard.main .main-container .task-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 24px;
+}
+.taskboard.main .main-container .task-container .task-item {
+  width: 280px;
+  padding: 24px 16px;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+}
+.taskboard.main .main-container .task-container .empty-column {
+  height: calc(100vh - 200px);
+  width: 280px;
+  border: 2px dashed #c8cfda;
+  border-radius: 6px;
+}
+.taskboard.main .main-container .new-column {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 40px;
+  background: linear-gradient(to bottom, rgba(121, 132, 147, 0.2), rgba(130, 143, 163, 0.1), rgba(130, 143, 163, 0));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.taskboard.main .main-container .new-column .new-column-text {
+  width: 280px;
+  text-align: center;
+}
+
+.theme-slider {
+  margin: 0 24px;
+  padding: 14px 54px;
+  background-color: #f4f7fd;
+  border-radius: 6px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -438,6 +532,10 @@ input[type=checkbox] {
 
 .mb-8 {
   margin-bottom: 8px;
+}
+
+.mb-32 {
+  margin-bottom: 32px;
 }
 
 .input-label {

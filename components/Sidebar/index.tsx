@@ -47,15 +47,7 @@ const Sidebar = ({
             <BoardList boards={boards} {...props} />
           </div>
 
-          <div
-            style={{
-              position: "absolute",
-              bottom: 40,
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
+          <div className="bottom-sidebar">
             <ThemeSlider />
             <HideSidebar setIsSidebarHidden={setIsSidebarHidden} />
           </div>

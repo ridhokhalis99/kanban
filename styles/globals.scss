@@ -10,6 +10,8 @@
 @import "./components/dropdown-ellipsis.scss";
 @import "./components/centered-modal.scss";
 @import "./components/delete-modal.scss";
+@import "./components/taskboard.scss";
+@import "./components/theme-slider.scss";
 
 * {
   box-sizing: border-box;
@@ -70,6 +72,10 @@ input[type="checkbox"] {
 
 .mb-8 {
   margin-bottom: 8px;
+}
+
+.mb-32 {
+  margin-bottom: 32px;
 }
 
 .input-label {

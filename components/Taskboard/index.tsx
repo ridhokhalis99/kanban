@@ -14,18 +14,7 @@ const Taskboard = ({ boardDetail, setTaskDetail }: TaskboardProps) => {
   const { columns } = boardDetail;
 
   return (
-    <div
-      style={{
-        backgroundColor: "#F4F7FD",
-        height: "calc(100vh - 80px)",
-        display: "flex",
-        overflowX: "auto",
-        paddingRight: "40px",
-        ...(isEmpty(columns)
-          ? { alignItems: "center", justifyContent: "center" }
-          : { paddingTop: "24px", paddingLeft: "18px", gap: "24px" }),
-      }}
-    >
+    <div className={`taskboard ${isEmpty(columns) ? "empty" : "main"}`}>
       {isEmpty(columns) ? (
         <EmptyScreen />
       ) : (
