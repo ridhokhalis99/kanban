@@ -1,3 +1,11 @@
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
 .taskboard {
   background-color: #f4f7fd;
   height: calc(100vh - 80px);
@@ -14,7 +22,7 @@
   background-color: #635fc7;
   border-radius: 24px;
   padding: 18px 24px;
-  color: white;
+  color: #ffffff;
 }
 
 .taskboard.main {
@@ -38,13 +46,17 @@
 .taskboard.main .main-container .task-container .task-item {
   width: 280px;
   padding: 24px 16px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1);
+  transition: all 0.25s linear;
+}
+.taskboard.main .main-container .task-container .task-item:hover {
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.3);
 }
 .taskboard.main .main-container .task-container .empty-column {
   height: calc(100vh - 200px);
