@@ -1,19 +1,20 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Dispatch } from "react";
 
-interface TaskDetailDropdownProps {
+interface DropdownEllipsisProps {
   isComponentVisible: boolean;
   forwardRef: any;
-  setDeleteType: Dispatch<string>;
-  toggleParent: Function;
+  onClickEdit: Function;
+  onClickDelete: Function;
+  type: string;
 }
 
-const TaskDetailDropdown = ({
+const DropdownEllipsis = ({
   isComponentVisible,
   forwardRef,
-  setDeleteType,
-  toggleParent,
-}: TaskDetailDropdownProps) => {
+  type,
+  onClickEdit,
+  onClickDelete,
+}: DropdownEllipsisProps) => {
   return (
     <AnimatePresence>
       {isComponentVisible && (
@@ -25,15 +26,17 @@ const TaskDetailDropdown = ({
           ref={forwardRef}
           className="dropdown-container"
         >
-          <h3 className="body-l dropdown-item edit">Edit Task</h3>
           <h3
-            onClick={() => {
-              toggleParent();
-              setDeleteType("task");
-            }}
+            onClick={() => onClickEdit()}
+            className="body-l dropdown-item edit"
+          >
+            Edit {type}
+          </h3>
+          <h3
+            onClick={() => onClickDelete()}
             className="body-l dropdown-item delete"
           >
-            Delete Task
+            Delete {type}
           </h3>
         </motion.div>
       )}
@@ -41,4 +44,4 @@ const TaskDetailDropdown = ({
   );
 };
 
-export default TaskDetailDropdown;
+export default DropdownEllipsis;

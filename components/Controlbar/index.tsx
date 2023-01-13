@@ -1,6 +1,6 @@
 import Image from "next/image";
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
-import BoardDropdown from "./BoardDropdown";
+import DropdownEllipsis from "../DropdownEllipsis";
 import useComponentVisible from "../../tools/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
@@ -21,6 +21,12 @@ const Controlbar = ({
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const { name, columns } = boardDetail || {};
+
+  const onClickDelete = () => {
+    setDeleteType("board");
+  };
+
+  const onClickEdit = () => {};
 
   return (
     <div className="controlbar container">
@@ -60,10 +66,12 @@ const Controlbar = ({
             marginRight: 32,
           }}
         />
-        <BoardDropdown
-          refDropdown={ref}
+        <DropdownEllipsis
+          forwardRef={ref}
           isComponentVisible={isComponentVisible}
-          setDeleteType={setDeleteType}
+          type="board"
+          onClickDelete={onClickDelete}
+          onClickEdit={onClickEdit}
         />
       </div>
     </div>

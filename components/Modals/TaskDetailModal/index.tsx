@@ -8,7 +8,7 @@ import useMutation from "../../../tools/useMutation";
 import Image from "next/image";
 import iconEllipsis from "../../../assets/icon-vertical-ellipsis.svg";
 import useComponentVisible from "../../../tools/useComponentVisible";
-import TaskDetailDropdown from "./TaskDetailDropdown";
+import DropdownEllipsis from "../../DropdownEllipsis";
 import { Dispatch } from "react";
 
 interface TaskDetailModalProps extends ModalProps {
@@ -67,6 +67,13 @@ const TaskDetailModal = ({
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
+  const onClickDelete = () => {
+    setDeleteType("task");
+    toggle();
+  };
+
+  const onClickEdit = () => {};
+
   return (
     <CenteredModal
       isOpen={isOpen}
@@ -85,14 +92,12 @@ const TaskDetailModal = ({
               cursor: "pointer",
             }}
           />
-          <TaskDetailDropdown
+          <DropdownEllipsis
             isComponentVisible={isComponentVisible}
             forwardRef={ref}
-            setDeleteType={setDeleteType}
-            toggleParent={() => {
-              toggle();
-              setIsComponentVisible((prev) => !prev);
-            }}
+            type="task"
+            onClickDelete={onClickDelete}
+            onClickEdit={onClickEdit}
           />
         </div>
       }
