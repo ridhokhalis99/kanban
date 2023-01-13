@@ -28,39 +28,13 @@ const CenteredModal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className={className}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 100,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className={`centered-modal-parent ${className}`}
           >
             <div
               onClick={() => toggle()}
-              style={{
-                width: "100vw",
-                height: "100vh",
-                background: "#000000",
-                mixBlendMode: "normal",
-                opacity: 0.5,
-                position: "absolute",
-              }}
+              className="centered-modal-background"
             />
-            <div
-              style={{
-                padding: 32,
-                backgroundColor: "white",
-                position: "absolute",
-                borderRadius: 6,
-                width: 500,
-              }}
-            >
+            <div className="centered-modal-container">
               <div
                 style={{
                   display: "flex",
@@ -68,11 +42,7 @@ const CenteredModal = ({
                 }}
               >
                 <h2
-                  className="heading-l"
-                  style={{
-                    marginBottom: 24,
-                    color: isTitleRed ? "#EA5555" : "#000112",
-                  }}
+                  className={`heading-l title ${isTitleRed ? "red" : "black"}`}
                 >
                   {title}
                 </h2>

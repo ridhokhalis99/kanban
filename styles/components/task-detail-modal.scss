@@ -1,0 +1,11 @@
+@import "../colors.scss";
+
+.task-detail-modal {
+  .sub-task-container {
+    display: flex;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: $whitef4;
+  }
+}

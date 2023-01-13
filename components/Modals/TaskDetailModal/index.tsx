@@ -88,9 +88,7 @@ const TaskDetailModal = ({
             width={iconEllipsis.width}
             height={iconEllipsis.height}
             onClick={() => setIsComponentVisible((prev) => !prev)}
-            style={{
-              cursor: "pointer",
-            }}
+            className="cursor-pointer"
           />
           <DropdownEllipsis
             isComponentVisible={isComponentVisible}
@@ -128,24 +126,11 @@ const TaskDetailModal = ({
             >
               {sub_tasks?.map(({ name, is_finished, id }) => {
                 return (
-                  <div
-                    key={id}
-                    style={{
-                      display: "flex",
-                      gap: "16px",
-                      padding: "12px",
-                      borderRadius: "4px",
-                      backgroundColor: "#F4F7FD",
-                    }}
-                  >
+                  <div key={id} className="sub-task-container">
                     <input
                       type="checkbox"
                       defaultChecked={is_finished}
                       onChange={(e) => subTaskChangeHandler(e, +id)}
-                      style={{
-                        width: "16px",
-                        cursor: "pointer",
-                      }}
                     />
                     <label className="body-m text-grey-82">{name}</label>
                   </div>
@@ -155,14 +140,7 @@ const TaskDetailModal = ({
           </div>
 
           <div>
-            <p
-              className="body-m text-grey-82"
-              style={{
-                marginBottom: "8px",
-              }}
-            >
-              Current Status
-            </p>
+            <p className="body-m text-grey-82 mb-8">Current Status</p>
             <select
               {...register(`columnId`)}
               onChange={(e) => columnChangeHandler(e, taskId)}

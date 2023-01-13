@@ -6,7 +6,10 @@
 
 @import "./components/sidebar.scss";
 @import "./components/controlbar.scss";
-@import "./components/taskdetailmodal.scss";
+@import "./components/task-detail-modal.scss";
+@import "./components/dropdown-ellipsis.scss";
+@import "./components/centered-modal.scss";
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -53,7 +56,26 @@ select {
   background-size: 1.2em;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+}
+
+.error-message {
+  font-size: 12px;
+  margin-top: 4;
+  color: $redea;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
 .input-label {
   margin-bottom: 8px;
   color: $grey82;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

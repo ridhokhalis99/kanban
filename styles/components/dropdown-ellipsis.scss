@@ -1,0 +1,26 @@
+.dropdown-container {
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  right: 26px;
+  top: 70px;
+  box-shadow: #e4ebfa 0px 1px 4px;
+  z-index: 1;
+
+  .dropdown-item {
+    width: 160px;
+    cursor: pointer;
+  }
+
+  .edit {
+    color: #828fa3;
+  }
+
+  .delete {
+    color: #ea5555;
+  }
+}

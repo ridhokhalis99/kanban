@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["../../../styles/colors.scss","../../../styles/components/centered-modal.scss"],"names":[],"mappings":"AAeA;EACE,OAhBS;;;AAmBX;EACE,OAZO;;;ACNT;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAGF;EACE,ODvBI;;AC0BN;EACE,ODnCM","file":"centered-modal.css"}

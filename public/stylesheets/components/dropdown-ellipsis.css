@@ -1,4 +1,4 @@
-.task-detail-modal .dropdown-container {
+.dropdown-container {
   padding: 16px;
   background-color: white;
   border-radius: 8px;
@@ -7,19 +7,19 @@
   gap: 16px;
   position: absolute;
   right: 26px;
-  top: 60px;
+  top: 70px;
   box-shadow: #e4ebfa 0px 1px 4px;
   z-index: 1;
 }
-.task-detail-modal .dropdown-container .dropdown-item {
+.dropdown-container .dropdown-item {
   width: 160px;
   cursor: pointer;
 }
-.task-detail-modal .dropdown-container .edit {
+.dropdown-container .edit {
   color: #828fa3;
 }
-.task-detail-modal .dropdown-container .delete {
+.dropdown-container .delete {
   color: #ea5555;
 }
 
-/*# sourceMappingURL=taskdetailmodal.css.map */
+/*# sourceMappingURL=dropdown-ellipsis.css.map */

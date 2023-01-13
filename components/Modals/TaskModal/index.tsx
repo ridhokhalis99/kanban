@@ -86,15 +86,7 @@ const TaskModal = ({
               errors={errors}
               name="title"
               render={({ message }) => (
-                <p
-                  style={{
-                    fontSize: 12,
-                    marginTop: 4,
-                    color: "#EA5555",
-                  }}
-                >
-                  {message}
-                </p>
+                <p className="error-message">{message}</p>
               )}
             />
           </div>

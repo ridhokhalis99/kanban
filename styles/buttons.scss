@@ -1,1 +1,21 @@
 @import "./colors.scss";
+
+.button {
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  color: $whiteff;
+  background-color: $purple63;
+  padding: 14px 0;
+  border-radius: 20px;
+}
+
+.button.primary {
+  color: $whiteff;
+  background-color: $purple63;
+}
+
+.button.secondary {
+  color: $purple63;
+  background-color: #635fc71a;
+}

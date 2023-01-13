@@ -38,17 +38,7 @@ const ArrayListInput = ({
       <ErrorMessage
         errors={errors}
         name={name}
-        render={({ message }) => (
-          <p
-            style={{
-              fontSize: 12,
-              marginTop: 4,
-              color: "#EA5555",
-            }}
-          >
-            {message}
-          </p>
-        )}
+        render={({ message }) => <p className="error-message">{message}</p>}
       />
     </div>
   );

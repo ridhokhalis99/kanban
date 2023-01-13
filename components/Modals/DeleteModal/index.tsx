@@ -41,23 +41,8 @@ const DeleteModal = ({
       children={
         <div>
           <p className="body-l text-grey-82">{description}</p>
-          <div
-            style={{
-              display: "flex",
-              gap: "16px",
-              marginTop: "16px",
-            }}
-          >
-            <button
-              style={{
-                width: "50%",
-                padding: "14px 0",
-                backgroundColor: "#EA5555",
-                color: "#ffffff",
-                borderRadius: "20px",
-              }}
-              onClick={() => mutationDelete()}
-            >
+          <div className="button-container">
+            <button className="button delete" onClick={() => mutationDelete()}>
               Delete
             </button>
             <button

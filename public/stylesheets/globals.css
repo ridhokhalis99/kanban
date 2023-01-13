@@ -112,6 +112,26 @@
   color: #828fa3;
 }
 
+.button {
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff;
+  background-color: #635fc7;
+  padding: 14px 0;
+  border-radius: 20px;
+}
+
+.button.primary {
+  color: #ffffff;
+  background-color: #635fc7;
+}
+
+.button.secondary {
+  color: #635fc7;
+  background-color: rgba(99, 95, 199, 0.1019607843);
+}
+
 .text-purple-63 {
   color: #635fc7;
 }
@@ -226,7 +246,7 @@
 }
 .controlbar .left-container-divider {
   border-right: #e4ebfa 2px solid;
-  margin: 0 32px 0 119px;
+  margin: 0 32px 0 120px;
   position: relative;
   height: 100%;
 }
@@ -240,29 +260,6 @@
   padding: 14px 24px;
   color: white;
 }
-.controlbar .dropdown-container {
-  padding: 16px;
-  background-color: white;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  position: absolute;
-  right: 24px;
-  top: 72px;
-  box-shadow: #e4ebfa 0px 1px 4px;
-  z-index: 1;
-}
-.controlbar .dropdown-container .dropdown-item {
-  width: 160px;
-  cursor: pointer;
-}
-.controlbar .dropdown-container .edit {
-  color: #828fa3;
-}
-.controlbar .dropdown-container .delete {
-  color: #ea5555;
-}
 
 .controlbar.container {
   border-bottom: 2px solid #e4ebfa;
@@ -271,7 +268,23 @@
   align-content: center;
 }
 
-.task-detail-modal .dropdown-container {
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+.task-detail-modal .sub-task-container {
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #f4f7fd;
+}
+
+.dropdown-container {
   padding: 16px;
   background-color: white;
   border-radius: 8px;
@@ -280,19 +293,65 @@
   gap: 16px;
   position: absolute;
   right: 26px;
-  top: 60px;
+  top: 70px;
   box-shadow: #e4ebfa 0px 1px 4px;
   z-index: 1;
 }
-.task-detail-modal .dropdown-container .dropdown-item {
+.dropdown-container .dropdown-item {
   width: 160px;
   cursor: pointer;
 }
-.task-detail-modal .dropdown-container .edit {
+.dropdown-container .edit {
   color: #828fa3;
 }
-.task-detail-modal .dropdown-container .delete {
+.dropdown-container .delete {
   color: #ea5555;
+}
+
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+.centered-modal-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-modal-background {
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.centered-modal-container {
+  padding: 32px;
+  background-color: white;
+  position: absolute;
+  border-radius: 6px;
+  width: 500px;
+}
+.centered-modal-container .title {
+  margin-bottom: 24px;
+}
+.centered-modal-container .title.red {
+  color: #ea5555;
+}
+.centered-modal-container .title.black {
+  color: #000112;
 }
 
 * {
@@ -339,9 +398,28 @@ select {
   background-size: 1.2em;
 }
 
+input[type=checkbox] {
+  cursor: pointer;
+  width: 16px;
+}
+
+.error-message {
+  font-size: 12px;
+  margin-top: 4;
+  color: #ea5555;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
 .input-label {
   margin-bottom: 8px;
   color: #828fa3;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=globals.css.map */
