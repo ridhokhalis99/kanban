@@ -79,7 +79,8 @@ const TaskDetailModal = ({
 
   const onClickEdit = () => {
     toggle();
-    toggleTaskModal({ type: "edit" });
+    setIsComponentVisible(false);
+    toggleTaskModal({ type: "edit", currentTaskDetail: taskDetail });
   };
 
   return (

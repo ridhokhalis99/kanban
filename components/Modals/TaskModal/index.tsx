@@ -8,20 +8,24 @@ import BoardDetail from "../../../interfaces/BoardDetail";
 import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
 import ModalProps from "../../../interfaces/ModalProps";
+import TaskDetail from "../../../interfaces/TaskDetail";
+import { useEffect } from "react";
+import { sub_task } from "@prisma/client";
 
 interface TaskModalProps extends ModalProps {
   boardDetail: BoardDetail;
   refetchBoardDetail: Function;
   type?: "add" | "edit" | "";
+  currentTaskDetail?: TaskDetail;
 }
 
 interface FormValues {
   title: string;
-  description: string;
+  description: string | null;
   subtasks: {
     name: string;
   }[];
-  columnId: number;
+  columnId: number | null;
 }
 
 const TaskModal = ({
@@ -30,8 +34,21 @@ const TaskModal = ({
   boardDetail,
   refetchBoardDetail,
   type,
+  currentTaskDetail,
 }: TaskModalProps) => {
+  const isEdit = type === "edit";
   const { columns } = boardDetail;
+  const { name, description, sub_tasks, column_id } = currentTaskDetail || {};
+
+  const defaultValuesEdit = {
+    title: name,
+    description: description,
+    subtasks: sub_tasks?.map(({ name, id }: sub_task) => {
+      return { name, id };
+    }),
+    columnId: column_id,
+  };
+
   const {
     control,
     register,
@@ -71,7 +88,10 @@ const TaskModal = ({
     remove(index);
   };
 
-  const isEdit = type === "edit";
+  useEffect(() => {
+    if (isEdit) return reset(defaultValuesEdit);
+    reset();
+  }, [isEdit]);
 
   return (
     <CenteredModal

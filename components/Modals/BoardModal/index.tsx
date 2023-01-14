@@ -6,18 +6,22 @@ import ArrayListInput from "./ArrayListInput";
 import { isEmpty } from "lodash";
 import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
+import BoardDetail from "../../../interfaces/BoardDetail";
+import ColumnDetail from "../../../interfaces/ColumnDetail";
+import { useEffect } from "react";
 
 interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
   refetchBoards: Function;
   type?: "add" | "edit" | "";
+  currentBoardDetail?: BoardDetail;
 }
 
 interface FormValues {
   board: string;
   columns: {
-    name: string;
+    name: string | null;
   }[];
 }
 
@@ -26,11 +30,24 @@ const BoardModal = ({
   toggle,
   refetchBoards,
   type,
+  currentBoardDetail,
 }: BoardModalProps) => {
+  const isEdit = type === "edit";
+
+  const { name, columns } = currentBoardDetail || {};
+
   const defaultValues = {
     board: "",
     columns: [{ name: "To do" }, { name: "Doing" }, { name: "Done" }],
   };
+
+  const defaultValuesEdit = {
+    board: name,
+    columns: columns?.map(({ name, id }: ColumnDetail) => {
+      return { name, id };
+    }),
+  };
+
   const {
     control,
     register,
@@ -71,7 +88,10 @@ const BoardModal = ({
     mutationCreate(formValues);
   };
 
-  const isEdit = type === "edit";
+  useEffect(() => {
+    if (isEdit) return reset(defaultValuesEdit);
+    reset(defaultValues);
+  }, [isEdit]);
 
   return (
     <CenteredModal
@@ -90,15 +110,7 @@ const BoardModal = ({
               errors={errors}
               name="board"
               render={({ message }) => (
-                <p
-                  style={{
-                    fontSize: 12,
-                    marginTop: 4,
-                    color: "#EA5555",
-                  }}
-                >
-                  {message}
-                </p>
+                <p className="error-message">{message}</p>
               )}
             />
           </div>

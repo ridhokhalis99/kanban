@@ -25,11 +25,13 @@ const Controlbar = ({
   const { name, columns } = boardDetail || {};
 
   const onClickDelete = () => {
+    setIsComponentVisible(false);
     toggleDeleteModal({ currentItem: boardDetail, type: "board" });
   };
 
   const onClickEdit = () => {
-    toggleBoardModal({ type: "edit" });
+    setIsComponentVisible(false);
+    toggleBoardModal({ type: "edit", currentBoardDetail: boardDetail });
   };
 
   return (
