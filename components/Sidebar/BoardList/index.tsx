@@ -20,7 +20,7 @@ const BoardList = ({
     <div>
       {boards.map((board: board, index: number) => {
         const { name } = board;
-        const isCurrentBoard = board === currentBoard;
+        const isCurrentBoard = board?.id === currentBoard?.id;
         const isHovered = hoveredIndex === index;
 
         const currentBoardStyle = {

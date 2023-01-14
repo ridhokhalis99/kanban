@@ -71,6 +71,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await updateTaskColumn(req, res);
       break;
   }
+  res.end();
 };
 
 export default handler;

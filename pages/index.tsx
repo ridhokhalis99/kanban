@@ -22,20 +22,27 @@ const Home = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
   const [taskDetail, setTaskDetail] = useState<TaskDetail>({} as TaskDetail);
 
-  const { data: boards, refetch: refetchBoards } = useFetch({
+  const {
+    data: boards,
+    refetch: refetchBoards,
+    loading: loadingBoards,
+  } = useFetch({
     url: "/api/board",
   });
 
   const { refetch: refetchBoardDetail } = useFetch({
-    url: `/api/board/${currentBoard.id}`,
-    afterSuccess: (res: BoardDetail) => setBoardDetail(res),
+    url: `/api/board/${currentBoard?.id}`,
+    afterSuccess: (boardDetail: BoardDetail) => {
+      setBoardDetail({ ...boardDetail });
+    },
   });
 
   useEffect(() => {
-    if (!isEmpty(boards)) {
-      return setCurrentBoard(boards[0]);
+    const latestBoard = boards.find(({ id }: board) => id === currentBoard?.id);
+    if (isEmpty(boards) && !loadingBoards) {
+      return setCurrentBoard({} as board);
     }
-    setCurrentBoard({} as board);
+    if (latestBoard) return setCurrentBoard({ ...latestBoard });
   }, [boards]);
 
   useEffect(() => {

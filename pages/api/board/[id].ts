@@ -51,54 +51,66 @@ const updateBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   const { board, columns } = req.body;
 
   const updateBoard = async () => {
-    if (boardId)
-      return await prisma.board.update({
-        data: {
-          name: board,
-        },
-        where: {
-          id: +boardId,
-        },
-      });
+    try {
+      if (boardId)
+        return await prisma.board.update({
+          data: {
+            name: board,
+          },
+          where: {
+            id: +boardId,
+          },
+        });
+    } catch (err) {
+      throw err;
+    }
   };
 
   const deleteColumns = async () => {
-    const columnsIds = columns.map(({ id }: column) => id);
-    const filteredColumnsIds = columnsIds.filter((id: number) => id);
-    if (boardId)
-      return await prisma.column.deleteMany({
-        where: {
-          id: {
-            notIn: filteredColumnsIds,
+    try {
+      const columnsIds = columns.map(({ id }: column) => id);
+      const filteredColumnsIds = columnsIds.filter((id: number) => id);
+      if (boardId)
+        return await prisma.column.deleteMany({
+          where: {
+            id: {
+              notIn: filteredColumnsIds,
+            },
+            board_id: +boardId,
           },
-          board_id: +boardId,
-        },
-      });
+        });
+    } catch (err) {
+      throw err;
+    }
   };
 
   const upsertColumns = async () => {
     return await columns.forEach(async ({ name, id }: column) => {
-      if (id)
-        return await prisma.column.update({
-          where: {
-            id: +id,
-          },
-          data: {
-            name,
-          },
-        });
+      try {
+        if (id)
+          return await prisma.column.update({
+            where: {
+              id: +id,
+            },
+            data: {
+              name,
+            },
+          });
 
-      if (boardId)
-        return await prisma.column.create({
-          data: {
-            name,
-            board: {
-              connect: {
-                id: +boardId,
+        if (boardId)
+          return await prisma.column.create({
+            data: {
+              name,
+              board: {
+                connect: {
+                  id: +boardId,
+                },
               },
             },
-          },
-        });
+          });
+      } catch (err) {
+        throw err;
+      }
     });
   };
 
@@ -109,7 +121,11 @@ const updateBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
         await deleteColumns();
         await upsertColumns();
       });
-      res.status(200).json({ message: "Successfully update task!" });
+      //anticipate server delay
+      setTimeout(
+        () => res.status(200).json({ message: "Successfully update task!" }),
+        300
+      );
     } catch (err) {
       console.log(err);
     }
