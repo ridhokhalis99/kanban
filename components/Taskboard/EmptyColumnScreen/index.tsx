@@ -1,4 +1,4 @@
-const EmptyScreen = () => {
+const EmptyColumnScreen = () => {
   return (
     <div className="text-center mb-32">
       <h2 className="heading-l text-grey-82 mb-32">
@@ -9,4 +9,4 @@ const EmptyScreen = () => {
   );
 };
 
-export default EmptyScreen;
+export default EmptyColumnScreen;

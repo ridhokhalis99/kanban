@@ -2,21 +2,33 @@ import { isEmpty } from "lodash";
 import { Dispatch } from "react";
 import BoardDetail from "../../interfaces/BoardDetail";
 import TaskDetail from "../../interfaces/TaskDetail";
-import EmptyScreen from "./EmptyScreen";
+import EmptyBoardScreen from "./EmptyBoardScreen";
+import EmptyColumnScreen from "./EmptyColumnScreen";
 import MainScreen from "./MainScreen";
 
 interface TaskboardProps {
   boardDetail: BoardDetail;
   setTaskDetail: Dispatch<TaskDetail>;
+  toggleBoardModal: Function;
 }
 
-const Taskboard = ({ boardDetail, setTaskDetail }: TaskboardProps) => {
+const Taskboard = ({
+  boardDetail,
+  setTaskDetail,
+  toggleBoardModal,
+}: TaskboardProps) => {
   const { columns } = boardDetail;
 
   return (
     <div className={`taskboard ${isEmpty(columns) ? "empty" : "main"}`}>
       {isEmpty(columns) ? (
-        <EmptyScreen />
+        <>
+          {isEmpty(boardDetail) ? (
+            <EmptyBoardScreen toggleBoardModal={toggleBoardModal} />
+          ) : (
+            <EmptyColumnScreen />
+          )}
+        </>
       ) : (
         <MainScreen columns={columns} setTaskDetail={setTaskDetail} />
       )}

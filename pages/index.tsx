@@ -77,14 +77,11 @@ const Home = () => {
         setIsSidebarHidden={setIsSidebarHidden}
         toggleBoardModal={toggleBoardModal}
       />
-
-      {!isEmpty(currentBoard) && (
-        <Controlbar
-          toggleTaskModal={toggleTaskModal}
-          boardDetail={boardDetail}
-          setDeleteType={setDeleteType}
-        />
-      )}
+      <Controlbar
+        toggleTaskModal={toggleTaskModal}
+        boardDetail={boardDetail}
+        setDeleteType={setDeleteType}
+      />
       <div
         style={{
           width: isSidebarHidden ? "100%" : "calc(100% - 302px)",
@@ -96,7 +93,11 @@ const Home = () => {
         {isSidebarHidden && (
           <ShowSidebar setIsSidebarHidden={setIsSidebarHidden} />
         )}
-        <Taskboard boardDetail={boardDetail} setTaskDetail={setTaskDetail} />
+        <Taskboard
+          boardDetail={boardDetail}
+          setTaskDetail={setTaskDetail}
+          toggleBoardModal={toggleBoardModal}
+        />
       </div>
 
       <BoardModal

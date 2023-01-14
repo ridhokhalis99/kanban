@@ -37,7 +37,7 @@ const Controlbar = ({
             alt="kanban logo"
             width={logoDark.width}
             height={logoDark.height}
-            style={{ margin: "auto" }}
+            style={{ margin: "26px 0" }}
           />
           <div className="left-container-divider" />
         </>
@@ -51,28 +51,33 @@ const Controlbar = ({
         }}
       >
         {!isEmpty(columns) && (
-          <button className="button-new-task" onClick={() => toggleTaskModal()}>
-            + Add New Task
-          </button>
+          <>
+            <button
+              className="button-new-task"
+              onClick={() => toggleTaskModal()}
+            >
+              + Add New Task
+            </button>
+            <Image
+              src={iconEllipsis.src}
+              alt="ellipsis"
+              width={iconEllipsis.width}
+              height={iconEllipsis.height}
+              onClick={() => setIsComponentVisible((prev) => !prev)}
+              style={{
+                cursor: "pointer",
+                marginRight: 32,
+              }}
+            />
+            <DropdownEllipsis
+              forwardRef={ref}
+              isComponentVisible={isComponentVisible}
+              type="board"
+              onClickDelete={onClickDelete}
+              onClickEdit={onClickEdit}
+            />
+          </>
         )}
-        <Image
-          src={iconEllipsis.src}
-          alt="ellipsis"
-          width={iconEllipsis.width}
-          height={iconEllipsis.height}
-          onClick={() => setIsComponentVisible((prev) => !prev)}
-          style={{
-            cursor: "pointer",
-            marginRight: 32,
-          }}
-        />
-        <DropdownEllipsis
-          forwardRef={ref}
-          isComponentVisible={isComponentVisible}
-          type="board"
-          onClickDelete={onClickDelete}
-          onClickEdit={onClickEdit}
-        />
       </div>
     </div>
   );
