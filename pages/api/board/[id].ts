@@ -5,36 +5,44 @@ const prisma = new PrismaClient();
 
 const readBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   const boardId = req.query.id;
-  if (boardId) {
-    const board = await prisma.board.findUnique({
-      where: {
-        id: +boardId,
-      },
-      include: {
-        columns: {
-          include: {
-            tasks: {
-              include: {
-                sub_tasks: true,
+  try {
+    if (boardId) {
+      const board = await prisma.board.findUnique({
+        where: {
+          id: +boardId,
+        },
+        include: {
+          columns: {
+            include: {
+              tasks: {
+                include: {
+                  sub_tasks: true,
+                },
               },
             },
           },
         },
-      },
-    });
-    res.status(200).json(board);
+      });
+      res.status(200).json(board);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
 const deleteBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   const boardId = req.query.id;
-  if (boardId) {
-    await prisma.board.delete({
-      where: {
-        id: +boardId,
-      },
-    });
-    res.status(200).json({ message: "board deleted successfully" });
+  try {
+    if (boardId) {
+      await prisma.board.delete({
+        where: {
+          id: +boardId,
+        },
+      });
+      res.status(200).json({ message: "board deleted successfully" });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 

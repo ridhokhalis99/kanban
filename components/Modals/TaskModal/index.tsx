@@ -38,7 +38,13 @@ const TaskModal = ({
 }: TaskModalProps) => {
   const isEdit = type === "edit";
   const { columns } = boardDetail;
-  const { name, description, sub_tasks, column_id } = currentTaskDetail || {};
+  const {
+    name,
+    description,
+    id: currentTaskId,
+    sub_tasks,
+    column_id,
+  } = currentTaskDetail || {};
 
   const defaultValuesEdit = {
     title: name,
@@ -67,7 +73,7 @@ const TaskModal = ({
     reset();
   };
 
-  const { mutation: mutationCreateTask, loading } = useMutation({
+  const { mutation: mutationCreateTask, loading: loadingCreate } = useMutation({
     url: "/api/task",
     method: "post",
     afterSuccess: () => {
@@ -76,8 +82,18 @@ const TaskModal = ({
     },
   });
 
-  const createTask = (formValues: FormValues) => {
-    mutationCreateTask(formValues);
+  const { mutation: mutationUpdateTask, loading: loadingUpdate } = useMutation({
+    url: `/api/task/${currentTaskId}`,
+    afterSuccess: () => {
+      refetchBoardDetail();
+      closeModal();
+    },
+  });
+
+  const onSubmit = (formValues: FormValues) => {
+    isEdit
+      ? mutationUpdateTask({ ...formValues, id: currentTaskId })
+      : mutationCreateTask(formValues);
   };
 
   const addSubtask = () => {
@@ -91,7 +107,7 @@ const TaskModal = ({
   useEffect(() => {
     if (isEdit) return reset(defaultValuesEdit);
     reset();
-  }, [isEdit]);
+  }, [isEdit, currentTaskDetail]);
 
   return (
     <CenteredModal
@@ -173,8 +189,8 @@ const TaskModal = ({
           >
             <SecondaryButton text="+ Add New Subtask" onClick={addSubtask} />
             <PrimaryButton
-              text="Create New Task"
-              onClick={handleSubmit(createTask)}
+              text={isEdit ? "Save Changes" : "Create New Task"}
+              onClick={handleSubmit(onSubmit)}
             />
           </div>
         </div>
