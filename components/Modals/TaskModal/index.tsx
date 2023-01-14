@@ -12,6 +12,7 @@ import ModalProps from "../../../interfaces/ModalProps";
 interface TaskModalProps extends ModalProps {
   boardDetail: BoardDetail;
   refetchBoardDetail: Function;
+  type?: "add" | "edit" | "";
 }
 
 interface FormValues {
@@ -28,6 +29,7 @@ const TaskModal = ({
   toggle,
   boardDetail,
   refetchBoardDetail,
+  type,
 }: TaskModalProps) => {
   const { columns } = boardDetail;
   const {
@@ -69,9 +71,11 @@ const TaskModal = ({
     remove(index);
   };
 
+  const isEdit = type === "edit";
+
   return (
     <CenteredModal
-      title="Add New Task"
+      title={isEdit ? "Edit task" : "Add new task"}
       isOpen={isOpen}
       toggle={closeModal}
       children={

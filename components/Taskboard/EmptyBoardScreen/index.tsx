@@ -8,7 +8,10 @@ const EmptyBoardScreen = ({ toggleBoardModal }: EmptyBoardScreenProps) => {
       <h2 className="heading-l text-grey-82 mb-32">
         You have no board. Create a new board to get started.
       </h2>
-      <button onClick={() => toggleBoardModal()} className="add-button">
+      <button
+        onClick={() => toggleBoardModal({ type: "add" })}
+        className="add-button"
+      >
         + Create New Board
       </button>
     </div>

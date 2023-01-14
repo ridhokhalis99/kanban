@@ -4,9 +4,9 @@ import useMutation from "../../../tools/useMutation";
 import CenteredModal from "../CenteredModal";
 
 interface DeleteModalProps extends ModalProps {
-  type: string;
-  afterSuccess: Function;
-  currentItem: board | task;
+  type?: string;
+  afterSuccess?: Function;
+  currentItem?: board | task;
 }
 
 const DeleteModal = ({
@@ -16,11 +16,12 @@ const DeleteModal = ({
   currentItem,
   afterSuccess,
 }: DeleteModalProps) => {
-  const { id, name } = currentItem;
+  const { id, name } = currentItem || {};
+
   const isBoard = type === "board";
   const description = isBoard
     ? `Are you sure you want to delete the ‘${name}’ board? This action will remove all columns and tasks and cannot be reversed.`
-    : `Are you sure you want to delete the ‘’ task and its subtasks? This action cannot be reversed.`;
+    : `Are you sure you want to delete the ‘${name}’ task and its subtasks? This action cannot be reversed.`;
 
   const { mutation: mutationDelete } = useMutation({
     url: `/api/${type}/${id}`,

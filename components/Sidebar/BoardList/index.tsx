@@ -74,7 +74,7 @@ const BoardList = ({
         <BoardIcon fill="#635fc7" />
         <h3
           className="heading-m text-purple-63"
-          onClick={() => toggleBoardModal()}
+          onClick={() => toggleBoardModal({ type: "add" })}
         >
           + Create New Board
         </h3>

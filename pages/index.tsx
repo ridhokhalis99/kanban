@@ -20,7 +20,6 @@ const Home = () => {
     {} as BoardDetail
   );
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
-  const [deleteType, setDeleteType] = useState<string>("");
   const [taskDetail, setTaskDetail] = useState<TaskDetail>({} as TaskDetail);
 
   const { data: boards, refetch: refetchBoards } = useFetch({
@@ -47,27 +46,29 @@ const Home = () => {
   }, [currentBoard]);
 
   useEffect(() => {
-    if (deleteType) openDeleteModal();
-  }, [deleteType]);
-
-  useEffect(() => {
     if (!isEmpty(taskDetail)) openTaskDetailModal();
   }, [taskDetail]);
 
-  const { isOpen: isOpenBoardModal, toggle: toggleBoardModal } = useModal();
-  const { isOpen: isOpenTaskModal, toggle: toggleTaskModal } = useModal();
+  const {
+    isOpen: isOpenBoardModal,
+    toggle: toggleBoardModal,
+    props: propsBoardModal,
+  } = useModal();
+  const {
+    isOpen: isOpenTaskModal,
+    toggle: toggleTaskModal,
+    props: propsTaskModal,
+  } = useModal();
   const {
     isOpen: isOpenDeleteModal,
     toggle: toggleDeleteModal,
-    open: openDeleteModal,
+    props: deleteModalProps,
   } = useModal();
   const {
     isOpen: isOpenTaskDetailModal,
     toggle: toggleTaskDetailModal,
     open: openTaskDetailModal,
   } = useModal();
-
-  const isBoard = deleteType === "board";
 
   return (
     <div className="light">
@@ -82,7 +83,8 @@ const Home = () => {
       <Controlbar
         toggleTaskModal={toggleTaskModal}
         boardDetail={boardDetail}
-        setDeleteType={setDeleteType}
+        toggleBoardModal={toggleBoardModal}
+        toggleDeleteModal={toggleDeleteModal}
       />
       <div
         style={{
@@ -106,28 +108,23 @@ const Home = () => {
         isOpen={isOpenBoardModal}
         toggle={toggleBoardModal}
         refetchBoards={refetchBoards}
+        {...propsBoardModal}
       />
       <TaskModal
         isOpen={isOpenTaskModal}
         toggle={toggleTaskModal}
         boardDetail={boardDetail}
         refetchBoardDetail={refetchBoardDetail}
+        {...propsTaskModal}
       />
       <DeleteModal
         isOpen={isOpenDeleteModal}
-        toggle={() => {
-          toggleDeleteModal();
-          setDeleteType("");
-          if (!isBoard) setTaskDetail({} as TaskDetail);
-        }}
-        type={deleteType}
+        toggle={toggleDeleteModal}
         afterSuccess={() => {
           toggleDeleteModal();
-          setDeleteType("");
-          if (!isBoard) setTaskDetail({} as TaskDetail);
           refetchBoards();
         }}
-        currentItem={isBoard ? currentBoard : taskDetail}
+        {...deleteModalProps}
       />
       <TaskDetailModal
         isOpen={isOpenTaskDetailModal}
@@ -138,7 +135,8 @@ const Home = () => {
         taskDetail={taskDetail}
         boardDetail={boardDetail}
         setTaskDetail={setTaskDetail}
-        setDeleteType={setDeleteType}
+        toggleTaskModal={toggleTaskModal}
+        toggleDeleteModal={toggleDeleteModal}
       />
     </div>
   );

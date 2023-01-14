@@ -11,6 +11,7 @@ interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
   refetchBoards: Function;
+  type?: "add" | "edit" | "";
 }
 
 interface FormValues {
@@ -20,7 +21,12 @@ interface FormValues {
   }[];
 }
 
-const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
+const BoardModal = ({
+  isOpen,
+  toggle,
+  refetchBoards,
+  type,
+}: BoardModalProps) => {
   const defaultValues = {
     board: "",
     columns: [{ name: "To do" }, { name: "Doing" }, { name: "Done" }],
@@ -65,9 +71,11 @@ const BoardModal = ({ isOpen, toggle, refetchBoards }: BoardModalProps) => {
     mutationCreate(formValues);
   };
 
+  const isEdit = type === "edit";
+
   return (
     <CenteredModal
-      title="Add New Board"
+      title={isEdit ? "Edit board" : "Add new board"}
       isOpen={isOpen}
       toggle={closeModal}
       children={

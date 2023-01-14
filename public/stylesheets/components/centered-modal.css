@@ -36,6 +36,7 @@
 }
 .centered-modal-container .title {
   margin-bottom: 24px;
+  text-transform: capitalize;
 }
 .centered-modal-container .title.red {
   color: #ea5555;

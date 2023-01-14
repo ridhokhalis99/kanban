@@ -15,7 +15,8 @@ interface TaskDetailModalProps extends ModalProps {
   taskDetail: TaskDetail;
   boardDetail: BoardDetail;
   setTaskDetail: Dispatch<TaskDetail>;
-  setDeleteType: Dispatch<string>;
+  toggleDeleteModal: Function;
+  toggleTaskModal: Function;
 }
 
 const TaskDetailModal = ({
@@ -24,7 +25,8 @@ const TaskDetailModal = ({
   taskDetail,
   boardDetail,
   setTaskDetail,
-  setDeleteType,
+  toggleDeleteModal,
+  toggleTaskModal,
 }: TaskDetailModalProps) => {
   const {
     name: taskTitle,
@@ -70,12 +72,15 @@ const TaskDetailModal = ({
     useComponentVisible(false);
 
   const onClickDelete = () => {
-    setDeleteType("task");
+    toggleDeleteModal({ currentItem: taskDetail, type: "task" });
     setIsComponentVisible(false);
     toggle();
   };
 
-  const onClickEdit = () => {};
+  const onClickEdit = () => {
+    toggle();
+    toggleTaskModal({ type: "edit" });
+  };
 
   return (
     <CenteredModal

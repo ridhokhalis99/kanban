@@ -10,23 +10,27 @@ import { Dispatch } from "react";
 interface ControlbarProps {
   boardDetail: BoardDetail;
   toggleTaskModal: Function;
-  setDeleteType: Dispatch<string>;
+  toggleDeleteModal: Function;
+  toggleBoardModal: Function;
 }
 
 const Controlbar = ({
   boardDetail,
   toggleTaskModal,
-  setDeleteType,
+  toggleDeleteModal,
+  toggleBoardModal,
 }: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const { name, columns } = boardDetail || {};
 
   const onClickDelete = () => {
-    setDeleteType("board");
+    toggleDeleteModal({ currentItem: boardDetail, type: "board" });
   };
 
-  const onClickEdit = () => {};
+  const onClickEdit = () => {
+    toggleBoardModal({ type: "edit" });
+  };
 
   return (
     <div className="controlbar container">
@@ -54,7 +58,7 @@ const Controlbar = ({
           <>
             <button
               className="button-new-task"
-              onClick={() => toggleTaskModal()}
+              onClick={() => toggleTaskModal({ type: "add" })}
             >
               + Add New Task
             </button>
