@@ -14,6 +14,7 @@ const deleteTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       res.status(200).json({ message: "task deleted successfully" });
     } catch (err) {
+      res.end();
       console.log(err);
     }
   }
@@ -24,57 +25,69 @@ const updateTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
   const { description, subtasks, title, columnId } = req.body;
 
   const updateTask = async () => {
-    if (taskId)
-      return await prisma.task.update({
-        data: {
-          name: title,
-          description: description,
-          column_id: +columnId,
-        },
-        where: {
-          id: +taskId,
-        },
-      });
+    try {
+      if (taskId)
+        return await prisma.task.update({
+          data: {
+            name: title,
+            description: description,
+            column_id: +columnId,
+          },
+          where: {
+            id: +taskId,
+          },
+        });
+    } catch (err) {
+      throw err;
+    }
   };
 
   const deleteSubtasks = async () => {
-    const subtasksIds = subtasks.map(({ id }: sub_task) => id);
-    const filteredSubtasksIds = subtasksIds.filter((id: number) => id);
-    if (taskId)
-      return await prisma.sub_task.deleteMany({
-        where: {
-          id: {
-            notIn: filteredSubtasksIds,
+    try {
+      const subtasksIds = subtasks.map(({ id }: sub_task) => id);
+      const filteredSubtasksIds = subtasksIds.filter((id: number) => id);
+      if (taskId)
+        return await prisma.sub_task.deleteMany({
+          where: {
+            id: {
+              notIn: filteredSubtasksIds,
+            },
+            task_id: +taskId,
           },
-          task_id: +taskId,
-        },
-      });
+        });
+    } catch (err) {
+      throw err;
+    }
   };
 
   const upsertSubtasks = async () => {
-    return await subtasks.forEach(async ({ name, id }: sub_task) => {
-      if (id)
-        return await prisma.sub_task.update({
-          where: {
-            id: +id,
-          },
-          data: {
-            name,
-          },
-        });
+    try {
+      return await subtasks.forEach(async ({ name, id }: sub_task) => {
+        if (id)
+          return await prisma.sub_task.update({
+            where: {
+              id: +id,
+            },
+            data: {
+              name,
+            },
+          });
 
-      if (taskId)
-        return await prisma.sub_task.create({
-          data: {
-            name,
-            task: {
-              connect: {
-                id: +taskId,
+        if (taskId)
+          return await prisma.sub_task.create({
+            data: {
+              name,
+              task: {
+                connect: {
+                  id: +taskId,
+                },
               },
             },
-          },
-        });
-    });
+          });
+      });
+    } catch (err) {
+      throw err;
+    }
   };
 
   if (taskId) {
@@ -84,8 +97,13 @@ const updateTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
         await deleteSubtasks();
         await upsertSubtasks();
       });
-      res.status(200).json({ message: "Successfully update task!" });
+      //anticipate server delay
+      setTimeout(
+        () => res.status(200).json({ message: "Successfully update task!" }),
+        500
+      );
     } catch (err) {
+      res.end();
       console.log(err);
     }
   }

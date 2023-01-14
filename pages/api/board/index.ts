@@ -25,6 +25,7 @@ const createBoard = async (req: NextApiRequest, res: NextApiResponse) => {
     await prisma.board.create({ data: board });
     res.status(201).json({ message: "Successfully create board!" });
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };
@@ -44,7 +45,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await createBoard(req, res);
       break;
   }
-  res.end();
 };
 
 export default handler;

@@ -39,6 +39,7 @@ const createTask = async (req: NextApiRequest, res: NextApiResponse) => {
     await prisma.task.create({ data: task });
     res.status(201).json({ message: "Successfully create task!" });
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };
@@ -57,6 +58,7 @@ const updateTaskColumn = async (req: NextApiRequest, res: NextApiResponse) => {
     });
     res.status(201).json({ message: "Successfully update subtask!" });
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };
@@ -71,7 +73,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await updateTaskColumn(req, res);
       break;
   }
-  res.end();
 };
 
 export default handler;

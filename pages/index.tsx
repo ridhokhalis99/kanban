@@ -28,6 +28,8 @@ const Home = () => {
     loading: loadingBoards,
   } = useFetch({
     url: "/api/board",
+    formatter: (boards: board[]) =>
+      boards.sort((a, b) => a.name.localeCompare(b.name)),
   });
 
   const { refetch: refetchBoardDetail } = useFetch({

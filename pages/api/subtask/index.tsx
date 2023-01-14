@@ -18,6 +18,7 @@ const updateIsFinished = async (req: NextApiRequest, res: NextApiResponse) => {
     });
     res.status(201).json({ message: "Successfully update subtask!" });
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };

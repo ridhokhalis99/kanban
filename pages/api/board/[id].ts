@@ -26,6 +26,7 @@ const readBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json(board);
     }
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };
@@ -42,6 +43,7 @@ const deleteBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({ message: "board deleted successfully" });
     }
   } catch (err) {
+    res.end();
     console.log(err);
   }
 };
@@ -123,10 +125,11 @@ const updateBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       //anticipate server delay
       setTimeout(
-        () => res.status(200).json({ message: "Successfully update task!" }),
-        300
+        () => res.status(200).json({ message: "Successfully update board!" }),
+        500
       );
     } catch (err) {
+      res.end();
       console.log(err);
     }
   }
@@ -145,7 +148,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await updateBoardById(req, res);
       break;
   }
-  res.end();
 };
 
 export default handler;
