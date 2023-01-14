@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const createBoard = async (req: NextApiRequest, res: NextApiResponse) => {
   const formValues = req.body;
   const { columns, board: boardTitle } = formValues;
-  let isIncludeColumns = Boolean(columns.length);
+  let isIncludeColumns = !!columns.length;
   let board: Prisma.boardCreateInput;
 
   if (isIncludeColumns) {
@@ -44,6 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await createBoard(req, res);
       break;
   }
+  res.end();
 };
 
 export default handler;

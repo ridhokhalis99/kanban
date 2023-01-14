@@ -6,6 +6,7 @@ interface ArrayListInputProps {
   onRemove: Function;
   forwardRef: any;
   name: string;
+  isRemoveDisabled?: boolean;
   errors?: any;
 }
 
@@ -14,6 +15,7 @@ const ArrayListInput = ({
   forwardRef,
   errors,
   name,
+  isRemoveDisabled,
   ...props
 }: ArrayListInputProps) => {
   return (
@@ -31,8 +33,8 @@ const ArrayListInput = ({
           alt="close modal"
           width={crossIcon.width}
           height={crossIcon.height}
-          style={{ cursor: "pointer" }}
-          onClick={() => onRemove()}
+          style={isRemoveDisabled ? { opacity: 0.3 } : { cursor: "pointer" }}
+          onClick={() => !isRemoveDisabled && onRemove()}
         />
       </div>
       <ErrorMessage

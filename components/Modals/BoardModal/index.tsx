@@ -62,9 +62,17 @@ const BoardModal = ({
     name: "columns",
   });
 
-  const { mutation: mutationCreate, loading } = useMutation({
+  const { mutation: mutationCreate, loading: loadingCreate } = useMutation({
     url: "/api/board",
     method: "post",
+    afterSuccess: () => {
+      refetchBoards();
+      closeModal();
+    },
+  });
+
+  const { mutation: mutationUpdate, loading: loadingUpdate } = useMutation({
+    url: `/api/board/${currentBoardDetail?.id}`,
     afterSuccess: () => {
       refetchBoards();
       closeModal();
@@ -84,14 +92,14 @@ const BoardModal = ({
     remove(index);
   };
 
-  const createBoard = async (formValues: FormValues) => {
-    mutationCreate(formValues);
+  const onSubmit = async (formValues: FormValues) => {
+    isEdit ? mutationUpdate(formValues) : mutationCreate(formValues);
   };
 
   useEffect(() => {
     if (isEdit) return reset(defaultValuesEdit);
     reset(defaultValues);
-  }, [isEdit]);
+  }, [isEdit, currentBoardDetail]);
 
   return (
     <CenteredModal
@@ -129,10 +137,14 @@ const BoardModal = ({
                   const { ref, ...props } = register(`columns.${index}.name`, {
                     required: "Please enter column name.",
                   });
+                  const isRemoveDisabled = !!columns?.find(
+                    ({ name }: ColumnDetail) => name === field?.name
+                  )?.tasks?.length;
                   return (
                     <ArrayListInput
                       key={field.id}
                       onRemove={() => removeColumn(index)}
+                      isRemoveDisabled={isRemoveDisabled}
                       forwardRef={ref}
                       errors={errors}
                       {...props}
@@ -152,8 +164,8 @@ const BoardModal = ({
           >
             <SecondaryButton text="+ Add New Column" onClick={addColumn} />
             <PrimaryButton
-              text="Create New Board"
-              onClick={handleSubmit(createBoard)}
+              text={isEdit ? "Save Changes" : "Create New Board"}
+              onClick={handleSubmit(onSubmit)}
             />
           </div>
         </div>

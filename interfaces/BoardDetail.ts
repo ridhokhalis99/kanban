@@ -1,7 +1,8 @@
-import { board, column } from "@prisma/client";
+import { board } from "@prisma/client";
+import ColumnDetail from "./ColumnDetail";
 
 interface BoardDetail extends board {
-  columns: column[];
+  columns: ColumnDetail[];
 }
 
 export default BoardDetail;

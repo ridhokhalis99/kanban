@@ -91,9 +91,7 @@ const TaskModal = ({
   });
 
   const onSubmit = (formValues: FormValues) => {
-    isEdit
-      ? mutationUpdateTask({ ...formValues, id: currentTaskId })
-      : mutationCreateTask(formValues);
+    isEdit ? mutationUpdateTask(formValues) : mutationCreateTask(formValues);
   };
 
   const addSubtask = () => {

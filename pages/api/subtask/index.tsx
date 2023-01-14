@@ -29,6 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await updateIsFinished(req, res);
       break;
   }
+  res.end();
 };
 
 export default handler;

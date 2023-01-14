@@ -11,15 +11,15 @@ interface MainScreenProps {
 const MainScreen = ({ columns, setTaskDetail }: MainScreenProps) => {
   return (
     <div className="main-container">
-      {columns.map(({ name, tasks }: ColumnDetail) => {
+      {columns.map(({ name, tasks }: ColumnDetail, index) => {
         return (
-          <div className="column-parent">
+          <div key={index} className="column-parent">
             <p className="heading-s uppercase">
               {name} ({tasks?.length})
             </p>
             <div className="task-container">
               {!isEmpty(tasks) ? (
-                tasks?.map((task: TaskDetail) => {
+                tasks?.map((task: TaskDetail, index) => {
                   const { name, sub_tasks } = task;
                   const finishedSubtasks =
                     countBy(sub_tasks, ({ is_finished }) => is_finished).true ||
@@ -28,6 +28,7 @@ const MainScreen = ({ columns, setTaskDetail }: MainScreenProps) => {
 
                   return (
                     <div
+                      key={index}
                       className="task-item"
                       onClick={() => setTaskDetail(task)}
                     >

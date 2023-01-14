@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const createTask = async (req: NextApiRequest, res: NextApiResponse) => {
   const formValues = req.body;
   const { title, description, subtasks, columnId } = formValues;
-  let isIncludeSubtasks = Boolean(subtasks.length);
+  let isIncludeSubtasks = !!subtasks.length;
   let task: Prisma.taskCreateInput;
 
   if (isIncludeSubtasks) {

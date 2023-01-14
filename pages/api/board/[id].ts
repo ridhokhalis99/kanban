@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient, Prisma, column } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
@@ -46,6 +46,76 @@ const deleteBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const updateBoardById = async (req: NextApiRequest, res: NextApiResponse) => {
+  const boardId = req.query.id;
+  const { board, columns } = req.body;
+
+  const updateBoard = async () => {
+    if (boardId)
+      return await prisma.board.update({
+        data: {
+          name: board,
+        },
+        where: {
+          id: +boardId,
+        },
+      });
+  };
+
+  const deleteColumns = async () => {
+    const columnsIds = columns.map(({ id }: column) => id);
+    const filteredColumnsIds = columnsIds.filter((id: number) => id);
+    if (boardId)
+      return await prisma.column.deleteMany({
+        where: {
+          id: {
+            notIn: filteredColumnsIds,
+          },
+          board_id: +boardId,
+        },
+      });
+  };
+
+  const upsertColumns = async () => {
+    return await columns.forEach(async ({ name, id }: column) => {
+      if (id)
+        return await prisma.column.update({
+          where: {
+            id: +id,
+          },
+          data: {
+            name,
+          },
+        });
+
+      if (boardId)
+        return await prisma.column.create({
+          data: {
+            name,
+            board: {
+              connect: {
+                id: +boardId,
+              },
+            },
+          },
+        });
+    });
+  };
+
+  if (boardId) {
+    try {
+      await prisma.$transaction(async () => {
+        await updateBoard();
+        await deleteColumns();
+        await upsertColumns();
+      });
+      res.status(200).json({ message: "Successfully update task!" });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   switch (method) {
@@ -55,7 +125,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "DELETE":
       await deleteBoardById(req, res);
       break;
+    case "PUT":
+      await updateBoardById(req, res);
+      break;
   }
+  res.end();
 };
 
 export default handler;

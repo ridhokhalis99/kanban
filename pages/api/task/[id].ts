@@ -17,7 +17,6 @@ const deleteTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(err);
     }
   }
-  res.end();
 };
 
 const updateTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -90,7 +89,6 @@ const updateTaskById = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(err);
     }
   }
-  res.end();
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -103,6 +101,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await updateTaskById(req, res);
       break;
   }
+  res.end();
 };
 
 export default handler;
