@@ -36,12 +36,14 @@ const Home = () => {
     if (!isEmpty(boards)) {
       return setCurrentBoard(boards[0]);
     }
+    setCurrentBoard({} as board);
   }, [boards]);
 
   useEffect(() => {
     if (currentBoard?.id) {
       refetchBoardDetail();
     }
+    setBoardDetail({} as BoardDetail);
   }, [currentBoard]);
 
   useEffect(() => {
