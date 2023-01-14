@@ -1,34 +1,31 @@
-import { board } from "@prisma/client";
+import { board, task } from "@prisma/client";
 import ModalProps from "../../../interfaces/ModalProps";
 import useMutation from "../../../tools/useMutation";
 import CenteredModal from "../CenteredModal";
 
 interface DeleteModalProps extends ModalProps {
   type: string;
-  currentBoard: board;
-  refetchBoards: Function;
+  afterSuccess: Function;
+  currentItem: board | task;
 }
 
 const DeleteModal = ({
   isOpen,
   toggle,
   type,
-  currentBoard,
-  refetchBoards,
+  currentItem,
+  afterSuccess,
 }: DeleteModalProps) => {
-  const { id: boardId, name } = currentBoard;
+  const { id, name } = currentItem;
   const isBoard = type === "board";
   const description = isBoard
     ? `Are you sure you want to delete the ‘${name}’ board? This action will remove all columns and tasks and cannot be reversed.`
     : `Are you sure you want to delete the ‘’ task and its subtasks? This action cannot be reversed.`;
 
   const { mutation: mutationDelete } = useMutation({
-    url: `/api/${type}/${boardId}`,
+    url: `/api/${type}/${id}`,
     method: "delete",
-    afterSuccess: () => {
-      refetchBoards();
-      toggle();
-    },
+    afterSuccess,
   });
 
   return (

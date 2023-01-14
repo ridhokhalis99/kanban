@@ -65,6 +65,8 @@ const Home = () => {
     open: openTaskDetailModal,
   } = useModal();
 
+  const isBoard = deleteType === "board";
+
   return (
     <div className="light">
       <Sidebar
@@ -113,20 +115,26 @@ const Home = () => {
         toggle={() => {
           toggleDeleteModal();
           setDeleteType("");
+          if (!isBoard) setTaskDetail({} as TaskDetail);
         }}
         type={deleteType}
-        currentBoard={currentBoard}
-        refetchBoards={refetchBoards}
+        afterSuccess={() => {
+          toggleDeleteModal();
+          setDeleteType("");
+          if (!isBoard) setTaskDetail({} as TaskDetail);
+          refetchBoards();
+        }}
+        currentItem={isBoard ? currentBoard : taskDetail}
       />
       <TaskDetailModal
         isOpen={isOpenTaskDetailModal}
         toggle={() => {
           refetchBoardDetail();
           toggleTaskDetailModal();
-          setTaskDetail({} as TaskDetail);
         }}
         taskDetail={taskDetail}
         boardDetail={boardDetail}
+        setTaskDetail={setTaskDetail}
         setDeleteType={setDeleteType}
       />
     </div>

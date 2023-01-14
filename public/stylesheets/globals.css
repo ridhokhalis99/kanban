@@ -451,7 +451,7 @@
   flex-direction: column;
   gap: 8px;
   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1);
-  transition: all 0.25s linear;
+  transition: box-shadow 0.25s linear;
 }
 .taskboard.main .main-container .task-container .task-item:hover {
   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.3);

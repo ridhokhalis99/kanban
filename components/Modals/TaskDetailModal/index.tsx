@@ -14,6 +14,7 @@ import { Dispatch } from "react";
 interface TaskDetailModalProps extends ModalProps {
   taskDetail: TaskDetail;
   boardDetail: BoardDetail;
+  setTaskDetail: Dispatch<TaskDetail>;
   setDeleteType: Dispatch<string>;
 }
 
@@ -22,6 +23,7 @@ const TaskDetailModal = ({
   toggle,
   taskDetail,
   boardDetail,
+  setTaskDetail,
   setDeleteType,
 }: TaskDetailModalProps) => {
   const {
@@ -69,6 +71,7 @@ const TaskDetailModal = ({
 
   const onClickDelete = () => {
     setDeleteType("task");
+    setIsComponentVisible(false);
     toggle();
   };
 
@@ -77,7 +80,10 @@ const TaskDetailModal = ({
   return (
     <CenteredModal
       isOpen={isOpen}
-      toggle={toggle}
+      toggle={() => {
+        toggle();
+        setTaskDetail({} as TaskDetail);
+      }}
       title={taskTitle}
       className="task-detail-modal"
       customComponent={
