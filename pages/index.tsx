@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Controlbar from "../components/Controlbar";
 import Sidebar from "../components/Sidebar";
 import { isEmpty } from "lodash";
@@ -45,6 +45,7 @@ const Home = () => {
       return setCurrentBoard({} as board);
     }
     if (latestBoard) return setCurrentBoard({ ...latestBoard });
+    setCurrentBoard({ ...boards[0] });
   }, [boards]);
 
   useEffect(() => {
@@ -117,6 +118,8 @@ const Home = () => {
         isOpen={isOpenBoardModal}
         toggle={toggleBoardModal}
         refetchBoards={refetchBoards}
+        setBoardDetail={setBoardDetail}
+        setCurrentBoard={setCurrentBoard}
         {...propsBoardModal}
       />
       <TaskModal

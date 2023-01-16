@@ -8,12 +8,16 @@ import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
 import BoardDetail from "../../../interfaces/BoardDetail";
 import ColumnDetail from "../../../interfaces/ColumnDetail";
-import { useEffect } from "react";
+import { Dispatch, useEffect } from "react";
+import { AxiosResponse } from "axios";
+import { board } from "@prisma/client";
 
 interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
   refetchBoards: Function;
+  setBoardDetail: Dispatch<BoardDetail>;
+  setCurrentBoard: Dispatch<board>;
   type?: "add" | "edit" | "addColumn" | "";
   currentBoardDetail?: BoardDetail;
 }
@@ -31,6 +35,8 @@ const BoardModal = ({
   refetchBoards,
   type,
   currentBoardDetail,
+  setBoardDetail,
+  setCurrentBoard,
 }: BoardModalProps) => {
   const isEdit = type === "edit";
   const isAddColumn = type === "addColumn";
@@ -66,16 +72,19 @@ const BoardModal = ({
   const { mutation: mutationCreate, loading: loadingCreate } = useMutation({
     url: "http://localhost:3001/board",
     method: "post",
-    afterSuccess: () => {
+    formatter: ({ data }: AxiosResponse) => data?.data,
+    afterSuccess: (board: board) => {
       refetchBoards();
+      setCurrentBoard(board);
       closeModal();
     },
   });
 
   const { mutation: mutationUpdate, loading: loadingUpdate } = useMutation({
     url: `http://localhost:3001/board/${currentBoardDetail?.id}`,
-    afterSuccess: () => {
-      refetchBoards();
+    formatter: ({ data }: AxiosResponse) => data?.data,
+    afterSuccess: (boardDetail: BoardDetail) => {
+      setBoardDetail(boardDetail);
       closeModal();
     },
   });
@@ -94,7 +103,9 @@ const BoardModal = ({
   };
 
   const onSubmit = async (formValues: FormValues) => {
-    isEdit ? mutationUpdate(formValues) : mutationCreate(formValues);
+    isEdit || isAddColumn
+      ? mutationUpdate(formValues)
+      : mutationCreate(formValues);
   };
 
   useEffect(() => {
@@ -112,7 +123,7 @@ const BoardModal = ({
 
   return (
     <CenteredModal
-      title={isEdit ? "Edit board" : "Add new board"}
+      title={isEdit || isAddColumn ? "Edit board" : "Add new board"}
       isOpen={isOpen}
       toggle={closeModal}
       children={
