@@ -11,6 +11,7 @@ import ColumnDetail from "../../../interfaces/ColumnDetail";
 import { Dispatch, useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { board } from "@prisma/client";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 interface BoardModalProps {
   isOpen: boolean;
@@ -60,6 +61,7 @@ const BoardModal = ({
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues,
@@ -103,6 +105,9 @@ const BoardModal = ({
   };
 
   const onSubmit = async (formValues: FormValues) => {
+    formValues.columns = formValues.columns.map(({ name }, index) => {
+      return { name, order: index };
+    });
     isEdit || isAddColumn
       ? mutationUpdate(formValues)
       : mutationCreate(formValues);
@@ -120,6 +125,18 @@ const BoardModal = ({
 
     reset(defaultValues);
   }, [isEdit, currentBoardDetail]);
+
+  const onDragEnd = (result: any) => {
+    const { destination, source } = result;
+    if (!destination) return;
+    if (destination.droppableId !== source.droppableId) return;
+    if (destination.index === source.index) return;
+
+    const newColumns = [...fields];
+    const [removed] = newColumns.splice(source.index, 1);
+    newColumns.splice(destination.index, 0, removed);
+    reset({ ...getValues(), columns: newColumns });
+  };
 
   return (
     <CenteredModal
@@ -145,34 +162,55 @@ const BoardModal = ({
 
           {!isEmpty(fields) && (
             <div>
-              <h3 className="body-m input-label">Columns</h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                }}
-              >
-                {fields.map((field, index) => {
-                  const { ref, ...props } = register(`columns.${index}.name`, {
-                    required: "Please enter column name.",
-                  });
-                  const isRemoveDisabled = !!columns?.find(
-                    ({ name }: ColumnDetail) => name === field?.name
-                  )?.tasks?.length;
-                  return (
-                    <ArrayListInput
-                      key={field.id}
-                      index={index}
-                      onRemove={() => removeColumn(index)}
-                      isRemoveDisabled={isRemoveDisabled}
-                      forwardRef={ref}
-                      errors={errors}
-                      {...props}
-                    />
-                  );
-                })}
-              </div>
+              <h3 className="body-m array-input-label">Columns</h3>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="column">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {fields.map((field, index) => {
+                        const { ref, ...props } = register(
+                          `columns.${index}.name`,
+                          {
+                            required: "Please enter column name.",
+                          }
+                        );
+                        const isRemoveDisabled = !!columns?.find(
+                          ({ name }: ColumnDetail) => name === field?.name
+                        )?.tasks?.length;
+                        return (
+                          <Draggable
+                            key={field.id}
+                            draggableId={field.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  marginTop: 12,
+                                }}
+                              >
+                                <ArrayListInput
+                                  key={field.id}
+                                  onRemove={() => removeColumn(index)}
+                                  isRemoveDisabled={isRemoveDisabled}
+                                  forwardRef={ref}
+                                  errors={errors}
+                                  {...props}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </div>
           )}
 
@@ -185,7 +223,7 @@ const BoardModal = ({
           >
             <SecondaryButton text="+ Add New Column" onClick={addColumn} />
             <PrimaryButton
-              text={isEdit ? "Save Changes" : "Create New Board"}
+              text={isEdit || isAddColumn ? "Save Changes" : "Create New Board"}
               onClick={handleSubmit(onSubmit)}
             />
           </div>

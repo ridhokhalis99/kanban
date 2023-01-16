@@ -9,7 +9,6 @@ interface ArrayListInputProps {
   name: string;
   isRemoveDisabled?: boolean;
   errors?: any;
-  index?: number;
 }
 
 const ArrayListInput = ({
@@ -18,11 +17,10 @@ const ArrayListInput = ({
   errors,
   name,
   isRemoveDisabled,
-  index,
   ...props
 }: ArrayListInputProps) => {
   return (
-    <div key={index}>
+    <>
       <div
         style={{
           display: "flex",
@@ -51,7 +49,7 @@ const ArrayListInput = ({
         name={name}
         render={({ message }) => <p className="error-message">{message}</p>}
       />
-    </div>
+    </>
   );
 };
 

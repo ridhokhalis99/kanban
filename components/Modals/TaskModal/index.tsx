@@ -11,6 +11,7 @@ import ModalProps from "../../../interfaces/ModalProps";
 import TaskDetail from "../../../interfaces/TaskDetail";
 import { useEffect } from "react";
 import { sub_task } from "@prisma/client";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 interface TaskModalProps extends ModalProps {
   boardDetail: BoardDetail;
@@ -60,6 +61,7 @@ const TaskModal = ({
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -91,6 +93,10 @@ const TaskModal = ({
   });
 
   const onSubmit = (formValues: FormValues) => {
+    formValues.subtasks = formValues.subtasks.map(({ name }, index) => ({
+      name,
+      order: index,
+    }));
     isEdit ? mutationUpdateTask(formValues) : mutationCreateTask(formValues);
   };
 
@@ -106,6 +112,14 @@ const TaskModal = ({
     if (isEdit) return reset(defaultValuesEdit);
     reset();
   }, [isEdit, currentTaskDetail]);
+
+  const onDragEnd = (result: any) => {
+    if (!result.destination) return;
+    const items = Array.from(fields);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    reset({ ...getValues(), subtasks: items });
+  };
 
   return (
     <CenteredModal
@@ -142,28 +156,48 @@ const TaskModal = ({
 
           {!isEmpty(fields) && (
             <div>
-              <h3 className="body-m input-label">Subtasks</h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                }}
-              >
-                {fields.map((field, index) => {
-                  const { ref, ...props } = register(`subtasks.${index}.name`);
-                  return (
-                    <ArrayListInput
-                      key={field.id}
-                      index={index}
-                      onRemove={() => removeSubtask(index)}
-                      forwardRef={ref}
-                      errors={errors}
-                      {...props}
-                    />
-                  );
-                })}
-              </div>
+              <h3 className="body-m array-input-label">Subtasks</h3>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="subtasks">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {fields.map((field, index) => {
+                        const { ref, ...props } = register(
+                          `subtasks.${index}.name`
+                        );
+                        return (
+                          <Draggable
+                            key={field.id}
+                            draggableId={field.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  marginTop: 12,
+                                }}
+                              >
+                                <ArrayListInput
+                                  key={field.id}
+                                  onRemove={() => removeSubtask(index)}
+                                  forwardRef={ref}
+                                  errors={errors}
+                                  {...props}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </div>
           )}
 
