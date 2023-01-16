@@ -14,7 +14,7 @@ interface BoardModalProps {
   isOpen: boolean;
   toggle: Function;
   refetchBoards: Function;
-  type?: "add" | "edit" | "";
+  type?: "add" | "edit" | "addColumn" | "";
   currentBoardDetail?: BoardDetail;
 }
 
@@ -33,6 +33,7 @@ const BoardModal = ({
   currentBoardDetail,
 }: BoardModalProps) => {
   const isEdit = type === "edit";
+  const isAddColumn = type === "addColumn";
 
   const { name, columns } = currentBoardDetail || {};
 
@@ -97,7 +98,15 @@ const BoardModal = ({
   };
 
   useEffect(() => {
-    if (isEdit) return reset(defaultValuesEdit);
+    if (isEdit || isAddColumn) {
+      if (isAddColumn)
+        return reset({
+          ...defaultValuesEdit,
+          columns: [...(defaultValuesEdit.columns || []), { name: "" }],
+        });
+      return reset(defaultValuesEdit);
+    }
+
     reset(defaultValues);
   }, [isEdit, currentBoardDetail]);
 

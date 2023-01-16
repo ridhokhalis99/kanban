@@ -2,13 +2,21 @@ import ColumnDetail from "../../../interfaces/ColumnDetail";
 import TaskDetail from "../../../interfaces/TaskDetail";
 import { countBy, isEmpty } from "lodash";
 import { Dispatch } from "react";
+import BoardDetail from "../../../interfaces/BoardDetail";
 
 interface MainScreenProps {
   columns: ColumnDetail[];
   setTaskDetail: Dispatch<TaskDetail>;
+  toggleBoardModal: Function;
+  boardDetail: BoardDetail;
 }
 
-const MainScreen = ({ columns, setTaskDetail }: MainScreenProps) => {
+const MainScreen = ({
+  columns,
+  setTaskDetail,
+  toggleBoardModal,
+  boardDetail,
+}: MainScreenProps) => {
   return (
     <div className="main-container">
       {columns.map(({ name, tasks }: ColumnDetail, index) => {
@@ -46,7 +54,15 @@ const MainScreen = ({ columns, setTaskDetail }: MainScreenProps) => {
           </div>
         );
       })}
-      <div className="new-column">
+      <div
+        onClick={() =>
+          toggleBoardModal({
+            type: "addColumn",
+            currentBoardDetail: boardDetail,
+          })
+        }
+        className="new-column cursor-pointer"
+      >
         <h2 className="heading-xl text-grey-82 new-column-text">
           + New Column
         </h2>

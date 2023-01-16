@@ -26,11 +26,19 @@ const Taskboard = ({
           {isEmpty(boardDetail) ? (
             <EmptyBoardScreen toggleBoardModal={toggleBoardModal} />
           ) : (
-            <EmptyColumnScreen />
+            <EmptyColumnScreen
+              toggleBoardModal={toggleBoardModal}
+              boardDetail={boardDetail}
+            />
           )}
         </>
       ) : (
-        <MainScreen columns={columns} setTaskDetail={setTaskDetail} />
+        <MainScreen
+          columns={columns}
+          setTaskDetail={setTaskDetail}
+          toggleBoardModal={toggleBoardModal}
+          boardDetail={boardDetail}
+        />
       )}
     </div>
   );
