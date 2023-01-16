@@ -63,7 +63,7 @@ const BoardModal = ({
   });
 
   const { mutation: mutationCreate, loading: loadingCreate } = useMutation({
-    url: "/api/board",
+    url: "http://localhost:3001/board",
     method: "post",
     afterSuccess: () => {
       refetchBoards();
@@ -72,7 +72,7 @@ const BoardModal = ({
   });
 
   const { mutation: mutationUpdate, loading: loadingUpdate } = useMutation({
-    url: `/api/board/${currentBoardDetail?.id}`,
+    url: `http://localhost:3001/board/${currentBoardDetail?.id}`,
     afterSuccess: () => {
       refetchBoards();
       closeModal();

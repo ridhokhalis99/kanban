@@ -24,7 +24,7 @@ const DeleteModal = ({
     : `Are you sure you want to delete the ‘${name}’ task and its subtasks? This action cannot be reversed.`;
 
   const { mutation: mutationDelete } = useMutation({
-    url: `/api/${type}/${id}`,
+    url: `http://localhost:3001/${type}/${id}`,
     method: "delete",
     afterSuccess,
   });

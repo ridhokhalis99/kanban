@@ -48,12 +48,12 @@ const TaskDetailModal = ({
   const numberOfSubtasks = sub_tasks?.length;
 
   const { mutation: mutationSubTask } = useMutation({
-    url: "/api/subtask",
+    url: "http://localhost:3001/subtask",
     method: "patch",
   });
 
   const { mutation: mutationTask } = useMutation({
-    url: "/api/task",
+    url: "http://localhost:3001/task",
     method: "patch",
   });
 

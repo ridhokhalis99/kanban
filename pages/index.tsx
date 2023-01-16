@@ -27,13 +27,13 @@ const Home = () => {
     refetch: refetchBoards,
     loading: loadingBoards,
   } = useFetch({
-    url: "/api/board",
+    url: "http://localhost:3001/board",
     formatter: (boards: board[]) =>
       boards.sort((a, b) => a.name.localeCompare(b.name)),
   });
 
   const { refetch: refetchBoardDetail } = useFetch({
-    url: `/api/board/${currentBoard?.id}`,
+    url: `http://localhost:3001/board/${currentBoard?.id}`,
     afterSuccess: (boardDetail: BoardDetail) => {
       setBoardDetail({ ...boardDetail });
     },
