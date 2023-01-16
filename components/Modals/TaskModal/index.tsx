@@ -1,5 +1,5 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import ArrayListInput from "../BoardModal/ArrayListInput";
+import ArrayListInput from "../../Input/ArrayListInput";
 import CenteredModal from "../CenteredModal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
@@ -155,6 +155,7 @@ const TaskModal = ({
                   return (
                     <ArrayListInput
                       key={field.id}
+                      index={index}
                       onRemove={() => removeSubtask(index)}
                       forwardRef={ref}
                       errors={errors}
