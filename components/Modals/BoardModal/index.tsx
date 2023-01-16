@@ -2,7 +2,7 @@ import CenteredModal from "../CenteredModal";
 import { useForm, useFieldArray } from "react-hook-form";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import ArrayListInput from "./ArrayListInput";
+import ArrayListInput from "../../Input/ArrayListInput";
 import { isEmpty } from "lodash";
 import { ErrorMessage } from "@hookform/error-message";
 import useMutation from "../../../tools/useMutation";
@@ -163,6 +163,7 @@ const BoardModal = ({
                   return (
                     <ArrayListInput
                       key={field.id}
+                      index={index}
                       onRemove={() => removeColumn(index)}
                       isRemoveDisabled={isRemoveDisabled}
                       forwardRef={ref}

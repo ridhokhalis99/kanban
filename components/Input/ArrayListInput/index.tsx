@@ -1,5 +1,6 @@
 import Image from "next/image";
-import crossIcon from "../../../../assets/icon-cross.svg";
+import crossIcon from "../../../assets/icon-cross.svg";
+import dragIcon from "../../../assets/icon-drag.svg";
 import { ErrorMessage } from "@hookform/error-message";
 
 interface ArrayListInputProps {
@@ -8,6 +9,7 @@ interface ArrayListInputProps {
   name: string;
   isRemoveDisabled?: boolean;
   errors?: any;
+  index?: number;
 }
 
 const ArrayListInput = ({
@@ -16,10 +18,11 @@ const ArrayListInput = ({
   errors,
   name,
   isRemoveDisabled,
+  index,
   ...props
 }: ArrayListInputProps) => {
   return (
-    <div>
+    <div key={index}>
       <div
         style={{
           display: "flex",
@@ -27,6 +30,12 @@ const ArrayListInput = ({
           gap: 16,
         }}
       >
+        <Image
+          src={dragIcon.src}
+          alt="drag"
+          width={dragIcon.width}
+          height={dragIcon.height}
+        />
         <input ref={forwardRef} name={name} {...props} />
         <Image
           src={crossIcon.src}
