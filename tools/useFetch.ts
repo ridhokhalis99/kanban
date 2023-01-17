@@ -6,6 +6,7 @@ interface useFetchProps {
   formatter?: Function;
   defaultValue?: any;
   afterSuccess?: Function;
+  woFetchFirst?: boolean;
 }
 
 const useFetch = ({
@@ -13,6 +14,7 @@ const useFetch = ({
   formatter = (val: any) => val,
   defaultValue = [],
   afterSuccess,
+  woFetchFirst = false,
 }: useFetchProps) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(defaultValue);
@@ -31,7 +33,9 @@ const useFetch = ({
   };
 
   useEffect(() => {
-    getData();
+    if (!woFetchFirst) {
+      getData();
+    }
   }, []);
 
   return { data, loading, refetch: getData };

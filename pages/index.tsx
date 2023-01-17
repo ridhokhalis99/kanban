@@ -38,6 +38,7 @@ const Home = () => {
     afterSuccess: (boardDetail: BoardDetail) => {
       setBoardDetail({ ...boardDetail });
     },
+    woFetchFirst: true,
   });
 
   useEffect(() => {
