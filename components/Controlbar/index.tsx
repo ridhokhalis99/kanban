@@ -57,33 +57,32 @@ const Controlbar = ({
         }}
       >
         {!isEmpty(columns) && (
-          <>
-            <button
-              className="button-new-task"
-              onClick={() => toggleTaskModal({ type: "add" })}
-            >
-              + Add New Task
-            </button>
-            <Image
-              src={iconEllipsis.src}
-              alt="ellipsis"
-              width={iconEllipsis.width}
-              height={iconEllipsis.height}
-              onClick={() => setIsComponentVisible((prev) => !prev)}
-              style={{
-                cursor: "pointer",
-                marginRight: 32,
-              }}
-            />
-            <DropdownEllipsis
-              forwardRef={ref}
-              isComponentVisible={isComponentVisible}
-              type="board"
-              onClickDelete={onClickDelete}
-              onClickEdit={onClickEdit}
-            />
-          </>
+          <button
+            className="button-new-task"
+            onClick={() => toggleTaskModal({ type: "add" })}
+          >
+            + Add New Task
+          </button>
         )}
+
+        <Image
+          src={iconEllipsis.src}
+          alt="ellipsis"
+          width={iconEllipsis.width}
+          height={iconEllipsis.height}
+          onClick={() => setIsComponentVisible((prev) => !prev)}
+          style={{
+            cursor: "pointer",
+            marginRight: 32,
+          }}
+        />
+        <DropdownEllipsis
+          forwardRef={ref}
+          isComponentVisible={isComponentVisible}
+          type="board"
+          onClickDelete={onClickDelete}
+          onClickEdit={onClickEdit}
+        />
       </div>
     </div>
   );

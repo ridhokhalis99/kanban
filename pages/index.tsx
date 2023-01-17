@@ -13,6 +13,7 @@ import BoardDetail from "../interfaces/BoardDetail";
 import DeleteModal from "../components/Modals/DeleteModal";
 import TaskDetailModal from "../components/Modals/TaskDetailModal";
 import TaskDetail from "../interfaces/TaskDetail";
+import { useRef } from "react";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
@@ -80,8 +81,10 @@ const Home = () => {
     open: openTaskDetailModal,
   } = useModal();
 
+  const refSidebar = useRef({} as HTMLDivElement);
+
   return (
-    <div className="light">
+    <div className="light main-container">
       <Sidebar
         boards={boards}
         currentBoard={currentBoard}
@@ -89,6 +92,7 @@ const Home = () => {
         isSidebarHidden={isSidebarHidden}
         setIsSidebarHidden={setIsSidebarHidden}
         toggleBoardModal={toggleBoardModal}
+        forwardRef={refSidebar}
       />
       <Controlbar
         toggleTaskModal={toggleTaskModal}
@@ -98,7 +102,9 @@ const Home = () => {
       />
       <div
         style={{
-          width: isSidebarHidden ? "100%" : "calc(100% - 302px)",
+          width: isSidebarHidden
+            ? "100%"
+            : `calc(100% - ${refSidebar?.current?.offsetWidth}px)`,
           position: "relative",
           left: isSidebarHidden ? 0 : 302,
           transition: "all 0.3s ease-out",

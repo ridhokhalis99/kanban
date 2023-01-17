@@ -11,12 +11,14 @@ interface SidebarProps {
   isSidebarHidden: boolean;
   setIsSidebarHidden: React.Dispatch<boolean>;
   toggleBoardModal: Function;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const Sidebar = ({
   boards,
   isSidebarHidden,
   setIsSidebarHidden,
+  forwardRef,
   ...props
 }: SidebarProps) => {
   const numberOfBoards = boards.length;
@@ -28,6 +30,7 @@ const Sidebar = ({
           exit={{ x: -300 }}
           transition={{ duration: 0.3 }}
           className="sidebar container"
+          ref={forwardRef}
         >
           <div
             style={{

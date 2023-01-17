@@ -11,7 +11,6 @@
   height: calc(100vh - 80px);
   display: flex;
   overflow-x: auto;
-  padding-right: 40px;
 }
 
 .taskboard.empty {
@@ -27,16 +26,15 @@
 
 .taskboard.main {
   padding-top: 24px;
-  padding-left: 18px;
   gap: 24px;
 }
 .taskboard.main .main-container {
   display: flex;
-  gap: 24px;
 }
 .taskboard.main .main-container .column-parent {
   width: 280px;
   margin-bottom: 24px;
+  margin-left: 24px;
 }
 .taskboard.main .main-container .task-container {
   display: flex;
@@ -68,7 +66,7 @@
 .taskboard.main .main-container .new-column {
   width: 100%;
   border-radius: 6px;
-  margin-top: 40px;
+  margin: 40px 40px 0 24px;
   background: linear-gradient(to bottom, rgba(121, 132, 147, 0.2), rgba(130, 143, 163, 0.1), rgba(130, 143, 163, 0));
   cursor: pointer;
   display: flex;
