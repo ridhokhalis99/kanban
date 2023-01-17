@@ -19,7 +19,7 @@ const MainScreen = ({
   boardDetail,
 }: MainScreenProps) => {
   const { mutation: updateColumn } = useMutation({
-    url: "https://localhost:3001/column",
+    url: "http://localhost:3001/column",
   });
 
   const onDragEnd = (result: any) => {
@@ -48,6 +48,7 @@ const MainScreen = ({
         task.order = index;
         return task;
       });
+      return column;
     });
     updateColumn(newColumns);
   };
