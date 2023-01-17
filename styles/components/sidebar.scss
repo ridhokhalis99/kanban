@@ -2,6 +2,8 @@
 
 .sidebar {
   color: $grey82;
+  position: sticky;
+  z-index: 1;
 
   .board {
     display: flex;

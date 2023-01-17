@@ -8,6 +8,8 @@
 
 .sidebar {
   color: #828fa3;
+  position: sticky;
+  z-index: 1;
 }
 .sidebar .board {
   display: flex;

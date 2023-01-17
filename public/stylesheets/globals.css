@@ -176,6 +176,8 @@ input[type=checkbox] {
 
 .sidebar {
   color: #828fa3;
+  position: sticky;
+  z-index: 1;
 }
 .sidebar .board {
   display: flex;
@@ -537,6 +539,7 @@ input[type=checkbox] {
   height: calc(100vh - 80px);
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .taskboard.empty {
