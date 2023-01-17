@@ -93,7 +93,7 @@ const TaskModal = ({
   });
 
   const onSubmit = (formValues: FormValues) => {
-    formValues.subtasks = formValues.subtasks.map(({ name }, index) => ({
+    formValues.subtasks = formValues?.subtasks?.map(({ name }, index) => ({
       name,
       order: index,
     }));

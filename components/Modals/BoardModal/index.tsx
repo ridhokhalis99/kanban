@@ -105,7 +105,7 @@ const BoardModal = ({
   };
 
   const onSubmit = async (formValues: FormValues) => {
-    formValues.columns = formValues.columns.map(({ name }, index) => {
+    formValues.columns = formValues?.columns?.map(({ name }, index) => {
       return { name, order: index };
     });
     isEdit || isAddColumn
