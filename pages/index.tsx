@@ -22,6 +22,7 @@ const Home = () => {
   );
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
   const [taskDetail, setTaskDetail] = useState<TaskDetail>({} as TaskDetail);
+  const [isLightMode, setIsLightMode] = useState<boolean>(true);
 
   const {
     data: boards,
@@ -84,7 +85,7 @@ const Home = () => {
   const refSidebar = useRef({} as HTMLDivElement);
 
   return (
-    <div className="light main-container">
+    <div className={`main-container ${isLightMode ? "light" : "dark"}`}>
       <Sidebar
         boards={boards}
         currentBoard={currentBoard}
@@ -93,12 +94,14 @@ const Home = () => {
         setIsSidebarHidden={setIsSidebarHidden}
         toggleBoardModal={toggleBoardModal}
         forwardRef={refSidebar}
+        setIsLightMode={setIsLightMode}
       />
       <Controlbar
         toggleTaskModal={toggleTaskModal}
         boardDetail={boardDetail}
         toggleBoardModal={toggleBoardModal}
         toggleDeleteModal={toggleDeleteModal}
+        isLightMode={isLightMode}
       />
       <div
         style={{

@@ -10,6 +10,7 @@
       width: 50%;
       padding: 14px 0;
       border-radius: 20px;
+      transition: background-color 0.25s ease-in;
     }
 
     .button.delete {
@@ -17,9 +18,27 @@
       color: $whiteff;
     }
 
+    .button.delete:hover {
+      background-color: $redd0;
+    }
+
     .button.cancel {
-      background-color: $purple60;
       color: $purple63;
     }
+  }
+}
+
+.light {
+  .button.cancel {
+    background-color: $purple60;
+  }
+}
+
+.dark {
+  .button.cancel {
+    background-color: $whiteff;
+  }
+  .button.cancel:hover {
+    background-color: $greyc8;
   }
 }

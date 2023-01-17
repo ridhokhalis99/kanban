@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../../styles/colors.scss","../../../styles/components/task-detail-modal.scss"],"names":[],"mappings":"AAgBA;EACE,OAjBS;;;AAoBX;EACE,OAbO;;;ACLP;EACE;EACA;EACA;EACA;EACA,kBDGM","file":"task-detail-modal.css"}
+{"version":3,"sourceRoot":"","sources":["../../../styles/colors.scss","../../../styles/components/task-detail-modal.scss"],"names":[],"mappings":"AAqBA;EACE,OArBS;;;AAwBX;EACE,OAdO;;;ACTP;EACE;EACA;EACA;EACA;EACA,kBDOM","file":"task-detail-modal.css"}

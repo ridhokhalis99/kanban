@@ -1,6 +1,13 @@
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
 .dropdown-container {
   padding: 16px;
-  background-color: white;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -8,8 +15,9 @@
   position: absolute;
   right: 26px;
   top: 70px;
-  box-shadow: #e4ebfa 0px 1px 4px;
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1019607843);
   z-index: 1;
+  transition: background-color 0.25s ease-in;
 }
 .dropdown-container .dropdown-item {
   width: 160px;
@@ -20,6 +28,14 @@
 }
 .dropdown-container .delete {
   color: #ea5555;
+}
+
+.light .dropdown-container {
+  background-color: #ffffff;
+}
+
+.dark .dropdown-container {
+  background-color: #2b2c37;
 }
 
 /*# sourceMappingURL=dropdown-ellipsis.css.map */

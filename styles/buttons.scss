@@ -8,6 +8,7 @@
   background-color: $purple63;
   padding: 14px 0;
   border-radius: 20px;
+  transition: background-color 0.25s ease-in;
 }
 
 .button.primary {
@@ -15,7 +16,28 @@
   background-color: $purple63;
 }
 
+.button.primary:hover {
+  background-color: $purple4f;
+}
+
 .button.secondary {
   color: $purple63;
-  background-color: #635fc71a;
+}
+
+.light {
+  .button.secondary {
+    background-color: $purple5c;
+  }
+  .button.secondary:hover {
+    background-color: $purple3c;
+  }
+}
+
+.dark {
+  .button.secondary {
+    background-color: $whitef4;
+  }
+  .button.secondary:hover {
+    background-color: $greyc8;
+  }
 }

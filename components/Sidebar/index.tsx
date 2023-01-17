@@ -12,6 +12,7 @@ interface SidebarProps {
   setIsSidebarHidden: React.Dispatch<boolean>;
   toggleBoardModal: Function;
   forwardRef: React.RefObject<HTMLDivElement>;
+  setIsLightMode: React.Dispatch<boolean>;
 }
 
 const Sidebar = ({
@@ -19,6 +20,7 @@ const Sidebar = ({
   isSidebarHidden,
   setIsSidebarHidden,
   forwardRef,
+  setIsLightMode,
   ...props
 }: SidebarProps) => {
   const numberOfBoards = boards.length;
@@ -51,7 +53,7 @@ const Sidebar = ({
           </div>
 
           <div className="bottom-sidebar">
-            <ThemeSlider />
+            <ThemeSlider setIsLightMode={setIsLightMode} />
             <HideSidebar setIsSidebarHidden={setIsSidebarHidden} />
           </div>
         </motion.div>

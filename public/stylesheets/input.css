@@ -1,0 +1,69 @@
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  padding: 10px 16px;
+  width: 100%;
+  font-size: 14px;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.2em;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+  width: 16px;
+}
+
+.error-message {
+  font-size: 12px;
+  margin-top: 4;
+  color: #ea5555;
+}
+
+.light input,
+.light textarea,
+.light select {
+  background-color: #ffffff;
+  color: #828fa3;
+}
+.light .input-label {
+  color: #828fa3;
+}
+.light .array-input-label {
+  color: #828fa3;
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #20212c;
+  color: #ffffff;
+}
+.dark .input-label {
+  color: #c8cfda;
+}
+.dark .array-input-label {
+  color: #c8cfda;
+}
+
+/*# sourceMappingURL=input.css.map */

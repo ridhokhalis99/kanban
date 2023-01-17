@@ -1,6 +1,7 @@
+@import "../colors.scss";
+
 .dropdown-container {
   padding: 16px;
-  background-color: white;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -8,8 +9,9 @@
   position: absolute;
   right: 26px;
   top: 70px;
-  box-shadow: #e4ebfa 0px 1px 4px;
+  box-shadow: 0px 4px 6px $grey36;
   z-index: 1;
+  transition: background-color 0.25s ease-in;
 
   .dropdown-item {
     width: 160px;
@@ -22,5 +24,17 @@
 
   .delete {
     color: #ea5555;
+  }
+}
+
+.light {
+  .dropdown-container {
+    background-color: $whiteff;
+  }
+}
+
+.dark {
+  .dropdown-container {
+    background-color: $black2b;
   }
 }

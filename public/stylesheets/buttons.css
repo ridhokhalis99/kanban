@@ -14,6 +14,7 @@
   background-color: #635fc7;
   padding: 14px 0;
   border-radius: 20px;
+  transition: background-color 0.25s ease-in;
 }
 
 .button.primary {
@@ -21,9 +22,26 @@
   background-color: #635fc7;
 }
 
+.button.primary:hover {
+  background-color: #4f4bb4;
+}
+
 .button.secondary {
   color: #635fc7;
-  background-color: rgba(99, 95, 199, 0.1019607843);
+}
+
+.light .button.secondary {
+  background-color: rgba(92, 89, 185, 0.1019607843);
+}
+.light .button.secondary:hover {
+  background-color: rgba(60, 57, 149, 0.1019607843);
+}
+
+.dark .button.secondary {
+  background-color: #f4f7fd;
+}
+.dark .button.secondary:hover {
+  background-color: #c8cfda;
 }
 
 /*# sourceMappingURL=buttons.css.map */

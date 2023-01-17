@@ -7,7 +7,6 @@
 }
 
 .taskboard {
-  background-color: #f4f7fd;
   height: calc(100vh - 80px);
   display: flex;
   overflow-x: auto;
@@ -27,6 +26,7 @@
 .taskboard.main {
   padding-top: 24px;
   gap: 24px;
+  transition: background-color 0.25s ease-in;
 }
 .taskboard.main .main-container {
   display: flex;
@@ -36,6 +36,9 @@
   margin-bottom: 24px;
   margin-left: 24px;
 }
+.taskboard.main .main-container .heading-s {
+  color: #828fa3;
+}
 .taskboard.main .main-container .task-container {
   display: flex;
   flex-direction: column;
@@ -44,7 +47,6 @@
 .taskboard.main .main-container .task-container .task-item {
   width: 280px;
   padding: 24px 16px;
-  background-color: #ffffff;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -55,12 +57,11 @@
   transition: box-shadow 0.25s linear;
 }
 .taskboard.main .main-container .task-container .task-item:hover {
-  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.3);
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1019607843);
 }
 .taskboard.main .main-container .task-container .empty-column {
   height: calc(100vh - 200px);
   width: 280px;
-  border: 2px dashed #c8cfda;
   border-radius: 6px;
 }
 .taskboard.main .main-container .new-column {
@@ -76,6 +77,28 @@
 .taskboard.main .main-container .new-column .new-column-text {
   width: 280px;
   text-align: center;
+}
+
+.light .taskboard {
+  background-color: #f4f7fd;
+}
+.light .taskboard .task-item {
+  background-color: #ffffff;
+  color: #000112;
+}
+.light .taskboard .empty-column {
+  border: 2px dashed #c8cfda;
+}
+
+.dark .taskboard {
+  background-color: #20212c;
+}
+.dark .taskboard .task-item {
+  background-color: #2b2c37;
+  color: #ffffff;
+}
+.dark .taskboard .empty-column {
+  border: 2px dashed #3e3f4e;
 }
 
 /*# sourceMappingURL=taskboard.css.map */

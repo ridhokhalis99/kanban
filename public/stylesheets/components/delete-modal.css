@@ -15,14 +15,28 @@
   width: 50%;
   padding: 14px 0;
   border-radius: 20px;
+  transition: background-color 0.25s ease-in;
 }
 .delete-modal .button-container .button.delete {
   background-color: #ea5555;
   color: #ffffff;
 }
+.delete-modal .button-container .button.delete:hover {
+  background-color: #d03f3f;
+}
 .delete-modal .button-container .button.cancel {
-  background-color: rgba(96, 93, 199, 0.1019607843);
   color: #635fc7;
+}
+
+.light .button.cancel {
+  background-color: rgba(96, 93, 199, 0.1019607843);
+}
+
+.dark .button.cancel {
+  background-color: #ffffff;
+}
+.dark .button.cancel:hover {
+  background-color: #c8cfda;
 }
 
 /*# sourceMappingURL=delete-modal.css.map */

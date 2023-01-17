@@ -3,15 +3,16 @@ import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 import DropdownEllipsis from "../DropdownEllipsis";
 import useComponentVisible from "../../tools/useComponentVisible";
 import logoDark from "../../assets/logo-dark.svg";
+import logoLight from "../../assets/logo-light.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";
-import { Dispatch } from "react";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
   toggleTaskModal: Function;
   toggleDeleteModal: Function;
   toggleBoardModal: Function;
+  isLightMode: boolean;
 }
 
 const Controlbar = ({
@@ -19,6 +20,7 @@ const Controlbar = ({
   toggleTaskModal,
   toggleDeleteModal,
   toggleBoardModal,
+  isLightMode,
 }: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
@@ -34,15 +36,17 @@ const Controlbar = ({
     toggleBoardModal({ type: "edit", currentBoardDetail: boardDetail });
   };
 
+  const logo = isLightMode ? logoDark : logoLight;
+
   return (
     <div className="controlbar container">
       <div className="left-container">
         <>
           <Image
-            src={logoDark}
+            src={logo.src}
             alt="kanban logo"
-            width={logoDark.width}
-            height={logoDark.height}
+            width={logo.width}
+            height={logo.height}
             style={{ margin: "26px 0" }}
           />
           <div className="left-container-divider" />

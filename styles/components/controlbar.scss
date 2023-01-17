@@ -1,11 +1,14 @@
+@import "../colors.scss";
+
 .controlbar {
+  transition: background-color 0.25s ease-in;
+
   .left-container {
     display: flex;
     padding: 0px 32px 0px 27px;
   }
 
   .left-container-divider {
-    border-right: #e4ebfa 2px solid;
     margin: 0 32px 0 120px;
     position: relative;
     height: 100%;
@@ -25,8 +28,43 @@
 }
 
 .controlbar.container {
-  border-bottom: 2px solid #e4ebfa;
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+
+.light {
+  .controlbar {
+    background-color: $whiteff;
+
+    .board-title {
+      color: $black00;
+    }
+
+    .left-container-divider {
+      border-right: 2px solid $greye4;
+    }
+  }
+
+  .controlbar.container {
+    border-bottom: 2px solid $greye4;
+  }
+}
+
+.dark {
+  .controlbar {
+    background-color: $black2b;
+
+    .board-title {
+      color: $whiteff;
+    }
+
+    .left-container-divider {
+      border-right: 2px solid $grey3e;
+    }
+  }
+
+  .controlbar.container {
+    border-bottom: 2px solid $grey3e;
+  }
 }

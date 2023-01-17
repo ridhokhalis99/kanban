@@ -29,10 +29,10 @@
 
 .centered-modal-container {
   padding: 32px;
-  background-color: white;
   position: absolute;
   border-radius: 6px;
   width: 500px;
+  transition: background-color 0.25s ease-in;
 }
 .centered-modal-container .title {
   margin-bottom: 24px;
@@ -43,6 +43,20 @@
 }
 .centered-modal-container .title.black {
   color: #000112;
+}
+
+.light .centered-modal-container {
+  background-color: white;
+}
+.light .centered-modal-container .title {
+  color: #000112;
+}
+
+.dark .centered-modal-container {
+  background-color: #2b2c37;
+}
+.dark .centered-modal-container .title {
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=centered-modal.css.map */

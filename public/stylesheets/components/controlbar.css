@@ -1,9 +1,19 @@
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+.controlbar {
+  transition: background-color 0.25s ease-in;
+}
 .controlbar .left-container {
   display: flex;
   padding: 0px 32px 0px 27px;
 }
 .controlbar .left-container-divider {
-  border-right: #e4ebfa 2px solid;
   margin: 0 32px 0 120px;
   position: relative;
   height: 100%;
@@ -20,10 +30,35 @@
 }
 
 .controlbar.container {
-  border-bottom: 2px solid #e4ebfa;
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+
+.light .controlbar {
+  background-color: #ffffff;
+}
+.light .controlbar .board-title {
+  color: #000112;
+}
+.light .controlbar .left-container-divider {
+  border-right: 2px solid #e4ebfa;
+}
+.light .controlbar.container {
+  border-bottom: 2px solid #e4ebfa;
+}
+
+.dark .controlbar {
+  background-color: #2b2c37;
+}
+.dark .controlbar .board-title {
+  color: #ffffff;
+}
+.dark .controlbar .left-container-divider {
+  border-right: 2px solid #3e3f4e;
+}
+.dark .controlbar.container {
+  border-bottom: 2px solid #3e3f4e;
 }
 
 /*# sourceMappingURL=controlbar.css.map */
