@@ -50,7 +50,7 @@ const MainScreen = ({
       });
       return column;
     });
-    updateColumn(newColumns);
+    updateColumn({ columns: newColumns });
   };
 
   return (
