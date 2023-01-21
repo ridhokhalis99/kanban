@@ -12,6 +12,7 @@ import { Dispatch, useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { board } from "@prisma/client";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { toast } from "react-hot-toast";
 
 interface BoardModalProps {
   isOpen: boolean;
@@ -74,20 +75,34 @@ const BoardModal = ({
   const { mutation: mutationCreate, loading: loadingCreate } = useMutation({
     url: "http://localhost:3001/board",
     method: "post",
-    formatter: ({ data }: AxiosResponse) => data?.data,
-    afterSuccess: (board: board) => {
+    formatter: ({ data }: AxiosResponse) => data,
+    afterSuccess: ({
+      data: board,
+      message,
+    }: {
+      data: board;
+      message: string;
+    }) => {
       refetchBoards();
       setCurrentBoard(board);
       closeModal();
+      toast.success(message);
     },
   });
 
   const { mutation: mutationUpdate, loading: loadingUpdate } = useMutation({
     url: `http://localhost:3001/board/${currentBoardDetail?.id}`,
-    formatter: ({ data }: AxiosResponse) => data?.data,
-    afterSuccess: (boardDetail: BoardDetail) => {
+    formatter: ({ data }: AxiosResponse) => data,
+    afterSuccess: ({
+      data: boardDetail,
+      message,
+    }: {
+      data: BoardDetail;
+      message: string;
+    }) => {
       setBoardDetail(boardDetail);
       closeModal();
+      toast.success(message);
     },
   });
 

@@ -4,8 +4,20 @@ import googleIcon from "../assets/icon-google-button.svg";
 import { signIn } from "next-auth/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const { query } = useRouter();
+  const { error } = query;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error as string);
+    }
+  }, [error]);
+
   const {
     register,
     handleSubmit,

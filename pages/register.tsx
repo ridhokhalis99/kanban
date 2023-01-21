@@ -4,6 +4,8 @@ import { FieldValues, useForm } from "react-hook-form";
 import useMutation from "../tools/useMutation";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
+import { AxiosResponse } from "axios";
 
 const Register = () => {
   const { push } = useRouter();
@@ -16,8 +18,14 @@ const Register = () => {
   const { mutation: mutationRegister } = useMutation({
     url: "http://localhost:3001/user/register",
     method: "post",
-    afterSuccess: () => {
+    formatter: ({ data }: AxiosResponse) => data,
+    afterSuccess: ({ message }: { message: string }) => {
       push("/login");
+      toast.success(message);
+    },
+    errorHandler: ({ data }: any) => {
+      const { message } = data;
+      toast.error(message);
     },
   });
 

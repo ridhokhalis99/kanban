@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Session from "../interfaces/Session";
@@ -11,6 +11,7 @@ interface useMutationProps {
   formatter?: Function;
   defaultValue?: any;
   afterSuccess?: Function;
+  errorHandler?: Function;
 }
 
 const useMutation = ({
@@ -19,6 +20,7 @@ const useMutation = ({
   url,
   formatter = (data: any) => data,
   afterSuccess,
+  errorHandler,
 }: useMutationProps) => {
   const { data: session } = useSession();
   const accesstoken = (session as Session | null)?.user?.accessToken;
@@ -36,8 +38,9 @@ const useMutation = ({
       const result = formatter(response);
       setResult((prev: any) => formatter(response, prev));
       afterSuccess && afterSuccess(result);
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
+      errorHandler && errorHandler(err.response);
     } finally {
       setLoading(false);
     }

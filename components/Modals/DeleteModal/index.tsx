@@ -2,6 +2,8 @@ import { board, task } from "@prisma/client";
 import ModalProps from "../../../interfaces/ModalProps";
 import useDelete from "../../../tools/useDelete";
 import CenteredModal from "../CenteredModal";
+import { toast } from "react-hot-toast";
+import { AxiosResponse } from "axios";
 
 interface DeleteModalProps extends ModalProps {
   type?: string;
@@ -25,7 +27,11 @@ const DeleteModal = ({
 
   const { remove } = useDelete({
     url: `http://localhost:3001/${type}/${id}`,
-    afterSuccess,
+    formatter: ({ data }: AxiosResponse) => data,
+    afterSuccess: ({ message }: { message: string }) => {
+      afterSuccess && afterSuccess();
+      toast.success(message);
+    },
   });
 
   return (

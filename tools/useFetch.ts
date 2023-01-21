@@ -46,7 +46,7 @@ const useFetch = ({
     if (!woFetchFirst) {
       getData();
     }
-  }, []);
+  }, [accesstoken]);
 
   return { data, loading, refetch: getData };
 };

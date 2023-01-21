@@ -38,7 +38,7 @@ const TaskModal = ({
   currentTaskDetail,
 }: TaskModalProps) => {
   const isEdit = type === "edit";
-  const { columns } = boardDetail;
+  const { columns } = boardDetail || {};
   const {
     name,
     description,

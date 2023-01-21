@@ -35,7 +35,7 @@ const TaskDetailModal = ({
     id: taskId,
     sub_tasks,
   } = taskDetail;
-  const { columns } = boardDetail;
+  const { columns } = boardDetail || {};
 
   const { register } = useForm({
     defaultValues: {

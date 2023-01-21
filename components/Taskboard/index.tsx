@@ -17,7 +17,7 @@ const Taskboard = ({
   setTaskDetail,
   toggleBoardModal,
 }: TaskboardProps) => {
-  const { columns } = boardDetail;
+  const { columns } = boardDetail || {};
 
   return (
     <div className={`taskboard ${isEmpty(columns) ? "empty" : "main"}`}>

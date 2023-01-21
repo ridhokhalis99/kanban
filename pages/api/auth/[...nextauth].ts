@@ -17,13 +17,18 @@ const providers = [
       password: { label: "Password", type: "password" },
     },
     async authorize(credentials: any) {
-      const { data: result } = await axios.post(
-        `${process.env.SERVER_URL}/user/login`,
-        credentials
-      );
-      const isUserNotFound = result.error === "User not found";
-      if (isUserNotFound) return;
-      return result;
+      try {
+        const { data: result } = await axios.post(
+          `${process.env.SERVER_URL}/user/login`,
+          credentials
+        );
+        return result;
+      } catch (error: any) {
+        if (error.response.status === 404) {
+          throw new Error("Incorrect email or password");
+        }
+        return;
+      }
     },
   }),
 ];
@@ -36,20 +41,23 @@ const callbacks = {
         email: user.email,
       };
       while (true) {
-        const { data: result } = await axios.post(
-          `${process.env.SERVER_URL}/user/social-login`,
-          googleUser
-        );
-        const isUserNotFound = result.error === "User not found";
-        if (isUserNotFound) {
-          await axios.post(
-            `${process.env.SERVER_URL}/user/social-register`,
+        try {
+          const { data: result } = await axios.post(
+            `${process.env.SERVER_URL}/user/social-login`,
             googleUser
           );
-          continue;
+          user.accessToken = result.accessToken;
+          break;
+        } catch (error: any) {
+          if (error.response.status === 404) {
+            await axios.post(
+              `${process.env.SERVER_URL}/user/social-register`,
+              googleUser
+            );
+            continue;
+          }
+          return false;
         }
-        user.accessToken = result.accessToken;
-        break;
       }
       return true;
     }
@@ -72,6 +80,7 @@ const callbacks = {
 
 const pages = {
   signIn: "/login",
+  error: "/login",
 };
 
 const options = {
