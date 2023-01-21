@@ -305,7 +305,7 @@ input[type=checkbox] {
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
   position: absolute;
-  bottom: 32px;
+  bottom: 80px;
   cursor: pointer;
 }
 

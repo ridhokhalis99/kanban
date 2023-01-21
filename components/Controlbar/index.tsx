@@ -54,7 +54,7 @@ const Controlbar = ({
           />
           <div className="left-container-divider" />
         </>
-        {true ? (
+        {loadingBoardDetail ? (
           <div className="board-title">
             <Skeleton width={200} height={24} />
           </div>
