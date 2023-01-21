@@ -656,9 +656,34 @@ input[type=checkbox] {
   background-color: white;
   border-radius: 10px;
   padding: 36px 32px;
-  boxshadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
-.auth .google-button {
+.auth .auth-wrapper .form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.auth .auth-wrapper .form-section .title {
+  margin: 24px 0;
+}
+.auth .auth-wrapper .form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.auth .auth-wrapper .form-section form label {
+  font-size: 13px;
+  color: #20212c;
+}
+.auth .auth-wrapper .form-section form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.auth .auth-wrapper .google-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -672,17 +697,12 @@ input[type=checkbox] {
   border-radius: 20px;
   transition: background-color 0.25s ease-in;
 }
-.auth .google-button:hover {
+.auth .auth-wrapper .google-button:hover {
   background-color: #f4f7fd;
 }
-.auth label {
-  font-size: 13px;
-  color: #20212c;
-}
-.auth .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.auth .auth-wrapper .navigate {
+  padding-top: 16px;
+  text-align: center;
 }
 
 * {

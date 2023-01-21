@@ -6,32 +6,15 @@ const Login = () => {
   return (
     <div className="auth">
       <div className="auth-wrapper">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
+        <div className="form-section">
           <Image
             src={logo.src}
             alt="kanban logo"
             width={logo.width}
             height={logo.height}
           />
-          <h1 className="heading-xl" style={{ margin: "24px 0" }}>
-            Sign in to Kanban
-          </h1>
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-              width: "100%",
-              marginBottom: "12px",
-            }}
-          >
+          <h1 className="heading-xl title">Sign in to Kanban</h1>
+          <form>
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input type="email" name="email" className="form-control" />
@@ -54,7 +37,7 @@ const Login = () => {
             Sign in with Google
           </button>
         </div>
-        <div style={{ paddingTop: "16px", textAlign: "center" }}>
+        <div className="navigate">
           <p className="body-l">
             Don't have an account?{" "}
             <a href="/register" style={{ color: "#0079BF" }}>
