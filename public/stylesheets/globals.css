@@ -707,12 +707,17 @@ input[type=checkbox] {
   flex-direction: column;
   gap: 8px;
 }
-.auth .auth-wrapper .google-button {
+.auth .auth-wrapper .social-login {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+.auth .auth-wrapper .social-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 100%;
+  width: 50%;
   text-align: center;
   font-size: 13px;
   border: 1px solid #635fc7;
@@ -721,7 +726,7 @@ input[type=checkbox] {
   border-radius: 20px;
   transition: background-color 0.25s ease-in;
 }
-.auth .auth-wrapper .google-button:hover {
+.auth .auth-wrapper .social-button:hover {
   background-color: #f4f7fd;
 }
 .auth .auth-wrapper .navigate {

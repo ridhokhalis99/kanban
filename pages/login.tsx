@@ -1,6 +1,7 @@
 import logo from "../assets/logo-pictorial.svg";
 import Image from "next/image";
 import googleIcon from "../assets/icon-google-button.svg";
+import githubIcon from "../assets/icon-github-button.svg";
 import { signIn } from "next-auth/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -26,6 +27,10 @@ const Login = () => {
 
   const googleSignIn = async () => {
     await signIn("google");
+  };
+
+  const githubSignIn = async () => {
+    await signIn("github");
   };
 
   const onSubmit = (formValues: FieldValues) => {
@@ -82,15 +87,26 @@ const Login = () => {
               Sign in
             </button>
           </form>
-          <button className="google-button" onClick={googleSignIn}>
-            <Image
-              src={googleIcon.src}
-              alt="google icon"
-              width={20}
-              height={20}
-            />
-            Sign in with Google
-          </button>
+          <div className="social-login">
+            <button className="social-button" onClick={googleSignIn}>
+              <Image
+                src={googleIcon.src}
+                alt="google icon"
+                width={20}
+                height={20}
+              />
+              Google
+            </button>
+            <button className="social-button" onClick={githubSignIn}>
+              <Image
+                src={githubIcon.src}
+                alt="github login"
+                width={20}
+                height={20}
+              />
+              Github
+            </button>
+          </div>
         </div>
         <div className="navigate">
           <p className="body-l">

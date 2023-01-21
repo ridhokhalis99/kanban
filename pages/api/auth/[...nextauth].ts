@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 
@@ -8,6 +9,10 @@ const providers = [
   GoogleProvider({
     clientId: process.env.GOOGLE_ID as string,
     clientSecret: process.env.GOOGLE_SECRET as string,
+  }),
+  GithubProvider({
+    clientId: process.env.GITHUB_ID as string,
+    clientSecret: process.env.GITHUB_SECRET as string,
   }),
   CredentialsProvider({
     name: "Credentials",
@@ -35,8 +40,10 @@ const providers = [
 
 const callbacks = {
   signIn: async function signIn({ user, account }: any) {
-    if (account.provider === "google") {
-      const googleUser = {
+    const accountGoogle = account.provider === "google";
+    const accountGithub = account.provider === "github";
+    if (accountGithub || accountGoogle) {
+      const userSocial = {
         name: user.name,
         email: user.email,
       };
@@ -44,7 +51,7 @@ const callbacks = {
         try {
           const { data: result } = await axios.post(
             `${process.env.SERVER_URL}/user/social-login`,
-            googleUser
+            userSocial
           );
           user.accessToken = result.accessToken;
           break;
@@ -52,7 +59,7 @@ const callbacks = {
           if (error.response.status === 404) {
             await axios.post(
               `${process.env.SERVER_URL}/user/social-register`,
-              googleUser
+              userSocial
             );
             continue;
           }
