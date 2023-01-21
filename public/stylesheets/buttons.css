@@ -17,6 +17,10 @@
   transition: background-color 0.25s ease-in;
 }
 
+.button:hover {
+  background-color: #4f4bb4;
+}
+
 .button.primary {
   color: #ffffff;
   background-color: #635fc7;

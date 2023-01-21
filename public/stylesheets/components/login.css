@@ -1,0 +1,51 @@
+.text-purple-63 {
+  color: #635fc7;
+}
+
+.text-grey-82 {
+  color: #828fa3;
+}
+
+.auth {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+.auth .auth-wrapper {
+  width: 450px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 36px 32px;
+  boxshadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.auth .google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #635fc7;
+  color: #635fc7;
+  padding: 10.5px 0;
+  border-radius: 20px;
+  transition: background-color 0.25s ease-in;
+}
+.auth .google-button:hover {
+  background-color: #f4f7fd;
+}
+.auth label {
+  font-size: 13px;
+  color: #20212c;
+}
+.auth .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/*# sourceMappingURL=login.css.map */

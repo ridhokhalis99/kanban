@@ -11,6 +11,10 @@
   transition: background-color 0.25s ease-in;
 }
 
+.button:hover {
+  background-color: $purple4f;
+}
+
 .button.primary {
   color: $whiteff;
   background-color: $purple63;
