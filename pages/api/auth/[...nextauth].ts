@@ -1,11 +1,30 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
 
 const providers = [
   GoogleProvider({
     clientId: process.env.GOOGLE_ID as string,
     clientSecret: process.env.GOOGLE_SECRET as string,
+  }),
+  CredentialsProvider({
+    name: "Credentials",
+    id: "credentials",
+    credentials: {
+      email: { label: "Email", type: "text" },
+      password: { label: "Password", type: "password" },
+    },
+    async authorize(credentials: any) {
+      const { data: result } = await axios.post(
+        `${process.env.SERVER_URL}/user/login`,
+        credentials
+      );
+      const isUserNotFound = result.error === "User not found";
+      if (isUserNotFound) return;
+      return result;
+    },
   }),
 ];
 
@@ -13,28 +32,52 @@ const callbacks = {
   signIn: async function signIn({ user, account }: any) {
     if (account.provider === "google") {
       const googleUser = {
-        id: user.id,
         name: user.name,
+        email: user.email,
       };
-      user.accessToken = "1234567890";
+      while (true) {
+        const { data: result } = await axios.post(
+          `${process.env.SERVER_URL}/user/social-login`,
+          googleUser
+        );
+        const isUserNotFound = result.error === "User not found";
+        if (isUserNotFound) {
+          await axios.post(
+            `${process.env.SERVER_URL}/user/social-register`,
+            googleUser
+          );
+          continue;
+        }
+        user.accessToken = result.accessToken;
+        break;
+      }
       return true;
     }
-    return false;
+    if (account.provider === "credentials") {
+      return true;
+    }
+    return "/login";
+  },
+  jwt: async function jwt({ token, user }: any) {
+    if (user) {
+      token.user = user;
+    }
+    return token;
+  },
+  session: async function session({ session, token }: any) {
+    session.user = token.user;
+    return session;
   },
 };
 
 const pages = {
   signIn: "/login",
-  newUser: "/register",
 };
-
-const secret = process.env.NEXTAUTH_SECRET as string;
 
 const options = {
   providers,
   callbacks,
   pages,
-  secret,
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) =>

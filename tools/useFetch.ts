@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import Session from "../interfaces/Session";
 
 interface useFetchProps {
   url: string;
@@ -19,10 +21,17 @@ const useFetch = ({
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(defaultValue);
 
+  const { data: session } = useSession();
+  const accesstoken = (session as Session | null)?.user?.accessToken;
+
   const getData = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url, {
+        headers: {
+          accesstoken,
+        },
+      });
       setData((prev: any) => formatter(data, prev));
       afterSuccess && afterSuccess(data);
     } catch (err) {
@@ -33,6 +42,7 @@ const useFetch = ({
   };
 
   useEffect(() => {
+    if (!accesstoken) return;
     if (!woFetchFirst) {
       getData();
     }
