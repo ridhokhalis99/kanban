@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Session from "../interfaces/Session";
 
-type Methods = "head" | "options" | "put" | "post" | "patch" | "delete";
+type Methods = "head" | "options" | "put" | "post" | "patch";
 
 interface useMutationProps {
   url: string;

@@ -1,6 +1,6 @@
 import { board, task } from "@prisma/client";
 import ModalProps from "../../../interfaces/ModalProps";
-import useMutation from "../../../tools/useMutation";
+import useDelete from "../../../tools/useDelete";
 import CenteredModal from "../CenteredModal";
 
 interface DeleteModalProps extends ModalProps {
@@ -23,9 +23,8 @@ const DeleteModal = ({
     ? `Are you sure you want to delete the ‘${name}’ board? This action will remove all columns and tasks and cannot be reversed.`
     : `Are you sure you want to delete the ‘${name}’ task and its subtasks? This action cannot be reversed.`;
 
-  const { mutation: mutationDelete } = useMutation({
+  const { remove } = useDelete({
     url: `http://localhost:3001/${type}/${id}`,
-    method: "delete",
     afterSuccess,
   });
 
@@ -39,7 +38,7 @@ const DeleteModal = ({
         <div className="delete-modal">
           <p className="body-l text-grey-82">{description}</p>
           <div className="button-container">
-            <button className="button delete" onClick={() => mutationDelete()}>
+            <button className="button delete" onClick={() => remove()}>
               Delete
             </button>
             <button className="button cancel" onClick={() => toggle()}>
