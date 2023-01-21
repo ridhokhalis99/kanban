@@ -1,8 +1,12 @@
 import logo from "../assets/logo-pictorial.svg";
 import Image from "next/image";
 import googleIcon from "../assets/icon-google-button.svg";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
+  const googleSignIn = async () => {
+    await signIn("google");
+  };
   return (
     <div className="auth">
       <div className="auth-wrapper">
@@ -27,7 +31,7 @@ const Login = () => {
               Sign in
             </button>
           </form>
-          <button className="google-button">
+          <button className="google-button" onClick={googleSignIn}>
             <Image
               src={googleIcon.src}
               alt="google icon"
