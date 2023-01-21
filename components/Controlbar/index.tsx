@@ -6,7 +6,7 @@ import logoDark from "../../assets/logo-dark.svg";
 import logoLight from "../../assets/logo-light.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";
-import { motion } from "framer-motion";
+import Skeleton from "react-loading-skeleton";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
@@ -54,16 +54,13 @@ const Controlbar = ({
           />
           <div className="left-container-divider" />
         </>
-        {name?.split("").map((char, index) => (
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.1 + index / 10 }}
-            className="heading-xl board-title"
-          >
-            {char}
-          </motion.h1>
-        ))}
+        {loadingBoardDetail ? (
+          <div className="board-title">
+            <Skeleton width={200} height={32} />
+          </div>
+        ) : (
+          <h1 className="heading-xl board-title">{name}</h1>
+        )}
       </div>
       <div className="right-container">
         {(!isEmpty(columns) || loadingBoardDetail) && (

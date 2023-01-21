@@ -127,7 +127,7 @@ const TaskModal = ({
       isOpen={isOpen}
       toggle={closeModal}
       children={
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div className="children-form-container">
           <div>
             <h3 className="body-m input-label">Title</h3>
             <input
@@ -213,13 +213,7 @@ const TaskModal = ({
             </select>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
+          <div className="buttons-container">
             <SecondaryButton text="+ Add New Subtask" onClick={addSubtask} />
             <PrimaryButton
               text={isEdit ? "Save Changes" : "Create New Task"}

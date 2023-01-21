@@ -21,6 +21,12 @@
   position: absolute;
 }
 
+.children-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .centered-modal-container {
   padding: 32px;
   position: absolute;

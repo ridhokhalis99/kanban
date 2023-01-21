@@ -11,6 +11,12 @@
   transition: background-color 0.25s ease-in;
 }
 
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .button:hover {
   background-color: $purple4f;
 }

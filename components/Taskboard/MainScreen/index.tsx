@@ -5,6 +5,7 @@ import { Dispatch } from "react";
 import BoardDetail from "../../../interfaces/BoardDetail";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import useMutation from "../../../tools/useMutation";
+import { colors } from "../../../assets/colors";
 interface MainScreenProps {
   columns: ColumnDetail[];
   setTaskDetail: Dispatch<TaskDetail>;
@@ -59,9 +60,25 @@ const MainScreen = ({
         {columns.map(({ name, tasks }: ColumnDetail, index) => {
           return (
             <div key={index} className="column-parent">
-              <p className="heading-s uppercase">
-                {name} ({tasks?.length})
-              </p>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    backgroundColor: colors[index],
+                    marginRight: "10px",
+                    borderRadius: "50%",
+                  }}
+                />
+                <p className="heading-s uppercase">
+                  {name} ({tasks?.length})
+                </p>
+              </div>
               <Droppable droppableId={name} key={index}>
                 {(provided) => (
                   <div

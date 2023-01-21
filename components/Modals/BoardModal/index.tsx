@@ -153,13 +153,15 @@ const BoardModal = ({
     reset({ ...getValues(), columns: newColumns });
   };
 
+  const isLimitColumns = fields.length >= 5;
+
   return (
     <CenteredModal
       title={isEdit || isAddColumn ? "Edit board" : "Add new board"}
       isOpen={isOpen}
       toggle={closeModal}
       children={
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div className="children-form-container">
           <div>
             <h3 className="body-m input-label">Name</h3>
             <input
@@ -229,14 +231,10 @@ const BoardModal = ({
             </div>
           )}
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
-            <SecondaryButton text="+ Add New Column" onClick={addColumn} />
+          <div className="buttons-container">
+            {!isLimitColumns && (
+              <SecondaryButton text="+ Add New Column" onClick={addColumn} />
+            )}
             <PrimaryButton
               text={isEdit || isAddColumn ? "Save Changes" : "Create New Board"}
               onClick={handleSubmit(onSubmit)}
