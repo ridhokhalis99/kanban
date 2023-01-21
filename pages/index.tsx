@@ -33,13 +33,15 @@ const Home = () => {
       boards.sort((a, b) => a.name.localeCompare(b.name)),
   });
 
-  const { refetch: refetchBoardDetail } = useFetch({
-    url: `http://localhost:3001/board/${currentBoard?.id}`,
-    afterSuccess: (boardDetail: BoardDetail) => {
-      setBoardDetail({ ...boardDetail });
-    },
-    woFetchFirst: true,
-  });
+  const { refetch: refetchBoardDetail, loading: loadingBoardDetail } = useFetch(
+    {
+      url: `http://localhost:3001/board/${currentBoard?.id}`,
+      afterSuccess: (boardDetail: BoardDetail) => {
+        setBoardDetail({ ...boardDetail });
+      },
+      woFetchFirst: true,
+    }
+  );
 
   useEffect(() => {
     const latestBoard = boards.find(({ id }: board) => id === currentBoard?.id);
@@ -91,6 +93,7 @@ const Home = () => {
         isSidebarHidden={isSidebarHidden}
         setIsSidebarHidden={setIsSidebarHidden}
         toggleBoardModal={toggleBoardModal}
+        isLightMode={isLightMode}
         setIsLightMode={setIsLightMode}
       />
       <Controlbar
@@ -99,6 +102,7 @@ const Home = () => {
         toggleBoardModal={toggleBoardModal}
         toggleDeleteModal={toggleDeleteModal}
         isLightMode={isLightMode}
+        loadingBoardDetail={loadingBoardDetail}
       />
       <div
         style={{
@@ -115,6 +119,7 @@ const Home = () => {
           boardDetail={boardDetail}
           setTaskDetail={setTaskDetail}
           toggleBoardModal={toggleBoardModal}
+          loadingBoardDetail={loadingBoardDetail}
         />
       </div>
 

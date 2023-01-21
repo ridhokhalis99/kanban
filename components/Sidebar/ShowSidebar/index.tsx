@@ -7,18 +7,7 @@ interface ShowSidebarProps {
 
 const ShowSidebar = ({ setIsSidebarHidden }: ShowSidebarProps) => {
   return (
-    <div
-      onClick={() => setIsSidebarHidden(false)}
-      style={{
-        padding: "19px 22px 19px 19px",
-        backgroundColor: "#A8A4FF",
-        borderTopRightRadius: 100,
-        borderBottomRightRadius: 100,
-        position: "absolute",
-        bottom: 32,
-        cursor: "pointer",
-      }}
-    >
+    <div onClick={() => setIsSidebarHidden(false)} className="show-sidebar">
       <Image
         src={showSidebarIcon.src}
         alt="show sidebar"

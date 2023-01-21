@@ -12,6 +12,7 @@ interface SidebarProps {
   isSidebarHidden: boolean;
   setIsSidebarHidden: React.Dispatch<boolean>;
   toggleBoardModal: Function;
+  isLightMode: boolean;
   setIsLightMode: React.Dispatch<boolean>;
 }
 

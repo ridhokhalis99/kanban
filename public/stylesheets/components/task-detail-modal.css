@@ -6,7 +6,17 @@
   color: #828fa3;
 }
 
-.task-detail-modal .sub-task-container {
+.task-detail-modal .children-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.task-detail-modal .children-container .sub-task-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.task-detail-modal .children-container .sub-task-container .sub-task-item {
   display: flex;
   gap: 16px;
   padding: 12px;

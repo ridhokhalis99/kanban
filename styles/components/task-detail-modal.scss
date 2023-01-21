@@ -1,11 +1,23 @@
 @import "../colors.scss";
 
 .task-detail-modal {
-  .sub-task-container {
+  .children-container {
     display: flex;
-    gap: 16px;
-    padding: 12px;
-    border-radius: 4px;
-    background-color: $whitef4;
+    flex-direction: column;
+    gap: 24px;
+
+    .sub-task-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .sub-task-item {
+        display: flex;
+        gap: 16px;
+        padding: 12px;
+        border-radius: 4px;
+        background-color: $whitef4;
+      }
+    }
   }
 }

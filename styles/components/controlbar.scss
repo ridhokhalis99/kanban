@@ -19,6 +19,13 @@
     padding: 20px 0 28px 0;
   }
 
+  .right-container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    padding-right: 32px;
+  }
+
   .button-new-task {
     background-color: #635fc7;
     border-radius: 24px;

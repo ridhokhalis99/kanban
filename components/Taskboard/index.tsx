@@ -10,18 +10,22 @@ interface TaskboardProps {
   boardDetail: BoardDetail;
   setTaskDetail: Dispatch<TaskDetail>;
   toggleBoardModal: Function;
+  loadingBoardDetail: boolean;
 }
 
 const Taskboard = ({
   boardDetail,
   setTaskDetail,
   toggleBoardModal,
+  loadingBoardDetail,
 }: TaskboardProps) => {
   const { columns } = boardDetail || {};
 
   return (
     <div className={`taskboard ${isEmpty(columns) ? "empty" : "main"}`}>
-      {isEmpty(columns) ? (
+      {loadingBoardDetail ? (
+        <></>
+      ) : isEmpty(columns) ? (
         <>
           {isEmpty(boardDetail) ? (
             <EmptyBoardScreen toggleBoardModal={toggleBoardModal} />

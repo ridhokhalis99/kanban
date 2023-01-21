@@ -7,6 +7,7 @@ interface BoardListProps {
   currentBoard: board;
   setCurrentBoard: React.Dispatch<board>;
   toggleBoardModal: Function;
+  isLightMode: boolean;
 }
 
 const BoardList = ({
@@ -14,6 +15,7 @@ const BoardList = ({
   currentBoard,
   setCurrentBoard,
   toggleBoardModal,
+  isLightMode,
 }: BoardListProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
@@ -31,7 +33,7 @@ const BoardList = ({
         };
 
         const hoveredStyle = {
-          backgroundColor: "#efeff9",
+          backgroundColor: isLightMode ? "#efeff9" : "#605dc71a",
           color: "#635fc7",
           borderTopRightRadius: 100,
           borderBottomRightRadius: 100,

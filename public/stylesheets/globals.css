@@ -292,6 +292,16 @@ input[type=checkbox] {
   transition: background-color 0.25s ease-in;
 }
 
+.show-sidebar {
+  padding: 19px 22px 19px 19px;
+  background-color: #a8a4ff;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  position: absolute;
+  bottom: 32px;
+  cursor: pointer;
+}
+
 .light .sidebar.container {
   background-color: #ffffff;
   border-right: 2px solid #e4ebfa;
@@ -331,6 +341,12 @@ input[type=checkbox] {
 .controlbar .board-title {
   margin: auto;
   padding: 20px 0 28px 0;
+}
+.controlbar .right-container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding-right: 32px;
 }
 .controlbar .button-new-task {
   background-color: #635fc7;
@@ -379,7 +395,17 @@ input[type=checkbox] {
   color: #828fa3;
 }
 
-.task-detail-modal .sub-task-container {
+.task-detail-modal .children-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.task-detail-modal .children-container .sub-task-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.task-detail-modal .children-container .sub-task-container .sub-task-item {
   display: flex;
   gap: 16px;
   padding: 12px;

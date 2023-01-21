@@ -120,6 +120,16 @@
   transition: background-color 0.25s ease-in;
 }
 
+.show-sidebar {
+  padding: 19px 22px 19px 19px;
+  background-color: #a8a4ff;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  position: absolute;
+  bottom: 32px;
+  cursor: pointer;
+}
+
 .light .sidebar.container {
   background-color: #ffffff;
   border-right: 2px solid #e4ebfa;

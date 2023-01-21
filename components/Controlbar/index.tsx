@@ -6,6 +6,7 @@ import logoDark from "../../assets/logo-dark.svg";
 import logoLight from "../../assets/logo-light.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";
+import { motion } from "framer-motion";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
@@ -13,6 +14,7 @@ interface ControlbarProps {
   toggleDeleteModal: Function;
   toggleBoardModal: Function;
   isLightMode: boolean;
+  loadingBoardDetail: boolean;
 }
 
 const Controlbar = ({
@@ -21,6 +23,7 @@ const Controlbar = ({
   toggleDeleteModal,
   toggleBoardModal,
   isLightMode,
+  loadingBoardDetail,
 }: ControlbarProps) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
@@ -51,16 +54,19 @@ const Controlbar = ({
           />
           <div className="left-container-divider" />
         </>
-        <h1 className="heading-xl board-title">{name}</h1>
+        {name?.split("").map((char, index) => (
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.1 + index / 10 }}
+            className="heading-xl board-title"
+          >
+            {char}
+          </motion.h1>
+        ))}
       </div>
-      <div
-        style={{
-          display: "flex",
-          gap: 24,
-          alignItems: "center",
-        }}
-      >
-        {!isEmpty(columns) && (
+      <div className="right-container">
+        {(!isEmpty(columns) || loadingBoardDetail) && (
           <button
             className="button-new-task"
             onClick={() => toggleTaskModal({ type: "add" })}
@@ -68,17 +74,13 @@ const Controlbar = ({
             + Add New Task
           </button>
         )}
-
         <Image
           src={iconEllipsis.src}
           alt="ellipsis"
           width={iconEllipsis.width}
           height={iconEllipsis.height}
           onClick={() => setIsComponentVisible((prev) => !prev)}
-          style={{
-            cursor: "pointer",
-            marginRight: 32,
-          }}
+          className="cursor-pointer"
         />
         <DropdownEllipsis
           forwardRef={ref}

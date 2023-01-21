@@ -112,13 +112,7 @@ const TaskDetailModal = ({
         </div>
       }
       children={
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "24px",
-          }}
-        >
+        <div className="children-container">
           {description && <p className="body-l text-grey-82">{description}</p>}
           <div>
             <p
@@ -129,16 +123,10 @@ const TaskDetailModal = ({
             >
               Subtasks ({finishedSubtasks} of {numberOfSubtasks})
             </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-              }}
-            >
+            <div className="sub-task-container">
               {sub_tasks?.map(({ name, is_finished, id }) => {
                 return (
-                  <div key={id} className="sub-task-container">
+                  <div key={id} className="sub-task-item">
                     <input
                       type="checkbox"
                       defaultChecked={is_finished}
