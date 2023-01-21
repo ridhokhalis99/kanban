@@ -34,6 +34,7 @@
     display: flex;
     gap: 24px;
     align-items: center;
+    margin-bottom: 24px;
   }
 
   .slider {
@@ -95,12 +96,9 @@
   .bottom-sidebar {
     position: absolute;
     bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
 
-  .hide-sidebar {
+  .sidebar-bottom-control {
     display: flex;
     padding: 15px 92px 15px 32px;
     gap: 16px;
@@ -109,7 +107,7 @@
     color: $grey82;
     cursor: pointer;
   }
-  .hide-sidebar:hover {
+  .sidebar-bottom-control:hover {
     background-color: $purpleef;
     color: $purple63;
     border-top-right-radius: 100px;

@@ -6,7 +6,10 @@ interface HideSidebarProps {
 
 const HideSidebar = ({ setIsSidebarHidden }: HideSidebarProps) => {
   return (
-    <div className="hide-sidebar" onClick={() => setIsSidebarHidden(true)}>
+    <div
+      className="sidebar-bottom-control"
+      onClick={() => setIsSidebarHidden(true)}
+    >
       <HideIcon />
       <h3 className="heading-m">Hide Sidebar</h3>
     </div>

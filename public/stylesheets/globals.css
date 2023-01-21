@@ -209,6 +209,7 @@ input[type=checkbox] {
   display: flex;
   gap: 24px;
   align-items: center;
+  margin-bottom: 24px;
 }
 .sidebar .slider {
   position: absolute;
@@ -261,11 +262,8 @@ input[type=checkbox] {
 .sidebar .bottom-sidebar {
   position: absolute;
   bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 }
-.sidebar .hide-sidebar {
+.sidebar .sidebar-bottom-control {
   display: flex;
   padding: 15px 92px 15px 32px;
   gap: 16px;
@@ -274,13 +272,13 @@ input[type=checkbox] {
   color: #828fa3;
   cursor: pointer;
 }
-.sidebar .hide-sidebar:hover {
+.sidebar .sidebar-bottom-control:hover {
   background-color: #efeff9;
   color: #635fc7;
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
 }
-.sidebar .hide-sidebar:hover path {
+.sidebar .sidebar-bottom-control:hover path {
   fill: #635fc7;
 }
 

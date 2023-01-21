@@ -3,6 +3,7 @@ import BoardList from "./BoardList";
 import ThemeSlider from "./ThemeSlider";
 import HideSidebar from "./HideSidebar";
 import { board } from "@prisma/client";
+import SignOut from "./SignOut";
 
 interface SidebarProps {
   boards: [board];
@@ -52,6 +53,7 @@ const Sidebar = ({
           <div className="bottom-sidebar">
             <ThemeSlider setIsLightMode={setIsLightMode} />
             <HideSidebar setIsSidebarHidden={setIsSidebarHidden} />
+            <SignOut />
           </div>
         </motion.div>
       )}
