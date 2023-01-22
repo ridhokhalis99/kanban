@@ -531,7 +531,7 @@ input[type=checkbox] {
 }
 
 .array-input-container {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -573,7 +573,7 @@ input[type=checkbox] {
     padding: 16px;
   }
   .array-input-container {
-    height: 1000px;
+    max-height: 260px;
   }
   .children-form-container {
     gap: 12px;
