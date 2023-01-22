@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useRef } from "react";
 import Controlbar from "../components/Controlbar";
 import Sidebar from "../components/Sidebar";
 import { isEmpty } from "lodash";
@@ -13,6 +13,7 @@ import BoardDetail from "../interfaces/BoardDetail";
 import DeleteModal from "../components/Modals/DeleteModal";
 import TaskDetailModal from "../components/Modals/TaskDetailModal";
 import TaskDetail from "../interfaces/TaskDetail";
+import useWindowSize from "../tools/useWindowSize";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
@@ -22,6 +23,7 @@ const Home = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
   const [taskDetail, setTaskDetail] = useState<TaskDetail>({} as TaskDetail);
   const [isLightMode, setIsLightMode] = useState<boolean>(true);
+  const [width] = useWindowSize();
 
   const {
     data: boards,
@@ -62,6 +64,10 @@ const Home = () => {
   useEffect(() => {
     if (!isEmpty(taskDetail)) openTaskDetailModal();
   }, [taskDetail]);
+
+  useEffect(() => {
+    if (width < 768) setIsSidebarHidden(true);
+  }, [width]);
 
   const {
     isOpen: isOpenBoardModal,

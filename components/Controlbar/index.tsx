@@ -7,6 +7,7 @@ import logoLight from "../../assets/logo-light.svg";
 import BoardDetail from "../../interfaces/BoardDetail";
 import { isEmpty } from "lodash";
 import Skeleton from "react-loading-skeleton";
+import iconAddMobile from "../../assets/icon-add-task-mobile.svg";
 
 interface ControlbarProps {
   boardDetail: BoardDetail;
@@ -44,7 +45,7 @@ const Controlbar = ({
   return (
     <div className="controlbar container">
       <div className="left-container">
-        <>
+        <div className="logo">
           <Image
             src={logo.src}
             alt="kanban logo"
@@ -53,7 +54,7 @@ const Controlbar = ({
             style={{ margin: "26px 0" }}
           />
           <div className="left-container-divider" />
-        </>
+        </div>
         {loadingBoardDetail ? (
           <div className="board-title">
             <Skeleton width={200} height={24} />
@@ -69,6 +70,19 @@ const Controlbar = ({
             onClick={() => toggleTaskModal({ type: "add" })}
           >
             + Add New Task
+          </button>
+        )}
+        {(!isEmpty(columns) || loadingBoardDetail) && (
+          <button
+            className="button-new-task-mobile"
+            onClick={() => toggleTaskModal({ type: "add" })}
+          >
+            <Image
+              src={iconAddMobile.src}
+              alt="add task"
+              width={iconAddMobile.width}
+              height={iconAddMobile.height}
+            />
           </button>
         )}
         <Image

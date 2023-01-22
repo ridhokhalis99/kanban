@@ -148,7 +148,7 @@ const TaskModal = ({
             <textarea
               placeholder="e.g. It’s always good to take a break. This 15 minute break will 
               recharge the batteries a little."
-              rows={4}
+              rows={3}
               cols={50}
               {...register("description")}
             />
@@ -157,47 +157,49 @@ const TaskModal = ({
           {!isEmpty(fields) && (
             <div>
               <h3 className="body-m array-input-label">Subtasks</h3>
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="subtasks">
-                  {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {fields.map((field, index) => {
-                        const { ref, ...props } = register(
-                          `subtasks.${index}.name`
-                        );
-                        return (
-                          <Draggable
-                            key={field.id}
-                            draggableId={field.id}
-                            index={index}
-                          >
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={{
-                                  ...provided.draggableProps.style,
-                                  marginTop: 12,
-                                }}
-                              >
-                                <ArrayListInput
-                                  key={field.id}
-                                  onRemove={() => removeSubtask(index)}
-                                  forwardRef={ref}
-                                  errors={errors}
-                                  {...props}
-                                />
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+              <div className="array-input-container">
+                <DragDropContext onDragEnd={onDragEnd}>
+                  <Droppable droppableId="subtasks">
+                    {(provided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {fields.map((field, index) => {
+                          const { ref, ...props } = register(
+                            `subtasks.${index}.name`
+                          );
+                          return (
+                            <Draggable
+                              key={field.id}
+                              draggableId={field.id}
+                              index={index}
+                            >
+                              {(provided) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={{
+                                    ...provided.draggableProps.style,
+                                    marginTop: 12,
+                                  }}
+                                >
+                                  <ArrayListInput
+                                    key={field.id}
+                                    onRemove={() => removeSubtask(index)}
+                                    forwardRef={ref}
+                                    errors={errors}
+                                    {...props}
+                                  />
+                                </div>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              </div>
             </div>
           )}
 

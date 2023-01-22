@@ -180,54 +180,56 @@ const BoardModal = ({
           {!isEmpty(fields) && (
             <div>
               <h3 className="body-m array-input-label">Columns</h3>
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="column">
-                  {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {fields.map((field, index) => {
-                        const { ref, ...props } = register(
-                          `columns.${index}.name`,
-                          {
-                            required: "Please enter column name.",
-                          }
-                        );
-                        const isRemoveDisabled = !!columns?.find(
-                          ({ name }: ColumnDetail) => name === field?.name
-                        )?.tasks?.length;
-                        return (
-                          <Draggable
-                            key={field.id}
-                            draggableId={field.id}
-                            index={index}
-                          >
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={{
-                                  ...provided.draggableProps.style,
-                                  marginTop: 12,
-                                }}
-                              >
-                                <ArrayListInput
-                                  key={field.id}
-                                  onRemove={() => removeColumn(index)}
-                                  isRemoveDisabled={isRemoveDisabled}
-                                  forwardRef={ref}
-                                  errors={errors}
-                                  {...props}
-                                />
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+              <div className="array-input-container">
+                <DragDropContext onDragEnd={onDragEnd}>
+                  <Droppable droppableId="column">
+                    {(provided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {fields.map((field, index) => {
+                          const { ref, ...props } = register(
+                            `columns.${index}.name`,
+                            {
+                              required: "Please enter column name.",
+                            }
+                          );
+                          const isRemoveDisabled = !!columns?.find(
+                            ({ name }: ColumnDetail) => name === field?.name
+                          )?.tasks?.length;
+                          return (
+                            <Draggable
+                              key={field.id}
+                              draggableId={field.id}
+                              index={index}
+                            >
+                              {(provided) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={{
+                                    ...provided.draggableProps.style,
+                                    marginTop: 12,
+                                  }}
+                                >
+                                  <ArrayListInput
+                                    key={field.id}
+                                    onRemove={() => removeColumn(index)}
+                                    isRemoveDisabled={isRemoveDisabled}
+                                    forwardRef={ref}
+                                    errors={errors}
+                                    {...props}
+                                  />
+                                </div>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              </div>
             </div>
           )}
 

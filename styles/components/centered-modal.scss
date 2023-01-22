@@ -27,6 +27,11 @@
   gap: 24px;
 }
 
+.array-input-container {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
 .centered-modal-container {
   padding: 32px;
   position: absolute;
@@ -65,5 +70,26 @@
     .title {
       color: $whiteff;
     }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .centered-modal-container {
+    width: 90%;
+    padding: 16px;
+  }
+
+  .array-input-container {
+    height: 1000px;
+  }
+
+  .children-form-container {
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .array-input-container {
+    max-height: 160px;
   }
 }

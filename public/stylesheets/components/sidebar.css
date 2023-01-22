@@ -130,6 +130,11 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 760px) {
+  .show-sidebar {
+    display: none;
+  }
+}
 .light .sidebar.container {
   background-color: #ffffff;
   border-right: 2px solid #e4ebfa;
