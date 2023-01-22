@@ -30,14 +30,14 @@ const Home = () => {
     refetch: refetchBoards,
     loading: loadingBoards,
   } = useFetch({
-    url: "http://localhost:3001/board",
+    url: "https://kanban-server.herokuapp.com/board",
     formatter: (boards: board[]) =>
       boards.sort((a, b) => a.name.localeCompare(b.name)),
   });
 
   const { refetch: refetchBoardDetail, loading: loadingBoardDetail } = useFetch(
     {
-      url: `http://localhost:3001/board/${currentBoard?.id}`,
+      url: `https://kanban-server.herokuapp.com/board/${currentBoard?.id}`,
       afterSuccess: (boardDetail: BoardDetail) => {
         setBoardDetail({ ...boardDetail });
       },

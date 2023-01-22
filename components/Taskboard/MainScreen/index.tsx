@@ -20,7 +20,7 @@ const MainScreen = ({
   boardDetail,
 }: MainScreenProps) => {
   const { mutation: updateColumn } = useMutation({
-    url: "http://localhost:3001/column",
+    url: "https://kanban-server.herokuapp.com/column",
   });
 
   const onDragEnd = (result: any) => {

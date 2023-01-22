@@ -73,7 +73,7 @@ const BoardModal = ({
   });
 
   const { mutation: mutationCreate, loading: loadingCreate } = useMutation({
-    url: "http://localhost:3001/board",
+    url: "https://kanban-server.herokuapp.com/board",
     method: "post",
     formatter: ({ data }: AxiosResponse) => data,
     afterSuccess: ({
@@ -91,7 +91,7 @@ const BoardModal = ({
   });
 
   const { mutation: mutationUpdate, loading: loadingUpdate } = useMutation({
-    url: `http://localhost:3001/board/${currentBoardDetail?.id}`,
+    url: `https://kanban-server.herokuapp.com/board/${currentBoardDetail?.id}`,
     formatter: ({ data }: AxiosResponse) => data,
     afterSuccess: ({
       data: boardDetail,

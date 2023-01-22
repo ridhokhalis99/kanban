@@ -16,7 +16,7 @@ const Register = () => {
   } = useForm();
 
   const { mutation: mutationRegister } = useMutation({
-    url: "http://localhost:3001/user/register",
+    url: `https://kanban-server.herokuapp.comuser/register`,
     method: "post",
     formatter: ({ data }: AxiosResponse) => data,
     afterSuccess: ({ message }: { message: string }) => {

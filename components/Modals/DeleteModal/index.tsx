@@ -26,7 +26,7 @@ const DeleteModal = ({
     : `Are you sure you want to delete the ‘${name}’ task and its subtasks? This action cannot be reversed.`;
 
   const { remove } = useDelete({
-    url: `http://localhost:3001/${type}/${id}`,
+    url: `https://kanban-server.herokuapp.com/${type}/${id}`,
     formatter: ({ data }: AxiosResponse) => data,
     afterSuccess: ({ message }: { message: string }) => {
       afterSuccess && afterSuccess();

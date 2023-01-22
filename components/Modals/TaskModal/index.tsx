@@ -76,7 +76,7 @@ const TaskModal = ({
   };
 
   const { mutation: mutationCreateTask, loading: loadingCreate } = useMutation({
-    url: "http://localhost:3001/task",
+    url: "https://kanban-server.herokuapp.com/task",
     method: "post",
     afterSuccess: () => {
       refetchBoardDetail();
@@ -85,7 +85,7 @@ const TaskModal = ({
   });
 
   const { mutation: mutationUpdateTask, loading: loadingUpdate } = useMutation({
-    url: `http://localhost:3001/task/${currentTaskId}`,
+    url: `https://kanban-server.herokuapp.com/task/${currentTaskId}`,
     afterSuccess: () => {
       refetchBoardDetail();
       closeModal();
