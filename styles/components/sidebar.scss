@@ -5,6 +5,11 @@
   position: sticky;
   z-index: 1;
 
+  .board-list {
+    height: 65vh;
+    overflow-y: auto;
+  }
+
   .board {
     display: flex;
     padding: 15px 92px 15px 32px;

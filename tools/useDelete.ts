@@ -21,11 +21,14 @@ const useDelete = ({
   const remove = async () => {
     try {
       setLoading(true);
-      const response = await axios.delete(url, {
-        headers: {
-          accesstoken,
-        },
-      });
+      const response = await axios.delete(
+        "https://kanban-server.herokuapp.com" + url,
+        {
+          headers: {
+            accesstoken,
+          },
+        }
+      );
       const result = formatter(response);
       afterSuccess && afterSuccess(result);
     } catch (err) {

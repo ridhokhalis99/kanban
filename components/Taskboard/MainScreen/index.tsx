@@ -20,7 +20,7 @@ const MainScreen = ({
   boardDetail,
 }: MainScreenProps) => {
   const { mutation: updateColumn } = useMutation({
-    url: "https://kanban-server.herokuapp.com/column",
+    url: "/column",
   });
 
   const onDragEnd = (result: any) => {
@@ -53,6 +53,8 @@ const MainScreen = ({
     });
     updateColumn({ columns: newColumns });
   };
+
+  const isColumnLimit = columns?.length >= 5;
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -125,19 +127,22 @@ const MainScreen = ({
             </div>
           );
         })}
-        <div
-          onClick={() =>
-            toggleBoardModal({
-              type: "addColumn",
-              currentBoardDetail: boardDetail,
-            })
-          }
-          className="new-column cursor-pointer"
-        >
-          <h2 className="heading-xl text-grey-82 new-column-text">
-            + New Column
-          </h2>
-        </div>
+
+        {!isColumnLimit && (
+          <div
+            onClick={() =>
+              toggleBoardModal({
+                type: "addColumn",
+                currentBoardDetail: boardDetail,
+              })
+            }
+            className="new-column cursor-pointer"
+          >
+            <h2 className="heading-xl text-grey-82 new-column-text">
+              + New Column
+            </h2>
+          </div>
+        )}
       </div>
     </DragDropContext>
   );

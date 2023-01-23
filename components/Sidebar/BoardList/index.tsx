@@ -19,7 +19,7 @@ const BoardList = ({
 }: BoardListProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
-    <div>
+    <div className="board-list">
       {boards.map((board: board, index: number) => {
         const { name } = board;
         const isCurrentBoard = board?.id === currentBoard?.id;

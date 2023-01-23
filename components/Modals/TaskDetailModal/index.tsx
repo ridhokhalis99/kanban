@@ -48,12 +48,12 @@ const TaskDetailModal = ({
   const numberOfSubtasks = sub_tasks?.length;
 
   const { mutation: mutationSubTask } = useMutation({
-    url: "https://kanban-server.herokuapp.com/subtask",
+    url: "/subtask",
     method: "patch",
   });
 
   const { mutation: mutationTask } = useMutation({
-    url: "https://kanban-server.herokuapp.com/task",
+    url: "/task",
     method: "patch",
   });
 

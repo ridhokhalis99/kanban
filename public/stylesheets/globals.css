@@ -199,6 +199,10 @@ input[type=checkbox] {
   position: sticky;
   z-index: 1;
 }
+.sidebar .board-list {
+  height: 65vh;
+  overflow-y: auto;
+}
 .sidebar .board {
   display: flex;
   padding: 15px 92px 15px 32px;

@@ -24,7 +24,7 @@ const providers = [
     async authorize(credentials: any) {
       try {
         const { data: result } = await axios.post(
-          `https://kanban-server.herokuapp.com/user/login`,
+          `${process.env.SERVER_URL}/user/login`,
           credentials
         );
         return result;
@@ -50,7 +50,7 @@ const callbacks = {
       while (true) {
         try {
           const { data: result } = await axios.post(
-            `https://kanban-server.herokuapp.com/user/social-login`,
+            `${process.env.SERVER_URL}/user/social-login`,
             userSocial
           );
           user.accessToken = result.accessToken;
@@ -58,7 +58,7 @@ const callbacks = {
         } catch (error: any) {
           if (error.response.status === 404) {
             await axios.post(
-              `https://kanban-server.herokuapp.com/user/social-register`,
+              `${process.env.SERVER_URL}/user/social-register`,
               userSocial
             );
             continue;

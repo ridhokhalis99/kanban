@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Session from "../interfaces/Session";
@@ -30,11 +30,15 @@ const useMutation = ({
   const mutation = async (value?: any) => {
     try {
       setLoading(true);
-      const response = await axios[method](url, value, {
-        headers: {
-          accesstoken,
-        },
-      });
+      const response = await axios[method](
+        "https://kanban-server.herokuapp.com" + url,
+        value,
+        {
+          headers: {
+            accesstoken,
+          },
+        }
+      );
       const result = formatter(response);
       setResult((prev: any) => formatter(response, prev));
       afterSuccess && afterSuccess(result);

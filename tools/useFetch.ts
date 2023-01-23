@@ -27,11 +27,14 @@ const useFetch = ({
   const getData = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(url, {
-        headers: {
-          accesstoken,
-        },
-      });
+      const { data } = await axios.get(
+        "https://kanban-server.herokuapp.com" + url,
+        {
+          headers: {
+            accesstoken,
+          },
+        }
+      );
       setData((prev: any) => formatter(data, prev));
       afterSuccess && afterSuccess(data);
     } catch (err) {
