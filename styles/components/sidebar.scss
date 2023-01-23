@@ -113,7 +113,7 @@
   .bottom-sidebar {
     position: absolute;
     bottom: 40px;
-    background-color: $whiteff;
+    transition: background-color 0.25s ease-in;
   }
 
   .sidebar-bottom-control {
@@ -208,6 +208,21 @@
   .sidebar.container {
     background-color: $whiteff;
     border-right: 2px solid $greye4;
+
+    .bottom-sidebar {
+      background-color: $whiteff;
+    }
+
+    .board-list::-webkit-scrollbar {
+      background-color: $greyc8;
+      border-radius: 12px;
+      width: 10px;
+    }
+
+    .board-list::-webkit-scrollbar-thumb {
+      background-color: $whitef4;
+      border-radius: 12px;
+    }
   }
 
   .theme-slider {
@@ -219,6 +234,21 @@
   .sidebar.container {
     background-color: $black2b;
     border-right: 2px solid $grey3e;
+
+    .bottom-sidebar {
+      background-color: $black2b;
+    }
+
+    .board-list::-webkit-scrollbar {
+      background-color: $black20;
+      border-radius: 12px;
+      width: 10px;
+    }
+
+    .board-list::-webkit-scrollbar-thumb {
+      background-color: $grey3e;
+      border-radius: 12px;
+    }
   }
 
   .theme-slider {
