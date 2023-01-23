@@ -32,6 +32,12 @@ input[type="checkbox"] {
   width: 16px;
 }
 
+.array-item-input {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .error-message {
   font-size: 12px;
   margin-top: 4;

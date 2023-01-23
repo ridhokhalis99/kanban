@@ -135,6 +135,9 @@
   transition: background-color 0.25s ease-in;
 }
 
+.sidebar-modal {
+  height: 82.5vh;
+}
 .sidebar-modal .board-list-heading {
   text-align: center;
   margin-bottom: 24px;

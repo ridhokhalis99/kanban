@@ -37,12 +37,7 @@ const CenteredModal = ({
               className="centered-modal-background"
             />
             <div className="centered-modal-container" style={style}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className="centered-modal-header">
                 <h2
                   className={`heading-l title ${isTitleRed ? "red" : "black"}`}
                 >

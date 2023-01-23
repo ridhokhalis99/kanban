@@ -21,13 +21,7 @@ const ArrayListInput = ({
 }: ArrayListInputProps) => {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-        }}
-      >
+      <div className="array-item-input">
         <Image
           src={dragIcon.src}
           alt="drag"

@@ -39,6 +39,11 @@
   width: 500px;
   transition: background-color 0.25s ease-in;
 
+  .centered-modal-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .title {
     margin-bottom: 24px;
     text-transform: capitalize;

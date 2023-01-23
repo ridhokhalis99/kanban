@@ -33,12 +33,7 @@ const SidebarModal = ({
         paddingLeft: 0,
       }}
     >
-      <div
-        className="sidebar sidebar-modal"
-        style={{
-          height: 560,
-        }}
-      >
+      <div className="sidebar sidebar-modal">
         <div>
           <h2 className="heading-s uppercase board-list-heading">
             All Boards ({numberOfBoards})

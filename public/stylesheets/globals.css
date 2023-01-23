@@ -154,6 +154,12 @@ input[type=checkbox] {
   width: 16px;
 }
 
+.array-item-input {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .error-message {
   font-size: 12px;
   margin-top: 4;
@@ -323,6 +329,9 @@ input[type=checkbox] {
   transition: background-color 0.25s ease-in;
 }
 
+.sidebar-modal {
+  height: 82.5vh;
+}
 .sidebar-modal .board-list-heading {
   text-align: center;
   margin-bottom: 24px;
@@ -605,6 +614,10 @@ input[type=checkbox] {
   border-radius: 6px;
   width: 500px;
   transition: background-color 0.25s ease-in;
+}
+.centered-modal-container .centered-modal-header {
+  display: flex;
+  justify-content: space-between;
 }
 .centered-modal-container .title {
   margin-bottom: 24px;
