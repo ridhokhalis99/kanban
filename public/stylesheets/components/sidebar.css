@@ -12,7 +12,7 @@
   z-index: 1;
 }
 .sidebar .board-list {
-  max-height: 55vh;
+  max-height: 67.5vh;
   overflow-y: auto;
 }
 .sidebar .board {
@@ -168,6 +168,11 @@
   cursor: pointer;
 }
 
+@media screen and (min-width: 760px) and (max-width: 1024px) {
+  .sidebar .board-list {
+    max-height: 57.5vh;
+  }
+}
 @media screen and (max-width: 760px) {
   .show-sidebar {
     display: none;

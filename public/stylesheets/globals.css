@@ -206,7 +206,7 @@ input[type=checkbox] {
   z-index: 1;
 }
 .sidebar .board-list {
-  max-height: 55vh;
+  max-height: 67.5vh;
   overflow-y: auto;
 }
 .sidebar .board {
@@ -362,6 +362,11 @@ input[type=checkbox] {
   cursor: pointer;
 }
 
+@media screen and (min-width: 760px) and (max-width: 1024px) {
+  .sidebar .board-list {
+    max-height: 57.5vh;
+  }
+}
 @media screen and (max-width: 760px) {
   .show-sidebar {
     display: none;
@@ -915,6 +920,11 @@ input[type=reset] {
 
 .mb-32 {
   margin-bottom: 32px;
+}
+
+.ph-16 {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .input-label {
