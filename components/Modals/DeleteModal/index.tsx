@@ -40,20 +40,19 @@ const DeleteModal = ({
       toggle={toggle}
       title={`Delete this ${type}?`}
       isTitleRed
-      children={
-        <div className="delete-modal">
-          <p className="body-l text-grey-82">{description}</p>
-          <div className="button-container">
-            <button className="button delete" onClick={() => remove()}>
-              Delete
-            </button>
-            <button className="button cancel" onClick={() => toggle()}>
-              Cancel
-            </button>
-          </div>
+    >
+      <div className="delete-modal">
+        <p className="body-l text-grey-82">{description}</p>
+        <div className="button-container">
+          <button className="button delete" onClick={() => remove()}>
+            Delete
+          </button>
+          <button className="button cancel" onClick={() => toggle()}>
+            Cancel
+          </button>
         </div>
-      }
-    />
+      </div>
+    </CenteredModal>
   );
 };
 

@@ -160,91 +160,88 @@ const BoardModal = ({
       title={isEdit || isAddColumn ? "Edit board" : "Add new board"}
       isOpen={isOpen}
       toggle={closeModal}
-      children={
-        <div className="children-form-container">
-          <div>
-            <h3 className="body-m input-label">Name</h3>
-            <input
-              placeholder="e.g. Web Design"
-              {...register("board", { required: "Please enter board name." })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="board"
-              render={({ message }) => (
-                <p className="error-message">{message}</p>
-              )}
-            />
-          </div>
-
-          {!isEmpty(fields) && (
-            <div>
-              <h3 className="body-m array-input-label">Columns</h3>
-              <div className="array-input-container">
-                <DragDropContext onDragEnd={onDragEnd}>
-                  <Droppable droppableId="column">
-                    {(provided) => (
-                      <div ref={provided.innerRef} {...provided.droppableProps}>
-                        {fields.map((field, index) => {
-                          const { ref, ...props } = register(
-                            `columns.${index}.name`,
-                            {
-                              required: "Please enter column name.",
-                            }
-                          );
-                          const isRemoveDisabled = !!columns?.find(
-                            ({ name }: ColumnDetail) => name === field?.name
-                          )?.tasks?.length;
-                          return (
-                            <Draggable
-                              key={field.id}
-                              draggableId={field.id}
-                              index={index}
-                            >
-                              {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    marginTop: 12,
-                                  }}
-                                >
-                                  <ArrayListInput
-                                    key={field.id}
-                                    onRemove={() => removeColumn(index)}
-                                    isRemoveDisabled={isRemoveDisabled}
-                                    forwardRef={ref}
-                                    errors={errors}
-                                    {...props}
-                                  />
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              </div>
-            </div>
-          )}
-
-          <div className="buttons-container">
-            {!isLimitColumns && (
-              <SecondaryButton text="+ Add New Column" onClick={addColumn} />
-            )}
-            <PrimaryButton
-              text={isEdit || isAddColumn ? "Save Changes" : "Create New Board"}
-              onClick={handleSubmit(onSubmit)}
-            />
-          </div>
+    >
+      <div className="children-form-container">
+        <div>
+          <h3 className="body-m input-label">Name</h3>
+          <input
+            placeholder="e.g. Web Design"
+            {...register("board", { required: "Please enter board name." })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="board"
+            render={({ message }) => <p className="error-message">{message}</p>}
+          />
         </div>
-      }
-    />
+
+        {!isEmpty(fields) && (
+          <div>
+            <h3 className="body-m array-input-label">Columns</h3>
+            <div className="array-input-container">
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="column">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {fields.map((field, index) => {
+                        const { ref, ...props } = register(
+                          `columns.${index}.name`,
+                          {
+                            required: "Please enter column name.",
+                          }
+                        );
+                        const isRemoveDisabled = !!columns?.find(
+                          ({ name }: ColumnDetail) => name === field?.name
+                        )?.tasks?.length;
+                        return (
+                          <Draggable
+                            key={field.id}
+                            draggableId={field.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  marginTop: 12,
+                                }}
+                              >
+                                <ArrayListInput
+                                  key={field.id}
+                                  onRemove={() => removeColumn(index)}
+                                  isRemoveDisabled={isRemoveDisabled}
+                                  forwardRef={ref}
+                                  errors={errors}
+                                  {...props}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+          </div>
+        )}
+
+        <div className="buttons-container">
+          {!isLimitColumns && (
+            <SecondaryButton text="+ Add New Column" onClick={addColumn} />
+          )}
+          <PrimaryButton
+            text={isEdit || isAddColumn ? "Save Changes" : "Create New Board"}
+            onClick={handleSubmit(onSubmit)}
+          />
+        </div>
+      </div>
+    </CenteredModal>
   );
 };
 

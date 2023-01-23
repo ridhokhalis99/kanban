@@ -8,6 +8,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
 
 const Login = () => {
   const { query } = useRouter();
@@ -110,10 +111,10 @@ const Login = () => {
         </div>
         <div className="navigate">
           <p className="body-l">
-            Don't have an account?{" "}
-            <a href="/register" style={{ color: "#0079BF" }}>
+            Don&apos;t have an account?{" "}
+            <Link href="/register" style={{ color: "#0079BF" }}>
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

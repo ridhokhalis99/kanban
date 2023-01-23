@@ -126,105 +126,102 @@ const TaskModal = ({
       title={isEdit ? "Edit task" : "Add new task"}
       isOpen={isOpen}
       toggle={closeModal}
-      children={
-        <div className="children-form-container">
-          <div>
-            <h3 className="body-m input-label">Title</h3>
-            <input
-              placeholder="e.g. Take coffee break"
-              {...register("title", { required: "Please enter task title." })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="title"
-              render={({ message }) => (
-                <p className="error-message">{message}</p>
-              )}
-            />
-          </div>
-
-          <div>
-            <h3 className="body-m input-label">Description</h3>
-            <textarea
-              placeholder="e.g. It’s always good to take a break. This 15 minute break will 
-              recharge the batteries a little."
-              rows={3}
-              cols={50}
-              {...register("description")}
-            />
-          </div>
-
-          {!isEmpty(fields) && (
-            <div>
-              <h3 className="body-m array-input-label">Subtasks</h3>
-              <div className="array-input-container">
-                <DragDropContext onDragEnd={onDragEnd}>
-                  <Droppable droppableId="subtasks">
-                    {(provided) => (
-                      <div ref={provided.innerRef} {...provided.droppableProps}>
-                        {fields.map((field, index) => {
-                          const { ref, ...props } = register(
-                            `subtasks.${index}.name`
-                          );
-                          return (
-                            <Draggable
-                              key={field.id}
-                              draggableId={field.id}
-                              index={index}
-                            >
-                              {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    marginTop: 12,
-                                  }}
-                                >
-                                  <ArrayListInput
-                                    key={field.id}
-                                    onRemove={() => removeSubtask(index)}
-                                    forwardRef={ref}
-                                    errors={errors}
-                                    {...props}
-                                  />
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              </div>
-            </div>
-          )}
-
-          <div>
-            <select {...register(`columnId`)}>
-              {columns?.map(({ name, id }) => {
-                return (
-                  <option key={id} value={id}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-
-          <div className="buttons-container">
-            <SecondaryButton text="+ Add New Subtask" onClick={addSubtask} />
-            <PrimaryButton
-              text={isEdit ? "Save Changes" : "Create New Task"}
-              onClick={handleSubmit(onSubmit)}
-            />
-          </div>
+    >
+      <div className="children-form-container">
+        <div>
+          <h3 className="body-m input-label">Title</h3>
+          <input
+            placeholder="e.g. Take coffee break"
+            {...register("title", { required: "Please enter task title." })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="title"
+            render={({ message }) => <p className="error-message">{message}</p>}
+          />
         </div>
-      }
-    />
+
+        <div>
+          <h3 className="body-m input-label">Description</h3>
+          <textarea
+            placeholder="e.g. It’s always good to take a break. This 15 minute break will 
+              recharge the batteries a little."
+            rows={3}
+            cols={50}
+            {...register("description")}
+          />
+        </div>
+
+        {!isEmpty(fields) && (
+          <div>
+            <h3 className="body-m array-input-label">Subtasks</h3>
+            <div className="array-input-container">
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="subtasks">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {fields.map((field, index) => {
+                        const { ref, ...props } = register(
+                          `subtasks.${index}.name`
+                        );
+                        return (
+                          <Draggable
+                            key={field.id}
+                            draggableId={field.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  marginTop: 12,
+                                }}
+                              >
+                                <ArrayListInput
+                                  key={field.id}
+                                  onRemove={() => removeSubtask(index)}
+                                  forwardRef={ref}
+                                  errors={errors}
+                                  {...props}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+          </div>
+        )}
+
+        <div>
+          <select {...register(`columnId`)}>
+            {columns?.map(({ name, id }) => {
+              return (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        <div className="buttons-container">
+          <SecondaryButton text="+ Add New Subtask" onClick={addSubtask} />
+          <PrimaryButton
+            text={isEdit ? "Save Changes" : "Create New Task"}
+            onClick={handleSubmit(onSubmit)}
+          />
+        </div>
+      </div>
+    </CenteredModal>
   );
 };
 

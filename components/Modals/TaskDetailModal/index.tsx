@@ -111,52 +111,51 @@ const TaskDetailModal = ({
           />
         </div>
       }
-      children={
-        <div className="children-container">
-          {description && <p className="body-l text-grey-82">{description}</p>}
-          <div>
-            <p
-              className="body-m text-grey-82"
-              style={{
-                marginBottom: !isEmpty(sub_tasks) ? "16px" : 0,
-              }}
-            >
-              Subtasks ({finishedSubtasks} of {numberOfSubtasks})
-            </p>
-            <div className="sub-task-container">
-              {sub_tasks?.map(({ name, is_finished, id }) => {
-                return (
-                  <div key={id} className="sub-task-item">
-                    <input
-                      type="checkbox"
-                      defaultChecked={is_finished}
-                      onChange={(e) => subTaskChangeHandler(e, +id)}
-                    />
-                    <label className="body-m text-grey-82">{name}</label>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <p className="body-m text-grey-82 mb-8">Current Status</p>
-            <select
-              {...register(`columnId`)}
-              onChange={(e) => columnChangeHandler(e, taskId)}
-            >
-              {columns?.map(({ name, id }) => {
-                return (
-                  <option key={id} value={id}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+    >
+      <div className="children-container">
+        {description && <p className="body-l text-grey-82">{description}</p>}
+        <div>
+          <p
+            className="body-m text-grey-82"
+            style={{
+              marginBottom: !isEmpty(sub_tasks) ? "16px" : 0,
+            }}
+          >
+            Subtasks ({finishedSubtasks} of {numberOfSubtasks})
+          </p>
+          <div className="sub-task-container">
+            {sub_tasks?.map(({ name, is_finished, id }) => {
+              return (
+                <div key={id} className="sub-task-item">
+                  <input
+                    type="checkbox"
+                    defaultChecked={is_finished}
+                    onChange={(e) => subTaskChangeHandler(e, +id)}
+                  />
+                  <label className="body-m text-grey-82">{name}</label>
+                </div>
+              );
+            })}
           </div>
         </div>
-      }
-    />
+
+        <div>
+          <p className="body-m text-grey-82 mb-8">Current Status</p>
+          <select
+            {...register(`columnId`)}
+            onChange={(e) => columnChangeHandler(e, taskId)}
+          >
+            {columns?.map(({ name, id }) => {
+              return (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
+    </CenteredModal>
   );
 };
 

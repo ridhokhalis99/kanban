@@ -6,6 +6,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import { AxiosResponse } from "axios";
+import Link from "next/link";
 
 const Register = () => {
   const { push } = useRouter();
@@ -96,9 +97,9 @@ const Register = () => {
         <div className="navigate">
           <p className="body-l">
             Already have an account?{" "}
-            <a href="/login" style={{ color: "#0079BF" }}>
+            <Link href="/login" style={{ color: "#0079BF" }}>
               Sign in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
