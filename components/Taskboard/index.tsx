@@ -5,6 +5,7 @@ import TaskDetail from "../../interfaces/TaskDetail";
 import EmptyBoardScreen from "./EmptyBoardScreen";
 import EmptyColumnScreen from "./EmptyColumnScreen";
 import MainScreen from "./MainScreen";
+import { BounceLoader } from "react-spinners";
 
 interface TaskboardProps {
   boardDetail: BoardDetail;
@@ -21,11 +22,16 @@ const Taskboard = ({
 }: TaskboardProps) => {
   const { columns } = boardDetail || {};
 
+  if (loadingBoardDetail)
+    return (
+      <div className="taskboard empty">
+        <BounceLoader color={"#635FC7"} loading={loadingBoardDetail} />
+      </div>
+    );
+
   return (
     <div className={`taskboard ${isEmpty(columns) ? "empty" : "main"}`}>
-      {loadingBoardDetail ? (
-        <></>
-      ) : isEmpty(columns) ? (
+      {isEmpty(columns) ? (
         <>
           {isEmpty(boardDetail) ? (
             <EmptyBoardScreen toggleBoardModal={toggleBoardModal} />

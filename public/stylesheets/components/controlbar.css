@@ -16,6 +16,17 @@
 .controlbar .logo {
   display: flex;
 }
+.controlbar .logo-mobile {
+  display: none;
+}
+.controlbar .board-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.controlbar .chevron-down {
+  display: none;
+}
 .controlbar .left-container-divider {
   margin: 0 32px 0 120px;
   position: relative;
@@ -43,6 +54,21 @@
 @media screen and (max-width: 760px) {
   .controlbar .logo {
     display: none;
+  }
+  .controlbar .logo-mobile {
+    display: block;
+    margin-right: 24px;
+  }
+  .controlbar .board-title {
+    max-width: 140px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .controlbar .chevron-down {
+    display: block;
+    cursor: pointer;
+    margin-left: 6px;
   }
   .controlbar .button-new-task {
     display: none;

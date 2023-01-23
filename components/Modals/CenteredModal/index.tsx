@@ -3,11 +3,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import ModalProps from "../../../interfaces/ModalProps";
 
 interface CenteredModalProps extends ModalProps {
-  title: string;
+  title?: string;
   isTitleRed?: boolean;
   className?: string;
   children: ReactElement;
   customComponent?: ReactElement;
+  style?: React.CSSProperties;
 }
 
 const CenteredModal = ({
@@ -18,6 +19,7 @@ const CenteredModal = ({
   toggle,
   children,
   customComponent,
+  style,
 }: CenteredModalProps) => {
   return (
     <>
@@ -34,7 +36,7 @@ const CenteredModal = ({
               onClick={() => toggle()}
               className="centered-modal-background"
             />
-            <div className="centered-modal-container">
+            <div className="centered-modal-container" style={style}>
               <div
                 style={{
                   display: "flex",

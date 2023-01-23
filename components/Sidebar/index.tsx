@@ -1,19 +1,20 @@
+import { Dispatch } from "react";
+import { board } from "@prisma/client";
 import { motion, AnimatePresence } from "framer-motion";
 import BoardList from "./BoardList";
 import ThemeSlider from "./ThemeSlider";
 import HideSidebar from "./HideSidebar";
-import { board } from "@prisma/client";
 import SignOut from "./SignOut";
 
 interface SidebarProps {
   boards: [board];
   currentBoard: board;
-  setCurrentBoard: React.Dispatch<board>;
+  setCurrentBoard: Dispatch<board>;
   isSidebarHidden: boolean;
-  setIsSidebarHidden: React.Dispatch<boolean>;
+  setIsSidebarHidden: Dispatch<boolean>;
   toggleBoardModal: Function;
   isLightMode: boolean;
-  setIsLightMode: React.Dispatch<boolean>;
+  setIsLightMode: Dispatch<boolean>;
 }
 
 const Sidebar = ({

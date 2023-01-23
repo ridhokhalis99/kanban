@@ -17,7 +17,7 @@ const Register = () => {
   } = useForm();
 
   const { mutation: mutationRegister } = useMutation({
-    url: `user/register`,
+    url: `/user/register`,
     method: "post",
     formatter: ({ data }: AxiosResponse) => data,
     afterSuccess: ({ message }: { message: string }) => {

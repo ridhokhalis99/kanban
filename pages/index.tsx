@@ -14,6 +14,7 @@ import DeleteModal from "../components/Modals/DeleteModal";
 import TaskDetailModal from "../components/Modals/TaskDetailModal";
 import TaskDetail from "../interfaces/TaskDetail";
 import useWindowSize from "../tools/useWindowSize";
+import SidebarModal from "../components/Modals/SidebarModal";
 
 const Home = () => {
   const [currentBoard, setCurrentBoard] = useState<board>({} as board);
@@ -66,8 +67,10 @@ const Home = () => {
   }, [taskDetail]);
 
   useEffect(() => {
-    if (width < 768) setIsSidebarHidden(true);
+    if (width && width < 768) setIsSidebarHidden(true);
   }, [width]);
+
+  const loading = loadingBoards || loadingBoardDetail;
 
   const {
     isOpen: isOpenBoardModal,
@@ -89,6 +92,7 @@ const Home = () => {
     toggle: toggleTaskDetailModal,
     open: openTaskDetailModal,
   } = useModal();
+  const { isOpen: isOpenSidebarModal, toggle: toggleSidebarModal } = useModal();
 
   return (
     <div className={`main-container ${isLightMode ? "light" : "dark"}`}>
@@ -103,12 +107,13 @@ const Home = () => {
         setIsLightMode={setIsLightMode}
       />
       <Controlbar
-        toggleTaskModal={toggleTaskModal}
         boardDetail={boardDetail}
+        isLightMode={isLightMode}
+        loading={loading}
+        toggleTaskModal={toggleTaskModal}
         toggleBoardModal={toggleBoardModal}
         toggleDeleteModal={toggleDeleteModal}
-        isLightMode={isLightMode}
-        loadingBoardDetail={loadingBoardDetail}
+        toggleSidebarModal={toggleSidebarModal}
       />
       <div
         style={{
@@ -164,6 +169,16 @@ const Home = () => {
         setTaskDetail={setTaskDetail}
         toggleTaskModal={toggleTaskModal}
         toggleDeleteModal={toggleDeleteModal}
+      />
+      <SidebarModal
+        isOpen={isOpenSidebarModal}
+        toggle={toggleSidebarModal}
+        boards={boards}
+        currentBoard={currentBoard}
+        setCurrentBoard={setCurrentBoard}
+        toggleBoardModal={toggleBoardModal}
+        isLightMode={isLightMode}
+        setIsLightMode={setIsLightMode}
       />
     </div>
   );

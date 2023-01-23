@@ -73,4 +73,13 @@
   text-align: center;
 }
 
+@media screen and (max-width: 768px) {
+  .auth .auth-wrapper {
+    margin: 0 24px;
+  }
+  .auth .auth-wrapper .title {
+    font-size: 20px;
+  }
+}
+
 /*# sourceMappingURL=auth.css.map */
