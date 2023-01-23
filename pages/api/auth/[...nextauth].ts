@@ -90,10 +90,13 @@ const pages = {
   error: "/login",
 };
 
+const secret = process.env.SECRET as string;
+
 const options = {
   providers,
   callbacks,
   pages,
+  secret,
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) =>
