@@ -12,14 +12,14 @@
 
   .board {
     display: flex;
-    padding: 15px 92px 15px 32px;
+    padding: 15px 20px 15px 32px;
     gap: 16px;
     align-items: center;
     cursor: pointer;
     transition: all 0.1s ease-in;
 
     .board-title {
-      max-width: 120px;
+      max-width: 150px;
     }
   }
 
@@ -214,13 +214,13 @@
     }
 
     .board-list::-webkit-scrollbar {
-      background-color: $greyc8;
+      background-color: $whitef4;
       border-radius: 12px;
       width: 10px;
     }
 
     .board-list::-webkit-scrollbar-thumb {
-      background-color: $whitef4;
+      background-color: $greyc8;
       border-radius: 12px;
     }
   }

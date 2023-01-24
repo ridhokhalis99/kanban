@@ -17,14 +17,14 @@
 }
 .sidebar .board {
   display: flex;
-  padding: 15px 92px 15px 32px;
+  padding: 15px 20px 15px 32px;
   gap: 16px;
   align-items: center;
   cursor: pointer;
   transition: all 0.1s ease-in;
 }
 .sidebar .board .board-title {
-  max-width: 120px;
+  max-width: 150px;
 }
 .sidebar .create-new-board {
   display: flex;
@@ -189,12 +189,12 @@
   background-color: #ffffff;
 }
 .light .sidebar.container .board-list::-webkit-scrollbar {
-  background-color: #c8cfda;
+  background-color: #f4f7fd;
   border-radius: 12px;
   width: 10px;
 }
 .light .sidebar.container .board-list::-webkit-scrollbar-thumb {
-  background-color: #f4f7fd;
+  background-color: #c8cfda;
   border-radius: 12px;
 }
 .light .theme-slider {

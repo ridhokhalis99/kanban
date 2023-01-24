@@ -28,6 +28,7 @@ interface FormValues {
   board: string;
   columns: {
     name: string | null;
+    columnId?: number;
   }[];
 }
 
@@ -53,7 +54,7 @@ const BoardModal = ({
   const defaultValuesEdit = {
     board: name,
     columns: columns?.map(({ name, id }: ColumnDetail) => {
-      return { name, id };
+      return { name, columnId: id };
     }),
   };
 
@@ -120,9 +121,11 @@ const BoardModal = ({
   };
 
   const onSubmit = async (formValues: FormValues) => {
-    formValues.columns = formValues?.columns?.map(({ name }, index) => {
-      return { name, order: index };
-    });
+    formValues.columns = formValues?.columns?.map(
+      ({ name, columnId }, index) => {
+        return { name, order: index, id: columnId };
+      }
+    );
     isEdit || isAddColumn
       ? mutationUpdate(formValues)
       : mutationCreate(formValues);
