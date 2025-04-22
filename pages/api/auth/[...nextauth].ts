@@ -24,15 +24,21 @@ const providers = [
     async authorize(credentials: any) {
       try {
         const { data: result } = await axios.post(
-          `${process.env.SERVER_URL}/user/login`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`,
           credentials
         );
         return result;
       } catch (error: any) {
-        if (error.response.status === 404) {
+        // Check if error.response exists before accessing its properties
+        if (error.response && error.response.status === 404) {
           throw new Error("Incorrect email or password");
         }
-        return;
+        // Handle cases where error.response might be undefined
+        console.error(
+          "Login error:",
+          error.message || "Unknown error occurred"
+        );
+        throw new Error("An error occurred during login. Please try again.");
       }
     },
   }),
@@ -44,25 +50,29 @@ const callbacks = {
     const accountGithub = account.provider === "github";
     if (accountGithub || accountGoogle) {
       const userSocial = {
-        name: user.name,
         email: user.email,
       };
       while (true) {
         try {
           const { data: result } = await axios.post(
-            `${process.env.SERVER_URL}/user/social-login`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/social-login`,
             userSocial
           );
           user.accessToken = result.accessToken;
           break;
         } catch (error: any) {
-          if (error.response.status === 404) {
+          // Check if error.response exists before accessing its properties
+          if (error.response && error.response.status === 404) {
             await axios.post(
-              `${process.env.SERVER_URL}/user/social-register`,
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/user/social-register`,
               userSocial
             );
             continue;
           }
+          console.error(
+            "Social login error:",
+            error.message || "Unknown error occurred"
+          );
           return false;
         }
       }

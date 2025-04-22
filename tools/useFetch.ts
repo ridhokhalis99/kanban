@@ -28,7 +28,7 @@ const useFetch = ({
     try {
       setLoading(true);
       const { data } = await axios.get(
-        "https://kanban-server.herokuapp.com" + url,
+        process.env.NEXT_PUBLIC_SERVER_URL + url,
         {
           headers: {
             accesstoken,

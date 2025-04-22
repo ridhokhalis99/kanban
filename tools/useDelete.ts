@@ -7,12 +7,14 @@ interface useDeleteProps {
   url: string;
   afterSuccess?: Function;
   formatter?: Function;
+  errorHandler?: Function;
 }
 
 const useDelete = ({
   url,
   afterSuccess,
   formatter = (data: any) => data,
+  errorHandler,
 }: useDeleteProps) => {
   const { data: session } = useSession();
   const accesstoken = (session as Session | null)?.user?.accessToken;
@@ -22,7 +24,7 @@ const useDelete = ({
     try {
       setLoading(true);
       const response = await axios.delete(
-        "https://kanban-server.herokuapp.com" + url,
+        process.env.NEXT_PUBLIC_SERVER_URL + url,
         {
           headers: {
             accesstoken,
@@ -31,8 +33,9 @@ const useDelete = ({
       );
       const result = formatter(response);
       afterSuccess && afterSuccess(result);
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
+      errorHandler && errorHandler(err.response);
     } finally {
       setLoading(false);
     }

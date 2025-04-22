@@ -31,7 +31,7 @@ const useMutation = ({
     try {
       setLoading(true);
       const response = await axios[method](
-        "https://kanban-server.herokuapp.com" + url,
+        process.env.NEXT_PUBLIC_SERVER_URL + url,
         value,
         {
           headers: {
